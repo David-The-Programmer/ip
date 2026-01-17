@@ -57,6 +57,7 @@ public class Atom {
                 System.out.println("Noted. The following task has been added: ");
                 System.out.println(tasks.get(tasks.size() - 1));
                 System.out.println("So, in total, you have " + tasks.size() + " task(s) remaining");
+                continue;
             }
             if(subcommands[0].equals("deadline")) {
                 String[] details = subcommands[1].split(" /by ");
@@ -64,10 +65,21 @@ public class Atom {
                 System.out.println("Noted. The following task has been added: ");
                 System.out.println(tasks.get(tasks.size() - 1));
                 System.out.println("So, in total, you have " + tasks.size() + " task(s) remaining");
+                continue;
             }
-            // TODO: remove this part, should be error to invoke non commands
-            // tasks.add(new Task(userInput));
-            // System.out.println("added: " + userInput);
+            if(subcommands[0].equals("event")) {
+                int idxOfFrom = subcommands[1].indexOf("/from");
+                int idxOfTo = subcommands[1].indexOf("/to");
+                String description = subcommands[1].substring(0, idxOfFrom);
+                String fromDateTime = subcommands[1].substring(idxOfFrom + 5, idxOfTo).trim();
+                String toDateTime = subcommands[1].substring(idxOfTo + 3).trim();
+                System.out.println(toDateTime);
+                tasks.add(new Event(description, fromDateTime, toDateTime));
+                System.out.println("Noted. The following task has been added: ");
+                System.out.println(tasks.get(tasks.size() - 1));
+                System.out.println("So, in total, you have " + tasks.size() + " task(s) remaining");
+                continue;
+            }
         }
     }
 }
