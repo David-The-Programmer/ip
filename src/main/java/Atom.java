@@ -29,7 +29,7 @@ public class Atom {
                 }
                 continue;
             }
-            String[] subcommands = userInput.split(" ");
+            String[] subcommands = userInput.split(" ", 2);
             if(subcommands[0].equals("mark")) {
                 int taskId = Integer.parseInt(subcommands[1]);
                 if (taskId - 1 < 0 || taskId - 1 >= tasks.size()) {
@@ -52,8 +52,15 @@ public class Atom {
                 }
                 continue;
             }
-            tasks.add(new Task(userInput));
-            System.out.println("added: " + userInput);
+            if(subcommands[0].equals("todo")) {
+                tasks.add(new ToDo(subcommands[1]));
+                System.out.println("Noted. The following task has been added: ");
+                System.out.println(tasks.get(tasks.size() - 1));
+                System.out.println("So, in total, you have " + tasks.size() + " task(s) remaining");
+            }
+            // TODO: remove this part, should be error to invoke non commands
+            // tasks.add(new Task(userInput));
+            // System.out.println("added: " + userInput);
         }
     }
 }
