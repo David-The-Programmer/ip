@@ -15,7 +15,7 @@ public class Atom {
         System.out.println(logo);
         System.out.println("Hello, I am an Assistive Task Organisation Manager, or A.T.O.M.");
         System.out.println("How can I help you?\n");
-        ArrayList<String> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         while(true) {
             System.out.print("> ");
             String userInput = scanner.nextLine();
@@ -29,7 +29,30 @@ public class Atom {
                 }
                 continue;
             }
-            tasks.add(userInput);
+            String[] subcommands = userInput.split(" ");
+            if(subcommands[0].equals("mark")) {
+                int taskId = Integer.parseInt(subcommands[1]);
+                if (taskId - 1 < 0 || taskId - 1 >= tasks.size()) {
+                    System.out.println("Sorry, task " + taskId + " does not exists, please try again.");
+                } else {
+                    tasks.get(taskId - 1).markAsComplete();
+                    System.out.println("Great Job! This task is marked as complete:");
+                    System.out.println(tasks.get(taskId - 1));
+                }
+                continue;
+            }
+            if(subcommands[0].equals("unmark")) {
+                int taskId = Integer.parseInt(subcommands[1]);
+                if (taskId - 1 < 0 || taskId - 1 >= tasks.size()) {
+                    System.out.println("Sorry, task " + taskId + " does not exists, please try again.");
+                } else {
+                    tasks.get(taskId - 1).markAsIncomplete();
+                    System.out.println("Alright, this task is marked as incomplete:");
+                    System.out.println(tasks.get(taskId - 1));
+                }
+                continue;
+            }
+            tasks.add(new Task(userInput));
             System.out.println("added: " + userInput);
         }
     }
