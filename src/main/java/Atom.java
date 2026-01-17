@@ -58,6 +58,13 @@ public class Atom {
                 System.out.println(tasks.get(tasks.size() - 1));
                 System.out.println("So, in total, you have " + tasks.size() + " task(s) remaining");
             }
+            if(subcommands[0].equals("deadline")) {
+                String[] details = subcommands[1].split(" /by ");
+                tasks.add(new Deadline(details[0], details[1]));
+                System.out.println("Noted. The following task has been added: ");
+                System.out.println(tasks.get(tasks.size() - 1));
+                System.out.println("So, in total, you have " + tasks.size() + " task(s) remaining");
+            }
             // TODO: remove this part, should be error to invoke non commands
             // tasks.add(new Task(userInput));
             // System.out.println("added: " + userInput);
