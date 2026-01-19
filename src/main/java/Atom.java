@@ -14,11 +14,12 @@ public class Atom {
         "###     ### ###    ### ###    ########  ###   ###       ###  ###\n";
         System.out.println(logo);
         System.out.println("Hello, I am an Assistive Task Organisation Manager, or A.T.O.M.");
-        System.out.println("How can I help you?\n");
+        System.out.println("How can I help you?");
         ArrayList<Task> tasks = new ArrayList<>();
         while(true) {
-            System.out.print("> ");
+            System.out.print("\n> ");
             String userInput = scanner.nextLine();
+            System.out.println();
             if(userInput.equals("bye")) {
                 System.out.println("Goodbye! Exiting...");
                 break;
@@ -73,7 +74,6 @@ public class Atom {
                 String description = subcommands[1].substring(0, idxOfFrom);
                 String fromDateTime = subcommands[1].substring(idxOfFrom + 5, idxOfTo).trim();
                 String toDateTime = subcommands[1].substring(idxOfTo + 3).trim();
-                System.out.println(toDateTime);
                 tasks.add(new Event(description, fromDateTime, toDateTime));
                 System.out.println("Noted. The following task has been added: ");
                 System.out.println(tasks.get(tasks.size() - 1));

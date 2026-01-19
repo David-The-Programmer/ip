@@ -1,0 +1,7 @@
+todo hello world
+deadline cs2103 assignment /by 18/07/26 10:00
+event Chinese New Year /from 18 Feb 2026 /to 19 Feb 2026
+mark 2
+list
+unmark 2
+bye

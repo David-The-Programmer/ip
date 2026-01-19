@@ -1,12 +1,41 @@
-          ###        ###########     ########        ###   ### 
-       #+# #+#          #+#        #+#    #+#      #+#+# #+#+#
-     +#+   +#+         +#+        +#+    +#+     +#+ +#+#+ +#+ 
-   +:++:++:++:        +:+        +:+    +:+     +:+  +:+  +:+  
-  +:+     +:+        +:+        +:+    +:+     +:+       +:+   
- :+:     :+: :+:    :+:    :+: :+:    :+: :+: :+:       :+:    
-:::     ::: :::    :::    :::  ::::::::  ::: :::       :::     
+          :::        :::::::::::    ::::::::          :::   ::: 
+       :+: :+:          :+:       :+:    :+:        :+:+: :+:+: 
+     +:+   +:+         +:+       +:+    +:+       +:+ +:+:+ +:+ 
+   +#++:++#++:        +#+       +#+    +:+       +#+  +:+  +#+  
+  +#+     +#+        +#+       +#+    +#+       +#+       +#+   
+ #+#     #+# #+#    #+# #+#   #+#    #+# #+#   #+#       #+# #+#
+###     ### ###    ### ###    ########  ###   ###       ###  ###
 
 Hello, I am an Assistive Task Organisation Manager, or A.T.O.M.
 How can I help you?
 
+> 
+Noted. The following task has been added: 
+[T][ ] hello world
+So, in total, you have 1 task(s) remaining
+
+> 
+Noted. The following task has been added: 
+[D][ ] cs2103 assignment (by: 18/07/26 10:00)
+So, in total, you have 2 task(s) remaining
+
+> 
+Noted. The following task has been added: 
+[E][ ] Chinese New Year  (from: 18 Feb 2026 to: 19 Feb 2026)
+So, in total, you have 3 task(s) remaining
+
+> 
+Great Job! This task is marked as complete:
+[D][X] cs2103 assignment (by: 18/07/26 10:00)
+
+> 
+1. [T][ ] hello world
+2. [D][X] cs2103 assignment (by: 18/07/26 10:00)
+3. [E][ ] Chinese New Year  (from: 18 Feb 2026 to: 19 Feb 2026)
+
+> 
+Alright, this task is marked as incomplete:
+[D][ ] cs2103 assignment (by: 18/07/26 10:00)
+
+> 
 Goodbye! Exiting...
