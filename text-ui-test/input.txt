@@ -8,4 +8,8 @@ unmark 2
 ufnuenif
 mark
 mark 5o
+mark 4
+unmark
+unmark s0
+unmark 0
 bye

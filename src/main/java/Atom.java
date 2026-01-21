@@ -60,12 +60,29 @@ public class Atom {
                     continue;
                 }
                 if (subcommands[0].equals("unmark")) {
-                    int taskId = Integer.parseInt(subcommands[1]);
+                    if(subcommands.length < 2) {
+                        String remedy = "Please follow the following format for the 'unmark' command:\n\n" +
+                        "   unmark <number>\n\n" +
+                        "Please try again.";
+                        throw new InvalidUnmarkCommandException("'unmark' command is missing a number", null, remedy);
+                    }
+                    int taskId = -1;
+                    try {
+                        taskId = Integer.parseInt(subcommands[1]);
+                    } catch(Exception exception) {
+                        String remedy = "Please follow the following format for the 'unmark' command:\n\n" +
+                        "   unmark <number>\n\n" +
+                        "Please try again.";
+                        throw new InvalidUnmarkCommandException("'" + subcommands[1] + "'" + " is not a number", exception, remedy);
+                    }
                     if (taskId - 1 < 0 || taskId - 1 >= tasks.size()) {
-                        System.out.println("Sorry, task " + taskId + " does not exists, please try again.");
+                        String remedy = "If you are unsure of the number of the task you want to mark as incomplete,\n" + 
+                        "type 'list' to show all tasks and corresponding task number.\n" +
+                        "Please try again.";
+                        throw new InvalidUnmarkCommandException("task " + taskId + " does not exist.", null, remedy);
                     } else {
-                        tasks.get(taskId - 1).markAsIncomplete();
-                        System.out.println("Alright, this task is marked as incomplete:");
+                        tasks.get(taskId - 1).markAsComplete();
+                        System.out.println("Alright, This task is marked as incomplete:");
                         System.out.println(tasks.get(taskId - 1));
                     }
                     continue;

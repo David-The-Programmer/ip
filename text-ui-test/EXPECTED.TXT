@@ -34,8 +34,8 @@ Great Job! This task is marked as complete:
 3. [E][ ] Chinese New Year  (from: 18 Feb 2026 to: 19 Feb 2026)
 
 > 
-Alright, this task is marked as incomplete:
-[D][ ] cs2103 assignment  (by:  18/07/26 10:00)
+Alright, This task is marked as incomplete:
+[D][X] cs2103 assignment  (by:  18/07/26 10:00)
 
 > 
 Unknown command '' is given.
@@ -95,6 +95,38 @@ Please follow the following format for the 'mark' command:
 
    mark <number>
 
+Please try again.
+
+> 
+task 4 does not exist.
+
+If you are unsure of the number of the task you want to mark as complete,
+type 'list' to show all tasks and corresponding task number.
+Please try again.
+
+> 
+'unmark' command is missing a number
+
+Please follow the following format for the 'unmark' command:
+
+   unmark <number>
+
+Please try again.
+
+> 
+'s0' is not a number
+
+Please follow the following format for the 'unmark' command:
+
+   unmark <number>
+
+Please try again.
+
+> 
+task 0 does not exist.
+
+If you are unsure of the number of the task you want to mark as incomplete,
+type 'list' to show all tasks and corresponding task number.
 Please try again.
 
 > 
