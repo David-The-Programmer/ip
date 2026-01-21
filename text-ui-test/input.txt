@@ -14,4 +14,9 @@ unmark s0
 unmark 0
 todo
 todo 
+deadline
+deadline 
+deadline /by
+deadline /by 2026
+deadline goodbye /by 1234
 bye

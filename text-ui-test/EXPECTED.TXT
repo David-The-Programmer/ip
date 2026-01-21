@@ -16,7 +16,7 @@ So, in total, you have 1 task(s) remaining
 
 > 
 Noted. The following task has been added: 
-[D][ ] cs2103 assignment  (by:  18/07/26 10:00)
+[D][ ] cs2103 assignment (by: 18/07/26 10:00)
 So, in total, you have 2 task(s) remaining
 
 > 
@@ -26,16 +26,16 @@ So, in total, you have 3 task(s) remaining
 
 > 
 Great Job! This task is marked as complete:
-[D][X] cs2103 assignment  (by:  18/07/26 10:00)
+[D][X] cs2103 assignment (by: 18/07/26 10:00)
 
 > 
 1. [T][ ] hello world
-2. [D][X] cs2103 assignment  (by:  18/07/26 10:00)
+2. [D][X] cs2103 assignment (by: 18/07/26 10:00)
 3. [E][ ] Chinese New Year  (from: 18 Feb 2026 to: 19 Feb 2026)
 
 > 
 Alright, This task is marked as incomplete:
-[D][X] cs2103 assignment  (by:  18/07/26 10:00)
+[D][X] cs2103 assignment (by: 18/07/26 10:00)
 
 > 
 Unknown command '' is given.
@@ -146,6 +146,47 @@ Please follow the following format for the 'todo' command:
     todo <description>
 
 Please try again.
+
+> 
+'deadline' command has an invalid format
+
+Please follow the following format for the 'deadline' command:
+
+    deadline <description> /by <date and/or time>
+
+Please try again.
+
+> 
+'deadline' command has an invalid format
+
+Please follow the following format for the 'deadline' command:
+
+    deadline <description> /by <date and/or time>
+
+Please try again.
+
+> 
+'deadline' command has an invalid format
+
+Please follow the following format for the 'deadline' command:
+
+    deadline <description> /by <date and/or time>
+
+Please try again.
+
+> 
+'deadline' command has an invalid format
+
+Please follow the following format for the 'deadline' command:
+
+    deadline <description> /by <date and/or time>
+
+Please try again.
+
+> 
+Noted. The following task has been added: 
+[D][ ] goodbye (by: 1234)
+So, in total, you have 4 task(s) remaining
 
 > 
 Goodbye! Exiting...
