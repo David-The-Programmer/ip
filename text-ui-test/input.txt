@@ -12,4 +12,6 @@ mark 4
 unmark
 unmark s0
 unmark 0
+todo
+todo 
 bye

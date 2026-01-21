@@ -34,7 +34,7 @@ public class Atom {
                 if (subcommands[0].equals("mark")) {
                     if(subcommands.length < 2) {
                         String remedy = "Please follow the following format for the 'mark' command:\n\n" +
-                        "   mark <number>\n\n" +
+                        "    mark <number>\n\n" +
                         "Please try again.";
                         throw new InvalidMarkCommandException("'mark' command is missing a number", null, remedy);
                     }
@@ -43,7 +43,7 @@ public class Atom {
                         taskId = Integer.parseInt(subcommands[1]);
                     } catch(Exception exception) {
                         String remedy = "Please follow the following format for the 'mark' command:\n\n" +
-                        "   mark <number>\n\n" +
+                        "    mark <number>\n\n" +
                         "Please try again.";
                         throw new InvalidMarkCommandException("'" + subcommands[1] + "'" + " is not a number", exception, remedy);
                     }
@@ -62,7 +62,7 @@ public class Atom {
                 if (subcommands[0].equals("unmark")) {
                     if(subcommands.length < 2) {
                         String remedy = "Please follow the following format for the 'unmark' command:\n\n" +
-                        "   unmark <number>\n\n" +
+                        "    unmark <number>\n\n" +
                         "Please try again.";
                         throw new InvalidUnmarkCommandException("'unmark' command is missing a number", null, remedy);
                     }
@@ -71,7 +71,7 @@ public class Atom {
                         taskId = Integer.parseInt(subcommands[1]);
                     } catch(Exception exception) {
                         String remedy = "Please follow the following format for the 'unmark' command:\n\n" +
-                        "   unmark <number>\n\n" +
+                        "    unmark <number>\n\n" +
                         "Please try again.";
                         throw new InvalidUnmarkCommandException("'" + subcommands[1] + "'" + " is not a number", exception, remedy);
                     }
@@ -88,6 +88,19 @@ public class Atom {
                     continue;
                 }
                 if (subcommands[0].equals("todo")) {
+                    if(subcommands.length < 2) {
+                        String remedy = "Please follow the following format for the 'todo' command:\n\n" +
+                        "    todo <description>\n\n" +
+                        "Please try again.";
+                        throw new InvalidTodoCommandException("'todo' command is missing a description", null, remedy);
+                    }
+                    subcommands[1] = subcommands[1].trim();
+                    if(subcommands[1].equals("")) {
+                        String remedy = "Please follow the following format for the 'todo' command:\n\n" +
+                        "    todo <description>\n\n" +
+                        "Please try again.";
+                        throw new InvalidTodoCommandException("'todo' command is missing a description", null, remedy);
+                    }
                     tasks.add(new ToDo(subcommands[1]));
                     System.out.println("Noted. The following task has been added: ");
                     System.out.println(tasks.get(tasks.size() - 1));

@@ -84,7 +84,7 @@ Please try again.
 
 Please follow the following format for the 'mark' command:
 
-   mark <number>
+    mark <number>
 
 Please try again.
 
@@ -93,7 +93,7 @@ Please try again.
 
 Please follow the following format for the 'mark' command:
 
-   mark <number>
+    mark <number>
 
 Please try again.
 
@@ -109,7 +109,7 @@ Please try again.
 
 Please follow the following format for the 'unmark' command:
 
-   unmark <number>
+    unmark <number>
 
 Please try again.
 
@@ -118,7 +118,7 @@ Please try again.
 
 Please follow the following format for the 'unmark' command:
 
-   unmark <number>
+    unmark <number>
 
 Please try again.
 
@@ -127,6 +127,24 @@ task 0 does not exist.
 
 If you are unsure of the number of the task you want to mark as incomplete,
 type 'list' to show all tasks and corresponding task number.
+Please try again.
+
+> 
+'todo' command is missing a description
+
+Please follow the following format for the 'todo' command:
+
+    todo <description>
+
+Please try again.
+
+> 
+'todo' command is missing a description
+
+Please follow the following format for the 'todo' command:
+
+    todo <description>
+
 Please try again.
 
 > 
