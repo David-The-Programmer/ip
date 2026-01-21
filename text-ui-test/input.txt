@@ -19,4 +19,14 @@ deadline
 deadline /by
 deadline /by 2026
 deadline goodbye /by 1234
+event
+event 
+event dinner
+event dinner /from
+event dinner /from /to
+event dinner /from 1234 /to
+event dinner /from /to 1300
+event /from
+event /to
+event /from /to
 bye

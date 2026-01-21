@@ -21,7 +21,7 @@ So, in total, you have 2 task(s) remaining
 
 > 
 Noted. The following task has been added: 
-[E][ ] Chinese New Year  (from: 18 Feb 2026 to: 19 Feb 2026)
+[E][ ] Chinese New Year (from: 18 Feb 2026 to: 19 Feb 2026)
 So, in total, you have 3 task(s) remaining
 
 > 
@@ -31,7 +31,7 @@ Great Job! This task is marked as complete:
 > 
 1. [T][ ] hello world
 2. [D][X] cs2103 assignment (by: 18/07/26 10:00)
-3. [E][ ] Chinese New Year  (from: 18 Feb 2026 to: 19 Feb 2026)
+3. [E][ ] Chinese New Year (from: 18 Feb 2026 to: 19 Feb 2026)
 
 > 
 Alright, This task is marked as incomplete:
@@ -187,6 +187,96 @@ Please try again.
 Noted. The following task has been added: 
 [D][ ] goodbye (by: 1234)
 So, in total, you have 4 task(s) remaining
+
+> 
+'event' command has an invalid format
+
+Please follow the following format for the 'event' command:
+
+    event <description> /from <date and/or time> /to <date and/or time>
+
+Please try again.
+
+> 
+'event' command has an invalid format: missing description
+
+Please follow the following format for the 'event' command:
+
+    event <description> /from <date and/or time> /to <date and/or time>
+
+Please try again.
+
+> 
+'event' command has an invalid format: missing /from
+
+Please follow the following format for the 'event' command:
+
+    event <description> /from <date and/or time> /to <date and/or time>
+
+Please try again.
+
+> 
+'event' command has an invalid format: missing /to
+
+Please follow the following format for the 'event' command:
+
+    event <description> /from <date and/or time> /to <date and/or time>
+
+Please try again.
+
+> 
+'event' command has an invalid format: missing /from
+
+Please follow the following format for the 'event' command:
+
+    event <description> /from <date and/or time> /to <date and/or time>
+
+Please try again.
+
+> 
+'event' command has an invalid format: missing /to
+
+Please follow the following format for the 'event' command:
+
+    event <description> /from <date and/or time> /to <date and/or time>
+
+Please try again.
+
+> 
+'event' command has an invalid format: missing /from
+
+Please follow the following format for the 'event' command:
+
+    event <description> /from <date and/or time> /to <date and/or time>
+
+Please try again.
+
+> 
+'event' command has an invalid format: missing /to
+
+Please follow the following format for the 'event' command:
+
+    event <description> /from <date and/or time> /to <date and/or time>
+
+Please try again.
+
+> 
+'event' command has an invalid format: missing /from
+
+Please follow the following format for the 'event' command:
+
+    event <description> /from <date and/or time> /to <date and/or time>
+
+Please try again.
+
+> 
+'event' command has an invalid format: missing description
+
+Please follow the following format for the 'event' command:
+
+    event <description> /from <date and/or time> /to <date and/or time>
+
+Please try again.
 
 > 
 Goodbye! Exiting...

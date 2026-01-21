@@ -151,11 +151,61 @@ public class Atom {
                     continue;
                 }
                 if (subcommands[0].equals("event")) {
+                    if (subcommands.length < 2) {
+                        String remedy = "Please follow the following format for the 'event' command:\n\n" +
+                                "    event <description> /from <date and/or time> /to <date and/or time>\n\n" +
+                                "Please try again.";
+                        throw new InvalidEventCommandException("'event' command has an invalid format", null,
+                                remedy);
+                    }
+                    String description = subcommands[1].trim();
+                    if(description.equals("")) {
+                        String remedy = "Please follow the following format for the 'event' command:\n\n" +
+                                "    event <description> /from <date and/or time> /to <date and/or time>\n\n" +
+                                "Please try again.";
+                        throw new InvalidEventCommandException("'event' command has an invalid format: missing description", null,
+                                remedy);
+                    }
                     int idxOfFrom = subcommands[1].indexOf("/from");
+                    if(idxOfFrom == -1) {
+                        String remedy = "Please follow the following format for the 'event' command:\n\n" +
+                                "    event <description> /from <date and/or time> /to <date and/or time>\n\n" +
+                                "Please try again.";
+                        throw new InvalidEventCommandException("'event' command has an invalid format: missing /from", null,
+                                remedy);
+                    }
                     int idxOfTo = subcommands[1].indexOf("/to");
-                    String description = subcommands[1].substring(0, idxOfFrom);
+                    if(idxOfTo == -1) {
+                        String remedy = "Please follow the following format for the 'event' command:\n\n" +
+                                "    event <description> /from <date and/or time> /to <date and/or time>\n\n" +
+                                "Please try again.";
+                        throw new InvalidEventCommandException("'event' command has an invalid format: missing /to", null,
+                                remedy);
+                    }
+                    description = subcommands[1].substring(0, idxOfFrom).trim();
+                    if(description.equals("")) {
+                        String remedy = "Please follow the following format for the 'event' command:\n\n" +
+                                "    event <description> /from <date and/or time> /to <date and/or time>\n\n" +
+                                "Please try again.";
+                        throw new InvalidEventCommandException("'event' command has an invalid format: missing description", null,
+                                remedy);
+                    }
                     String fromDateTime = subcommands[1].substring(idxOfFrom + 5, idxOfTo).trim();
+                    if(fromDateTime.equals("")) {
+                        String remedy = "Please follow the following format for the 'event' command:\n\n" +
+                                "    event <description> /from <date and/or time> /to <date and/or time>\n\n" +
+                                "Please try again.";
+                        throw new InvalidEventCommandException("'event' command has an invalid format: missing /from", null,
+                                remedy);
+                    }
                     String toDateTime = subcommands[1].substring(idxOfTo + 3).trim();
+                    if(toDateTime.equals("")) {
+                        String remedy = "Please follow the following format for the 'event' command:\n\n" +
+                                "    event <description> /from <date and/or time> /to <date and/or time>\n\n" +
+                                "Please try again.";
+                        throw new InvalidEventCommandException("'event' command has an invalid format: missing /to", null,
+                                remedy);
+                    }
                     tasks.add(new Event(description, fromDateTime, toDateTime));
                     System.out.println("Noted. The following task has been added: ");
                     System.out.println(tasks.get(tasks.size() - 1));
