@@ -29,4 +29,8 @@ event dinner /from /to 1300
 event /from
 event /to
 event /from /to
+list
+delete
+delete 1
+list
 bye

@@ -279,4 +279,28 @@ Please follow the following format for the 'event' command:
 Please try again.
 
 > 
+1. [T][ ] hello world
+2. [D][X] cs2103 assignment (by: 18/07/26 10:00)
+3. [E][ ] Chinese New Year (from: 18 Feb 2026 to: 19 Feb 2026)
+4. [D][ ] goodbye (by: 1234)
+
+> 
+'delete' command is missing a number
+
+Please follow the following format for the 'delete' command:
+
+    delete <number>
+
+Please try again.
+
+> 
+Understood. This task is deleted:
+[T][ ] hello world
+
+> 
+1. [D][X] cs2103 assignment (by: 18/07/26 10:00)
+2. [E][ ] Chinese New Year (from: 18 Feb 2026 to: 19 Feb 2026)
+3. [D][ ] goodbye (by: 1234)
+
+> 
 Goodbye! Exiting...

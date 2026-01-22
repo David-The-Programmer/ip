@@ -31,6 +31,35 @@ public class Atom {
                     continue;
                 }
                 String[] subcommands = userInput.split(" ", 2);
+                if (subcommands[0].equals("delete")) {
+                    if (subcommands.length < 2) {
+                        String remedy = "Please follow the following format for the 'delete' command:\n\n" +
+                                "    delete <number>\n\n" +
+                                "Please try again.";
+                        throw new InvalidDeleteCommandException("'delete' command is missing a number", null, remedy);
+                    }
+                    int taskId = -1;
+                    try {
+                        taskId = Integer.parseInt(subcommands[1]);
+                    } catch (Exception exception) {
+                        String remedy = "Please follow the following format for the 'delete' command:\n\n" +
+                                "    delete <number>\n\n" +
+                                "Please try again.";
+                        throw new InvalidDeleteCommandException("'" + subcommands[1] + "'" + " is not a number",
+                                exception, remedy);
+                    }
+                    if (taskId - 1 < 0 || taskId - 1 >= tasks.size()) {
+                        String remedy = "If you are unsure of the number of the task you want to delete,\n" +
+                                "type 'list' to show all tasks and corresponding task number.\n" +
+                                "Please try again.";
+                        throw new InvalidMarkCommandException("task " + taskId + " does not exist.", null, remedy);
+                    } else {
+                        System.out.println("Understood. This task is deleted:");
+                        System.out.println(tasks.get(taskId - 1));
+                        tasks.remove(taskId - 1);
+                    }
+                    continue;
+                }
                 if (subcommands[0].equals("mark")) {
                     if (subcommands.length < 2) {
                         String remedy = "Please follow the following format for the 'mark' command:\n\n" +
