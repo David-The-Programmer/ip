@@ -1,7 +1,9 @@
 public interface Serialiser {
-    void serialise(ToDo task);
+    public void serialise(ToDo task);
 
-    void serialise(Deadline task);
+    public void serialise(Deadline task);
 
-    void serialise(Event task);
+    public void serialise(Event task);
+
+    public String getSerialisedTask();
 }

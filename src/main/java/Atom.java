@@ -1,10 +1,11 @@
-import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Atom {
     public static void main(String[] args) throws StorageException {
-        Storage storage = new Storage("./data/atom.txt");
+        TaskSerialiser taskSerialiser = new TaskSerialiser();
+        TaskDeserialiser taskDeserialiser = new TaskDeserialiser();
+        Storage storage = new Storage("./data/atom.txt", taskSerialiser, taskDeserialiser);
         Scanner scanner = new Scanner(System.in);
         String logo = "          :::        :::::::::::    ::::::::          :::   ::: \n"
                 + "       :+: :+:          :+:       :+:    :+:        :+:+: :+:+: \n"
@@ -16,7 +17,7 @@ public class Atom {
         System.out.println(logo);
         System.out.println("Hello, I am an Assistive Task Organisation Manager, or A.T.O.M.");
         System.out.println("How can I help you?");
-        ArrayList<Task> tasks = new ArrayList<>();
+        List<Task> tasks = storage.readTasks();
         while (true) {
             try {
                 System.out.print("\n> ");
