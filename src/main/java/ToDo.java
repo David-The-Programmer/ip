@@ -1,6 +1,14 @@
+/**
+ * hello.
+ */
 public class ToDo extends Task {
+
     public ToDo(String description) {
         super(description);
+    }
+
+    public void acceptSerialiser(Serialiser serialiser) {
+        serialiser.serialise(this);
     }
 
     @Override

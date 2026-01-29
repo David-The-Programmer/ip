@@ -1,4 +1,4 @@
-public class Task {
+abstract public class Task {
     private String description;
     private Boolean isCompleted;
 
@@ -15,9 +15,19 @@ public class Task {
         this.isCompleted = false;
     }
 
+    public boolean isCompleted() {
+        return this.isCompleted;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public abstract void acceptSerialiser(Serialiser serialiser);
+
     @Override
     public String toString() {
-        if(this.isCompleted) {
+        if (this.isCompleted) {
             return "[X] " + this.description;
         }
         return "[ ] " + this.description;

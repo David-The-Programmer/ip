@@ -6,6 +6,14 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public String getDateTime() {
+        return this.by;
+    }
+
+    public void acceptSerialiser(Serialiser serialiser) {
+        serialiser.serialise(this);
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.by + ")";
