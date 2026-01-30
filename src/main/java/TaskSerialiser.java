@@ -1,3 +1,5 @@
+import java.time.format.DateTimeFormatter;
+
 public class TaskSerialiser implements Serialiser {
     private String serialisedTask;
 
@@ -25,7 +27,8 @@ public class TaskSerialiser implements Serialiser {
         } else {
             this.serialisedTask += "0|";
         }
-        this.serialisedTask += task.getDateTime();
+        String dateTimeStr = task.getDateTime().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        this.serialisedTask += dateTimeStr;
     }
 
     @Override
@@ -39,8 +42,10 @@ public class TaskSerialiser implements Serialiser {
         } else {
             this.serialisedTask += "0|";
         }
-        this.serialisedTask += task.getStartDateTime() + "|";
-        this.serialisedTask += task.getEndDateTime();
+        String startDateTimeStr = task.getStartDateTime().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        String endDateTimeStr = task.getEndDateTime().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        this.serialisedTask += startDateTimeStr + "|";
+        this.serialisedTask += endDateTimeStr;
     }
 
     public String getSerialisedTask() {

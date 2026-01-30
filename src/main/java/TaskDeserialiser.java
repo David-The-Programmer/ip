@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.HashSet;
 
 public class TaskDeserialiser implements Deserialiser {
@@ -62,8 +64,15 @@ public class TaskDeserialiser implements Deserialiser {
                 message += " from serialisedTask: '" + serialisedTask + "'";
                 throw new DeserialiserException(message, null, "");
             }
-            String deadlineDatetime = result[1];
-            deserialisedTask = new Deadline(taskDescription, deadlineDatetime);
+            LocalDateTime deadlineDateTime = null;
+            try {
+                deadlineDateTime = LocalDateTime.parse(result[1]);
+            } catch (DateTimeParseException exception) {
+                String message = "unable to deserialise deadline datetime ";
+                message += " from serialisedTask: '" + serialisedTask + "'";
+                throw new DeserialiserException(message, exception, "");
+            }
+            deserialisedTask = new Deadline(taskDescription, deadlineDateTime);
         } else if (type.equals("E")) {
             if (result.length != 2) {
                 String message = "unable to deserialise event datetimes ";
@@ -77,7 +86,17 @@ public class TaskDeserialiser implements Deserialiser {
                 message += " from serialisedTask: '" + serialisedTask + "'";
                 throw new DeserialiserException(message, null, "");
             }
-            deserialisedTask = new Event(taskDescription, result[0], result[1]);
+            LocalDateTime startDateTime = null;
+            LocalDateTime endDateTime = null;
+            try {
+                startDateTime = LocalDateTime.parse(result[0]);
+                endDateTime = LocalDateTime.parse(result[1]);
+            } catch (DateTimeParseException exception) {
+                String message = "unable to deserialise event datetime ";
+                message += " from serialisedTask: '" + serialisedTask + "'";
+                throw new DeserialiserException(message, exception, "");
+            }
+            deserialisedTask = new Event(taskDescription, startDateTime, endDateTime);
         }
 
         if (isCompleted) {
