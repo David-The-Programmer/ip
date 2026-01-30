@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
 
@@ -162,7 +163,7 @@ public class Atom {
                         throw new InvalidDeadlineCommandException("'deadline' command has an invalid format",
                                 null, remedy);
                     }
-                    String[] details = subcommands[1].split("/by");
+                    String[] details = subcommands[1].split("/by", 2);
                     if (details.length < 2) {
                         String remedy = "Please follow the following format for the 'deadline' command:\n\n"
                                 + "    deadline <description> /by <date and/or time>\n\n"
@@ -170,17 +171,23 @@ public class Atom {
                         throw new InvalidDeadlineCommandException("'deadline' command has an invalid format",
                                 null, remedy);
                     }
-                    for (int i = 0; i < details.length; i++) {
-                        details[i] = details[i].trim();
-                        if (details[i].equals("")) {
-                            String remedy = "Please follow the following format for the 'deadline' command:\n\n"
-                                    + "    deadline <description> /by <date and/or time>\n\n"
-                                    + "Please try again.";
-                            throw new InvalidDeadlineCommandException(
-                                    "'deadline' command has an invalid format", null, remedy);
-                        }
+                    details[0] = details[0].trim();
+                    if (details[0].equals("")) {
+                        String remedy = "Please follow the following format for the 'deadline' command:\n\n"
+                                + "    deadline <description> /by <date and/or time>\n\n"
+                                + "Please try again.";
+                        throw new InvalidDeadlineCommandException("'deadline' command has an invalid format",
+                                null, remedy);
                     }
-                    tasks.add(new Deadline(details[0], details[1]));
+                    if (details[1].equals("")) {
+                        String remedy = "Please follow the following format for the 'deadline' command:\n\n"
+                                + "    deadline <description> /by <date and/or time>\n\n"
+                                + "Please try again.";
+                        throw new InvalidDeadlineCommandException("'deadline' command has an invalid format",
+                                null, remedy);
+                    }
+                    LocalDateTime deadlineDateTime = DateTimeParser.parse(details[1]);
+                    tasks.add(new Deadline(details[0], deadlineDateTime));
                     storage.saveTasks(tasks);
                     System.out.println("Noted. The following task has been added: ");
                     System.out.println(tasks.get(tasks.size() - 1));
@@ -227,22 +234,24 @@ public class Atom {
                         throw new InvalidEventCommandException(
                                 "'event' command has an invalid format: missing description", null, remedy);
                     }
-                    String fromDateTime = subcommands[1].substring(idxOfFrom + 5, idxOfTo).trim();
-                    if (fromDateTime.equals("")) {
+                    String fromDateTimeStr = subcommands[1].substring(idxOfFrom + 5, idxOfTo).trim();
+                    if (fromDateTimeStr.equals("")) {
                         String remedy = "Please follow the following format for the 'event' command:\n\n"
                                 + "    event <description> /from <date and/or time> /to <date and/or time>\n\n"
                                 + "Please try again.";
                         throw new InvalidEventCommandException(
                                 "'event' command has an invalid format: missing /from", null, remedy);
                     }
-                    String toDateTime = subcommands[1].substring(idxOfTo + 3).trim();
-                    if (toDateTime.equals("")) {
+                    String toDateTimeStr = subcommands[1].substring(idxOfTo + 3).trim();
+                    if (toDateTimeStr.equals("")) {
                         String remedy = "Please follow the following format for the 'event' command:\n\n"
                                 + "    event <description> /from <date and/or time> /to <date and/or time>\n\n"
                                 + "Please try again.";
                         throw new InvalidEventCommandException(
                                 "'event' command has an invalid format: missing /to", null, remedy);
                     }
+                    LocalDateTime fromDateTime = DateTimeParser.parse(fromDateTimeStr);
+                    LocalDateTime toDateTime = DateTimeParser.parse(toDateTimeStr);
                     tasks.add(new Event(description, fromDateTime, toDateTime));
                     storage.saveTasks(tasks);
                     System.out.println("Noted. The following task has been added: ");
@@ -263,8 +272,12 @@ public class Atom {
                 System.out.println(exception.getMessage() + "\n");
                 System.out.println(exception.getRemedy());
             } catch (StorageException exception) {
-                System.out.println("Unable to save tasklist");
+                System.out.println(exception.getMessage() + "\n");
+                System.out.println(exception.getRemedy());
                 exception.printStackTrace();
+            } catch (DateTimeParserException exception) {
+                System.out.println(exception.getMessage() + "\n");
+                System.out.println(exception.getRemedy());
             }
         }
     }
