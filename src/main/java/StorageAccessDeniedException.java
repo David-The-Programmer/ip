@@ -1,7 +1,7 @@
-public class StorageException extends Exception {
+public class StorageAccessDeniedException extends Exception {
     private String remedy;
 
-    public StorageException(String message, Throwable cause, String remedy) {
+    public StorageAccessDeniedException(String message, Throwable cause, String remedy) {
         super(message, cause);
         this.remedy = remedy;
     }

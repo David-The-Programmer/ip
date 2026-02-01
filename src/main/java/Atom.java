@@ -3,10 +3,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Atom {
-    public static void main(String[] args) throws StorageException {
+    public static void main(String[] args) {
         TaskSerialiser taskSerialiser = new TaskSerialiser();
         TaskDeserialiser taskDeserialiser = new TaskDeserialiser();
-        Storage storage = new Storage("./data/atom.txt", taskSerialiser, taskDeserialiser);
+        Storage storage = Storage.init("./data/atom.txt", taskSerialiser, taskDeserialiser);
+        TaskService taskService = new TaskService(storage.readTasks());
         Scanner scanner = new Scanner(System.in);
         String logo = "          :::        :::::::::::    ::::::::          :::   ::: \n"
                 + "       :+: :+:          :+:       :+:    :+:        :+:+: :+:+: \n"
@@ -18,7 +19,6 @@ public class Atom {
         System.out.println(logo);
         System.out.println("Hello, I am an Assistive Task Organisation Manager, or A.T.O.M.");
         System.out.println("How can I help you?");
-        List<Task> tasks = storage.readTasks();
         while (true) {
             try {
                 System.out.print("\n> ");
@@ -29,8 +29,9 @@ public class Atom {
                     break;
                 }
                 if (userInput.equals("list")) {
-                    for (int i = 0; i < tasks.size(); i++) {
-                        System.out.println((i + 1) + ". " + tasks.get(i));
+                    int taskSize = taskService.getTasks().size();
+                    for (int i = 1; i <= taskSize; i++) {
+                        System.out.println(i + ". " + taskService.getTask(i));
                     }
                     continue;
                 }
@@ -51,19 +52,11 @@ public class Atom {
                         throw new InvalidDeleteCommandException(
                                 "'" + subcommands[1] + "'" + " is not a number", exception, remedy);
                     }
-                    if (taskId - 1 < 0 || taskId - 1 >= tasks.size()) {
-                        String remedy = "If you are unsure of the number of the task you want to delete,\n"
-                                + "type 'list' to show all tasks and corresponding task number.\n"
-                                + "Please try again.";
-                        throw new InvalidMarkCommandException("task " + taskId + " does not exist.", null,
-                                remedy);
-                    } else {
-                        Task taskToDelete = tasks.get(taskId - 1);
-                        System.out.println("Understood. This task will be deleted:");
-                        System.out.println(taskToDelete);
-                        tasks.remove(taskId - 1);
-                        storage.saveTasks(tasks);
-                    }
+                    Task taskToDelete = taskService.getTask(taskId);
+                    System.out.println("Understood. This task will be deleted:");
+                    System.out.println(taskToDelete);
+                    taskService.removeTask(taskId);
+                    storage.saveTasks(taskService.getTasks());
                     continue;
                 }
                 if (subcommands[0].equals("mark")) {
@@ -82,18 +75,10 @@ public class Atom {
                         throw new InvalidMarkCommandException("'" + subcommands[1] + "'" + " is not a number",
                                 exception, remedy);
                     }
-                    if (taskId - 1 < 0 || taskId - 1 >= tasks.size()) {
-                        String remedy = "If you are unsure of the number of the task you want to mark as complete,\n"
-                                + "type 'list' to show all tasks and corresponding task number.\n"
-                                + "Please try again.";
-                        throw new InvalidMarkCommandException("task " + taskId + " does not exist.", null,
-                                remedy);
-                    } else {
-                        tasks.get(taskId - 1).markAsComplete();
-                        System.out.println("Great Job! This task is marked as complete:");
-                        System.out.println(tasks.get(taskId - 1));
-                        storage.saveTasks(tasks);
-                    }
+                    taskService.markTaskAsComplete(taskId);
+                    System.out.println("Great Job! This task is marked as complete:");
+                    System.out.println(taskService.getTask(taskId));
+                    storage.saveTasks(taskService.getTasks());
                     continue;
                 }
                 if (subcommands[0].equals("unmark")) {
@@ -112,18 +97,10 @@ public class Atom {
                         throw new InvalidUnmarkCommandException(
                                 "'" + subcommands[1] + "'" + " is not a number", exception, remedy);
                     }
-                    if (taskId - 1 < 0 || taskId - 1 >= tasks.size()) {
-                        String remedy = "If you are unsure of the number of the task you want to mark as incomplete,\n"
-                                + "type 'list' to show all tasks and corresponding task number.\n"
-                                + "Please try again.";
-                        throw new InvalidUnmarkCommandException("task " + taskId + " does not exist.", null,
-                                remedy);
-                    } else {
-                        tasks.get(taskId - 1).markAsIncomplete();
-                        System.out.println("Alright, This task is marked as incomplete:");
-                        System.out.println(tasks.get(taskId - 1));
-                        storage.saveTasks(tasks);
-                    }
+                    taskService.markTaskAsIncomplete(taskId);
+                    System.out.println("Alright, This task is marked as incomplete:");
+                    System.out.println(taskService.getTask(taskId));
+                    storage.saveTasks(taskService.getTasks());
                     continue;
                 }
                 if (subcommands[0].equals("todo")) {
@@ -140,11 +117,12 @@ public class Atom {
                         throw new InvalidTodoCommandException("'todo' command is missing a description", null,
                                 remedy);
                     }
-                    tasks.add(new ToDo(subcommands[1]));
-                    storage.saveTasks(tasks);
+                    taskService.addTask(new ToDo(subcommands[1]));
+                    storage.saveTasks(taskService.getTasks());
                     System.out.println("Noted. The following task has been added: ");
-                    System.out.println(tasks.get(tasks.size() - 1));
-                    System.out.println("So, in total, you have " + tasks.size() + " task(s) remaining");
+                    int totalNumTasks = taskService.getTasks().size();
+                    System.out.println(taskService.getTask(totalNumTasks));
+                    System.out.println("So, in total, you have " + totalNumTasks + " task(s) remaining");
                     continue;
                 }
                 if (subcommands[0].equals("deadline")) {
@@ -187,11 +165,12 @@ public class Atom {
                                 null, remedy);
                     }
                     LocalDateTime deadlineDateTime = DateTimeParser.parse(details[1]);
-                    tasks.add(new Deadline(details[0], deadlineDateTime));
-                    storage.saveTasks(tasks);
+                    taskService.addTask(new Deadline(details[0], deadlineDateTime));
+                    storage.saveTasks(taskService.getTasks());
                     System.out.println("Noted. The following task has been added: ");
-                    System.out.println(tasks.get(tasks.size() - 1));
-                    System.out.println("So, in total, you have " + tasks.size() + " task(s) remaining");
+                    int totalNumTasks = taskService.getTasks().size();
+                    System.out.println(taskService.getTask(totalNumTasks));
+                    System.out.println("So, in total, you have " + totalNumTasks + " task(s) remaining");
                     continue;
                 }
                 if (subcommands[0].equals("event")) {
@@ -252,11 +231,12 @@ public class Atom {
                     }
                     LocalDateTime fromDateTime = DateTimeParser.parse(fromDateTimeStr);
                     LocalDateTime toDateTime = DateTimeParser.parse(toDateTimeStr);
-                    tasks.add(new Event(description, fromDateTime, toDateTime));
-                    storage.saveTasks(tasks);
+                    taskService.addTask(new Event(description, fromDateTime, toDateTime));
+                    storage.saveTasks(taskService.getTasks());
                     System.out.println("Noted. The following task has been added: ");
-                    System.out.println(tasks.get(tasks.size() - 1));
-                    System.out.println("So, in total, you have " + tasks.size() + " task(s) remaining");
+                    int totalNumTasks = taskService.getTasks().size();
+                    System.out.println(taskService.getTask(totalNumTasks));
+                    System.out.println("So, in total, you have " + totalNumTasks + " task(s) remaining");
                     continue;
                 }
                 String remedy = "The following are the only valid commands:\n\n" + "   todo <description>\n\n"
@@ -271,13 +251,25 @@ public class Atom {
             } catch (AtomException exception) {
                 System.out.println(exception.getMessage() + "\n");
                 System.out.println(exception.getRemedy());
-            } catch (StorageException exception) {
-                System.out.println(exception.getMessage() + "\n");
-                System.out.println(exception.getRemedy());
-                exception.printStackTrace();
             } catch (DateTimeParserException exception) {
                 System.out.println(exception.getMessage() + "\n");
                 System.out.println(exception.getRemedy());
+            } catch (TaskNotFoundException exception) {
+                System.out.println(exception.getMessage() + "\n");
+                System.out.println(exception.getRemedy());
+            } catch (TaskAlreadyMarkedCompleteException exception) {
+                System.out.println(exception.getMessage() + "\n");
+                System.out.println(exception.getRemedy());
+            } catch (TaskAlreadyMarkedIncompleteException exception) {
+                System.out.println(exception.getMessage() + "\n");
+                System.out.println(exception.getRemedy());
+            } catch (StorageAccessDeniedException exception) {
+                System.out.println(exception.getMessage() + "\n");
+                System.out.println(exception.getRemedy());
+            } catch (StorageWriteException exception) {
+                System.out.println(exception.getMessage() + "\n");
+                System.out.println("Fatal Error, exiting...");
+                break;
             }
         }
     }

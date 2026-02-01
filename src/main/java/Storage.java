@@ -1,6 +1,6 @@
 import java.io.IOException;
+import java.nio.file.AccessDeniedException;
 import java.nio.file.Files;
-import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -11,62 +11,51 @@ public class Storage {
     private Serialiser taskSerialiser;
     private Deserialiser taskDeserialiser;
 
-    public Storage(String saveFilePath, TaskSerialiser taskSerialiser, TaskDeserialiser taskDeserialiser)
-            throws StorageException {
+    private Storage(Path saveFilePath, TaskSerialiser taskSerialiser, TaskDeserialiser taskDeserialiser) {
+        this.saveFilePath = saveFilePath;
         this.taskSerialiser = taskSerialiser;
         this.taskDeserialiser = taskDeserialiser;
-        try {
-            this.saveFilePath = Paths.get(saveFilePath);
-        } catch (InvalidPathException exception) {
-            String message = "'saveFilePath' parameter provided: " + saveFilePath
-                    + " is an invalid file path";
-            String remedy = "ensure that 'saveFilePath' is a proper path";
-            throw new StorageException(message, exception, remedy);
-        }
     }
 
-    public void saveTasks(List<Task> tasks) throws StorageException {
+    // TODO: Need to move all remedy of exceptions into command controller/ui layer
+    public static Storage init(String saveFilePathStr, TaskSerialiser serialiser,
+            TaskDeserialiser deserialiser) throws StorageInitException {
+        Path saveFilePath = Paths.get(saveFilePathStr);
+        Path saveDirectory = saveFilePath.getParent();
+        try {
+            if (saveDirectory != null) {
+                Files.createDirectories(saveDirectory);
+            }
+            if (Files.notExists(saveFilePath)) {
+                Files.createFile(saveFilePath);
+            }
+        } catch (IOException e) {
+            String message = "Unable to init storage";
+            throw new StorageInitException(message, e);
+        }
+        return new Storage(saveFilePath, serialiser, deserialiser);
+    }
+
+    public void saveTasks(List<Task> tasks) throws StorageAccessDeniedException, StorageWriteException {
         String serialisedTaskList = "";
         for (Task task : tasks) {
             task.acceptSerialiser(taskSerialiser);
             serialisedTaskList += taskSerialiser.getSerialisedTask() + "\n";
         }
-        Path saveDirectory = saveFilePath.getParent();
-        if (saveDirectory == null) {
-            saveDirectory = Paths.get("");
-        }
         try {
-            if (Files.notExists(saveDirectory)) {
-                Files.createDirectories(saveDirectory);
-            }
-            if (Files.notExists(saveFilePath)) {
-                Files.createFile(saveFilePath);
-            }
             Files.writeString(saveFilePath, serialisedTaskList);
-
-        } catch (UnsupportedOperationException | IOException | SecurityException exception) {
-            String message = "Unable to write tasks to file";
-            throw new StorageException(message, exception, "");
+        } catch (AccessDeniedException e) {
+            String message = "Unable to access save file";
+            String remedy = "Please check if " + saveFilePath.toString() + " is read-only,";
+            remedy += " open in another program, or in a protected folder.";
+            throw new StorageAccessDeniedException(message, e, remedy);
+        } catch (IOException e) {
+            String message = "Unable to write tasks storage";
+            throw new StorageWriteException(message, e);
         }
     }
 
-    public List<Task> readTasks() throws StorageException {
-        Path saveDirectory = saveFilePath.getParent();
-        if (saveDirectory == null) {
-            saveDirectory = Paths.get("");
-        }
-        try {
-            if (Files.notExists(saveDirectory)) {
-                Files.createDirectories(saveDirectory);
-            }
-            if (Files.notExists(saveFilePath)) {
-                Files.createFile(saveFilePath);
-            }
-        } catch (UnsupportedOperationException | IOException | SecurityException exception) {
-            String message = "Unable to create file at saveFilePath: ";
-            message += saveFilePath;
-            throw new StorageException(message, exception, "");
-        }
+    public List<Task> readTasks() throws StorageReadException {
         List<Task> tasks = new ArrayList<>();
         List<String> serialisedTasks = null;
 
@@ -75,7 +64,7 @@ public class Storage {
         } catch (IOException exception) {
             String message = "Unable to read file from saveFilePath: ";
             message += saveFilePath;
-            throw new StorageException(message, exception, "");
+            throw new StorageReadException(message, exception);
         }
 
         for (String serialisedTask : serialisedTasks) {
@@ -85,7 +74,7 @@ public class Storage {
             } catch (DeserialiserException exception) {
                 String message = "Unable to deserialise task string: ";
                 message += "'" + serialisedTask + "'";
-                throw new StorageException(message, exception, "");
+                throw new StorageReadException(message, exception);
             }
         }
 
