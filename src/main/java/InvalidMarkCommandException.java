@@ -1,6 +1,6 @@
-public class InvalidMarkCommandException extends AtomException {
+public class InvalidMarkCommandException extends Exception {
 
-    public InvalidMarkCommandException(String message, Throwable cause, String remedy) {
-        super(message, cause, remedy);
+    public InvalidMarkCommandException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

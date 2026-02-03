@@ -78,8 +78,8 @@ public final class DateTimeParser {
             if (reason.contains(": ")) {
                 reason = reason.split(": ")[1];
             }
-            reason = reason.replace("MonthOfYear", "month").replace("DayOfMonth", "day").replace("HourOfDay",
-                    "hour");
+            reason = reason.replace("MonthOfYear", "month").replace("DayOfMonth", "day")
+                    .replace("HourOfDay", "hour").replace("MinuteOfHour", "minute");
 
             throw new DateTimeParserException(reason, e, "Please try again with a valid calendar date.");
         }

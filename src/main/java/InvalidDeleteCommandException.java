@@ -1,6 +1,6 @@
-public class InvalidDeleteCommandException extends AtomException {
+public class InvalidDeleteCommandException extends Exception {
 
-    public InvalidDeleteCommandException(String message, Throwable cause, String remedy) {
-        super(message, cause, remedy);
+    public InvalidDeleteCommandException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

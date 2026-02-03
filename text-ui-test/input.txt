@@ -1,36 +1,45 @@
-todo hello world
-deadline cs2103 assignment /by 18/07/26 10:00
-event Chinese New Year /from 18 Feb 2026 /to 19 Feb 2026
-mark 2
-list
-unmark 2
 
 ufnuenif
+todo
+todo Task
+deadline
+deadline /by 2026-02-03 1200
+deadline Buy Milk
+deadline Buy Milk /by
+deadline Buy Milk /by 2026-15-40 1200
+deadline Buy Milk /by 03-02-2026 12:00
+deadline Buy Milk /by 2026.02.03 1200
+deadline Buy Milk /by 2026/13/03 1200
+deadline Buy Milk /by 2026/02/39 1200
+deadline Buy Milk /by 2026/02/03 1260
+deadline Buy Milk /by 2026/02/03 1200
+deadline Buy Bread /by 2026-02-03 1200
+deadline Buy Cheese /by 20/02/2026 1200
+deadline Buy Eggs /by 20-02-2026 1200
+event
+event Party /from 2026-02-03 1800
+event /from 2026-02-03 1800 /to 2026-02-03 2000
+event Trip /from 2026-02-03 2000 /to 2026-02-03 1800
+event Gala /from 2026-02-03 0900 /to 2026-02-03 2500
+event /from /to /from
+event Read /from 2026-01-01 /to 2026-01-01 1200
+event /by deadline /from 2026-01-01 1000 /to 2026-01-01 1100
+event Work /from 2026-01-01 1000 /to 2026-01-01 1100 /from 2026-01-01 1200
+event "Party /from now" /from 2026-01-01 1000 /to 2026-01-01 1100
+list
 mark
 mark 5o
+mark 0
+mark 10000
 mark 4
 unmark
 unmark s0
 unmark 0
-todo
-todo 
-deadline
-deadline 
-deadline /by
-deadline /by 2026
-deadline goodbye /by 1234
-event
-event 
-event dinner
-event dinner /from
-event dinner /from /to
-event dinner /from 1234 /to
-event dinner /from /to 1300
-event /from
-event /to
-event /from /to
-list
+unmark 10000
+unmark 4
 delete
+delete 5o
+delete 10000
 delete 1
 list
 bye
