@@ -15,8 +15,7 @@ public class TaskService {
         int taskIndex = taskNumber - 1;
         if (taskIndex < 0 || taskIndex >= this.tasks.size()) {
             String message = "Task " + taskNumber + " cannot be found.";
-            String remedy = "Please try again.";
-            throw new TaskNotFoundException(message, taskNumber, null, remedy);
+            throw new TaskNotFoundException(message, taskNumber, null);
         }
         return this.tasks.get(taskIndex);
     }
@@ -29,8 +28,7 @@ public class TaskService {
         int taskIndex = taskNumber - 1;
         if (taskIndex < 0 || taskIndex >= this.tasks.size()) {
             String message = "Task " + taskNumber + " cannot be found.";
-            String remedy = "Please try again.";
-            throw new TaskNotFoundException(message, taskNumber, null, remedy);
+            throw new TaskNotFoundException(message, taskNumber, null);
         }
         this.tasks.remove(taskIndex);
     }
@@ -40,13 +38,11 @@ public class TaskService {
         int taskIndex = taskNumber - 1;
         if (taskIndex < 0 || taskIndex >= this.tasks.size()) {
             String message = "Task " + taskNumber + " cannot be found.";
-            String remedy = "Please try again.";
-            throw new TaskNotFoundException(message, taskNumber, null, remedy);
+            throw new TaskNotFoundException(message, taskNumber, null);
         }
         if (this.tasks.get(taskIndex).isCompleted()) {
             String message = "Task " + taskNumber + " is already marked complete.";
-            String remedy = "No further action required.";
-            throw new TaskAlreadyMarkedCompleteException(message, null, remedy);
+            throw new TaskAlreadyMarkedCompleteException(message, null);
         }
         this.tasks.get(taskIndex).markAsComplete();
     }
@@ -56,13 +52,11 @@ public class TaskService {
         int taskIndex = taskNumber - 1;
         if (taskIndex < 0 || taskIndex >= this.tasks.size()) {
             String message = "Task " + taskNumber + " cannot be found.";
-            String remedy = "Please try again.";
-            throw new TaskNotFoundException(message, taskNumber, null, remedy);
+            throw new TaskNotFoundException(message, taskNumber, null);
         }
         if (!this.tasks.get(taskIndex).isCompleted()) {
             String message = "Task " + taskNumber + " is already marked incomplete.";
-            String remedy = "No further action required.";
-            throw new TaskAlreadyMarkedIncompleteException(message, null, remedy);
+            throw new TaskAlreadyMarkedIncompleteException(message, null);
         }
         this.tasks.get(taskIndex).markAsIncomplete();
     }

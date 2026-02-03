@@ -46,9 +46,7 @@ public class Storage {
             Files.writeString(saveFilePath, serialisedTaskList);
         } catch (AccessDeniedException e) {
             String message = "Unable to access save file";
-            String remedy = "Please check if " + saveFilePath.toString() + " is read-only,";
-            remedy += " open in another program, or in a protected folder.";
-            throw new StorageAccessDeniedException(message, e, remedy);
+            throw new StorageAccessDeniedException(message, e, saveFilePath.toString());
         } catch (IOException e) {
             String message = "Unable to write tasks storage";
             throw new StorageWriteException(message, e);

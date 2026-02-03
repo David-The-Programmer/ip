@@ -10,297 +10,262 @@ Hello, I am an Assistive Task Organisation Manager, or A.T.O.M.
 How can I help you?
 
 > 
-Noted. The following task has been added: 
-[T][ ] hello world
-So, in total, you have 1 task(s) remaining
+'' command not found (unknown)
+The following are the only valid commands:
+
+   todo <description>
+
+   deadline <description> /by <datetime of deadline>
+
+   event <description> /from <datetime that event starts> /to <datetime that event ends>
+
+   list
+
+   mark <task number shown after entering the list command>
+
+   unmark <task number shown after entering the list command>
+
+   bye
+
+> 
+'ufnuenif' command not found (unknown)
+The following are the only valid commands:
+
+   todo <description>
+
+   deadline <description> /by <datetime of deadline>
+
+   event <description> /from <datetime that event starts> /to <datetime that event ends>
+
+   list
+
+   mark <task number shown after entering the list command>
+
+   unmark <task number shown after entering the list command>
+
+   bye
+
+> 
+ERROR: 'todo' command is missing a description
 
 > 
 Noted. The following task has been added: 
-[D][ ] cs2103 assignment (by: 18/07/26 10:00)
-So, in total, you have 2 task(s) remaining
+[T][ ] Task
+So, in total, you have 24 task(s) remaining
+
+> 
+ERROR: 'deadline' command has an invalid format: missing description
+
+> 
+ERROR: 'deadline' command has an invalid format: missing description
+
+> 
+ERROR: 'deadline' command has an invalid format: missing /by
+
+> 
+ERROR: 'deadline' command has an invalid format: missing /by datetime
+
+> 
+ERROR: Invalid value for month (valid values 1 - 12)
+
+> 
+ERROR: Invalid Time Syntax: '12:00'. Expected HHmm (e.g., 1430).
+
+> 
+ERROR: Invalid Datetime Syntax: '2026.02.03'.
+
+Supported datetime formats:
+  - yyyy-MM-dd HHmm
+  - yyyy/MM/dd HHmm
+  - dd/MM/yyyy HHmm
+  - dd-MM-yyyy HHmm
+
+
+> 
+ERROR: Invalid value for month (valid values 1 - 12)
+
+> 
+ERROR: Invalid value for day (valid values 1 - 28/31)
+
+> 
+ERROR: Invalid value for minute (valid values 0 - 59)
 
 > 
 Noted. The following task has been added: 
-[E][ ] Chinese New Year (from: 18 Feb 2026 to: 19 Feb 2026)
-So, in total, you have 3 task(s) remaining
+[D][ ] Buy Milk (by: Tuesday, 03 Feb 2026 1200)
+So, in total, you have 25 task(s) remaining
+
+> 
+Noted. The following task has been added: 
+[D][ ] Buy Bread (by: Tuesday, 03 Feb 2026 1200)
+So, in total, you have 26 task(s) remaining
+
+> 
+Noted. The following task has been added: 
+[D][ ] Buy Cheese (by: Friday, 20 Feb 2026 1200)
+So, in total, you have 27 task(s) remaining
+
+> 
+Noted. The following task has been added: 
+[D][ ] Buy Eggs (by: Friday, 20 Feb 2026 1200)
+So, in total, you have 28 task(s) remaining
+
+> 
+ERROR: 'event' command has an invalid format
+
+> 
+ERROR: 'event' command has an invalid format: missing /to
+
+> 
+ERROR: 'event' command has an invalid format: missing description
+
+> 
+ERROR: /from datetime cannot be later than /to datetime
+
+> 
+ERROR: Invalid value for hour (valid values 0 - 23)
+
+> 
+ERROR: 'event' command has an invalid format: missing description
+
+> 
+ERROR: Invalid Datetime Syntax: '2026-01-01'.
+
+Supported datetime formats:
+  - yyyy-MM-dd HHmm
+  - yyyy/MM/dd HHmm
+  - dd/MM/yyyy HHmm
+  - dd-MM-yyyy HHmm
+
+
+> 
+Noted. The following task has been added: 
+[E][ ] /by deadline (from: Thursday, 01 Jan 2026 1000 to: Thursday, 01 Jan 2026 1100)
+So, in total, you have 29 task(s) remaining
+
+> 
+ERROR: Invalid Time Syntax: '1100 /from 2026-01-01 1200'. Expected HHmm (e.g., 1430).
+
+> 
+ERROR: Invalid Datetime Syntax: 'now"'.
+
+Supported datetime formats:
+  - yyyy-MM-dd HHmm
+  - yyyy/MM/dd HHmm
+  - dd/MM/yyyy HHmm
+  - dd-MM-yyyy HHmm
+
+
+> 
+1. [D][ ] Buy Eggs (by: Friday, 20 Feb 2026 1200)
+2. [E][ ] Trip (from: Tuesday, 03 Feb 2026 2000 to: Tuesday, 03 Feb 2026 1800)
+3. [E][ ] /by deadline (from: Thursday, 01 Jan 2026 1000 to: Thursday, 01 Jan 2026 1100)
+4. [T][ ] Task
+5. [D][ ] Buy Milk (by: Tuesday, 03 Feb 2026 1200)
+6. [D][ ] Buy Bread (by: Tuesday, 03 Feb 2026 1200)
+7. [D][ ] Buy Cheese (by: Friday, 20 Feb 2026 1200)
+8. [D][ ] Buy Eggs (by: Friday, 20 Feb 2026 1200)
+9. [E][ ] Trip (from: Tuesday, 03 Feb 2026 2000 to: Tuesday, 03 Feb 2026 1800)
+10. [E][ ] /by deadline (from: Thursday, 01 Jan 2026 1000 to: Thursday, 01 Jan 2026 1100)
+11. [T][ ] Task
+12. [D][ ] Buy Milk (by: Tuesday, 03 Feb 2026 1200)
+13. [D][ ] Buy Bread (by: Tuesday, 03 Feb 2026 1200)
+14. [D][ ] Buy Cheese (by: Friday, 20 Feb 2026 1200)
+15. [D][ ] Buy Eggs (by: Friday, 20 Feb 2026 1200)
+16. [E][ ] Trip (from: Tuesday, 03 Feb 2026 2000 to: Tuesday, 03 Feb 2026 1800)
+17. [E][ ] /by deadline (from: Thursday, 01 Jan 2026 1000 to: Thursday, 01 Jan 2026 1100)
+18. [T][ ] Task
+19. [D][ ] Buy Milk (by: Tuesday, 03 Feb 2026 1200)
+20. [D][ ] Buy Bread (by: Tuesday, 03 Feb 2026 1200)
+21. [D][ ] Buy Cheese (by: Friday, 20 Feb 2026 1200)
+22. [D][ ] Buy Eggs (by: Friday, 20 Feb 2026 1200)
+23. [E][ ] /by deadline (from: Thursday, 01 Jan 2026 1000 to: Thursday, 01 Jan 2026 1100)
+24. [T][ ] Task
+25. [D][ ] Buy Milk (by: Tuesday, 03 Feb 2026 1200)
+26. [D][ ] Buy Bread (by: Tuesday, 03 Feb 2026 1200)
+27. [D][ ] Buy Cheese (by: Friday, 20 Feb 2026 1200)
+28. [D][ ] Buy Eggs (by: Friday, 20 Feb 2026 1200)
+29. [E][ ] /by deadline (from: Thursday, 01 Jan 2026 1000 to: Thursday, 01 Jan 2026 1100)
+
+> 
+ERROR: 'mark' command is missing a number
+
+> 
+ERROR: '5o' is not a number
+
+> 
+ERROR: Task 0 cannot be found.
+Please try again.
+
+> 
+ERROR: Task 10000 cannot be found.
+Please try again.
 
 > 
 Great Job! This task is marked as complete:
-[D][X] cs2103 assignment (by: 18/07/26 10:00)
+[T][X] Task
 
 > 
-1. [T][ ] hello world
-2. [D][X] cs2103 assignment (by: 18/07/26 10:00)
-3. [E][ ] Chinese New Year (from: 18 Feb 2026 to: 19 Feb 2026)
+ERROR: 'unmark' command is missing a number
 
 > 
-Alright, This task is marked as incomplete:
-[D][X] cs2103 assignment (by: 18/07/26 10:00)
+ERROR: 's0' is not a number
 
 > 
-Unknown command '' is given.
-
-The following are the only valid commands:
-
-   todo <description>
-
-   deadline <description> /by <date and/or time of deadline>
-
-   event <description> /from <date and/or time that event starts> /to <date and/or time that event ends>
-
-   list
-
-   mark <task number shown after entering the list command>
-
-   unmark <task number shown after entering the list command>
-
-   bye
-
+ERROR: Task 0 cannot be found.
 Please try again.
 
 > 
-Unknown command 'ufnuenif' is given.
-
-The following are the only valid commands:
-
-   todo <description>
-
-   deadline <description> /by <date and/or time of deadline>
-
-   event <description> /from <date and/or time that event starts> /to <date and/or time that event ends>
-
-   list
-
-   mark <task number shown after entering the list command>
-
-   unmark <task number shown after entering the list command>
-
-   bye
-
+ERROR: Task 10000 cannot be found.
 Please try again.
 
 > 
-'mark' command is missing a number
+Great Job! This task is marked as complete:
+[T][ ] Task
 
-Please follow the following format for the 'mark' command:
+> 
+ERROR: 'delete' command is missing a number
 
-    mark <number>
+> 
+ERROR: '5o' is not a number
 
+> 
+ERROR: Task 10000 cannot be found.
 Please try again.
 
 > 
-'5o' is not a number
-
-Please follow the following format for the 'mark' command:
-
-    mark <number>
-
-Please try again.
+Understood. This task will be deleted:
+[D][ ] Buy Eggs (by: Friday, 20 Feb 2026 1200)
 
 > 
-task 4 does not exist.
-
-If you are unsure of the number of the task you want to mark as complete,
-type 'list' to show all tasks and corresponding task number.
-Please try again.
-
-> 
-'unmark' command is missing a number
-
-Please follow the following format for the 'unmark' command:
-
-    unmark <number>
-
-Please try again.
-
-> 
-'s0' is not a number
-
-Please follow the following format for the 'unmark' command:
-
-    unmark <number>
-
-Please try again.
-
-> 
-task 0 does not exist.
-
-If you are unsure of the number of the task you want to mark as incomplete,
-type 'list' to show all tasks and corresponding task number.
-Please try again.
-
-> 
-'todo' command is missing a description
-
-Please follow the following format for the 'todo' command:
-
-    todo <description>
-
-Please try again.
-
-> 
-'todo' command is missing a description
-
-Please follow the following format for the 'todo' command:
-
-    todo <description>
-
-Please try again.
-
-> 
-'deadline' command has an invalid format
-
-Please follow the following format for the 'deadline' command:
-
-    deadline <description> /by <date and/or time>
-
-Please try again.
-
-> 
-'deadline' command has an invalid format
-
-Please follow the following format for the 'deadline' command:
-
-    deadline <description> /by <date and/or time>
-
-Please try again.
-
-> 
-'deadline' command has an invalid format
-
-Please follow the following format for the 'deadline' command:
-
-    deadline <description> /by <date and/or time>
-
-Please try again.
-
-> 
-'deadline' command has an invalid format
-
-Please follow the following format for the 'deadline' command:
-
-    deadline <description> /by <date and/or time>
-
-Please try again.
-
-> 
-Noted. The following task has been added: 
-[D][ ] goodbye (by: 1234)
-So, in total, you have 4 task(s) remaining
-
-> 
-'event' command has an invalid format
-
-Please follow the following format for the 'event' command:
-
-    event <description> /from <date and/or time> /to <date and/or time>
-
-Please try again.
-
-> 
-'event' command has an invalid format: missing description
-
-Please follow the following format for the 'event' command:
-
-    event <description> /from <date and/or time> /to <date and/or time>
-
-Please try again.
-
-> 
-'event' command has an invalid format: missing /from
-
-Please follow the following format for the 'event' command:
-
-    event <description> /from <date and/or time> /to <date and/or time>
-
-Please try again.
-
-> 
-'event' command has an invalid format: missing /to
-
-Please follow the following format for the 'event' command:
-
-    event <description> /from <date and/or time> /to <date and/or time>
-
-Please try again.
-
-> 
-'event' command has an invalid format: missing /from
-
-Please follow the following format for the 'event' command:
-
-    event <description> /from <date and/or time> /to <date and/or time>
-
-Please try again.
-
-> 
-'event' command has an invalid format: missing /to
-
-Please follow the following format for the 'event' command:
-
-    event <description> /from <date and/or time> /to <date and/or time>
-
-Please try again.
-
-> 
-'event' command has an invalid format: missing /from
-
-Please follow the following format for the 'event' command:
-
-    event <description> /from <date and/or time> /to <date and/or time>
-
-Please try again.
-
-> 
-'event' command has an invalid format: missing /to
-
-Please follow the following format for the 'event' command:
-
-    event <description> /from <date and/or time> /to <date and/or time>
-
-Please try again.
-
-> 
-'event' command has an invalid format: missing /from
-
-Please follow the following format for the 'event' command:
-
-    event <description> /from <date and/or time> /to <date and/or time>
-
-Please try again.
-
-> 
-'event' command has an invalid format: missing description
-
-Please follow the following format for the 'event' command:
-
-    event <description> /from <date and/or time> /to <date and/or time>
-
-Please try again.
-
-> 
-1. [T][ ] hello world
-2. [D][X] cs2103 assignment (by: 18/07/26 10:00)
-3. [E][ ] Chinese New Year (from: 18 Feb 2026 to: 19 Feb 2026)
-4. [D][ ] goodbye (by: 1234)
-
-> 
-'delete' command is missing a number
-
-Please follow the following format for the 'delete' command:
-
-    delete <number>
-
-Please try again.
-
-> 
-Understood. This task is deleted:
-[T][ ] hello world
-
-> 
-1. [D][X] cs2103 assignment (by: 18/07/26 10:00)
-2. [E][ ] Chinese New Year (from: 18 Feb 2026 to: 19 Feb 2026)
-3. [D][ ] goodbye (by: 1234)
+1. [E][ ] Trip (from: Tuesday, 03 Feb 2026 2000 to: Tuesday, 03 Feb 2026 1800)
+2. [E][ ] /by deadline (from: Thursday, 01 Jan 2026 1000 to: Thursday, 01 Jan 2026 1100)
+3. [T][ ] Task
+4. [D][ ] Buy Milk (by: Tuesday, 03 Feb 2026 1200)
+5. [D][ ] Buy Bread (by: Tuesday, 03 Feb 2026 1200)
+6. [D][ ] Buy Cheese (by: Friday, 20 Feb 2026 1200)
+7. [D][ ] Buy Eggs (by: Friday, 20 Feb 2026 1200)
+8. [E][ ] Trip (from: Tuesday, 03 Feb 2026 2000 to: Tuesday, 03 Feb 2026 1800)
+9. [E][ ] /by deadline (from: Thursday, 01 Jan 2026 1000 to: Thursday, 01 Jan 2026 1100)
+10. [T][ ] Task
+11. [D][ ] Buy Milk (by: Tuesday, 03 Feb 2026 1200)
+12. [D][ ] Buy Bread (by: Tuesday, 03 Feb 2026 1200)
+13. [D][ ] Buy Cheese (by: Friday, 20 Feb 2026 1200)
+14. [D][ ] Buy Eggs (by: Friday, 20 Feb 2026 1200)
+15. [E][ ] Trip (from: Tuesday, 03 Feb 2026 2000 to: Tuesday, 03 Feb 2026 1800)
+16. [E][ ] /by deadline (from: Thursday, 01 Jan 2026 1000 to: Thursday, 01 Jan 2026 1100)
+17. [T][ ] Task
+18. [D][ ] Buy Milk (by: Tuesday, 03 Feb 2026 1200)
+19. [D][ ] Buy Bread (by: Tuesday, 03 Feb 2026 1200)
+20. [D][ ] Buy Cheese (by: Friday, 20 Feb 2026 1200)
+21. [D][ ] Buy Eggs (by: Friday, 20 Feb 2026 1200)
+22. [E][ ] /by deadline (from: Thursday, 01 Jan 2026 1000 to: Thursday, 01 Jan 2026 1100)
+23. [T][ ] Task
+24. [D][ ] Buy Milk (by: Tuesday, 03 Feb 2026 1200)
+25. [D][ ] Buy Bread (by: Tuesday, 03 Feb 2026 1200)
+26. [D][ ] Buy Cheese (by: Friday, 20 Feb 2026 1200)
+27. [D][ ] Buy Eggs (by: Friday, 20 Feb 2026 1200)
+28. [E][ ] /by deadline (from: Thursday, 01 Jan 2026 1000 to: Thursday, 01 Jan 2026 1100)
 
 > 
 Goodbye! Exiting...

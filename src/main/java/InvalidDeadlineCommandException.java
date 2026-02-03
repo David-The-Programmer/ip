@@ -1,6 +1,6 @@
-public class InvalidDeadlineCommandException extends AtomException {
+public class InvalidDeadlineCommandException extends Exception {
 
-    public InvalidDeadlineCommandException(String message, Throwable cause, String remedy) {
-        super(message, cause, remedy);
+    public InvalidDeadlineCommandException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

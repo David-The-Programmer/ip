@@ -1,6 +1,6 @@
-public class InvalidEventCommandException extends AtomException {
+public class InvalidEventCommandException extends Exception {
 
-    public InvalidEventCommandException(String message, Throwable cause, String remedy) {
-        super(message, cause, remedy);
+    public InvalidEventCommandException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

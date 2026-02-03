@@ -1,6 +1,6 @@
-public class InvalidTodoCommandException extends AtomException {
+public class InvalidTodoCommandException extends Exception {
 
-    public InvalidTodoCommandException(String message, Throwable cause, String remedy) {
-        super(message, cause, remedy);
+    public InvalidTodoCommandException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

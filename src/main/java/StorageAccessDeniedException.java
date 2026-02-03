@@ -1,12 +1,12 @@
 public class StorageAccessDeniedException extends Exception {
-    private String remedy;
+    private String saveFilePath;
 
-    public StorageAccessDeniedException(String message, Throwable cause, String remedy) {
+    public StorageAccessDeniedException(String message, Throwable cause, String saveFilePath) {
         super(message, cause);
-        this.remedy = remedy;
+        this.saveFilePath = saveFilePath;
     }
 
-    public String getRemedy() {
-        return this.remedy;
+    public String getSaveFilePath() {
+        return this.saveFilePath;
     }
 }
