@@ -70,8 +70,8 @@ class ParserTest {
     @Test
     @DisplayName("Should throw exception for deadline missing description")
     void testDeadlineMissingDescription() {
-        assertThrows(InvalidDeadlineCommandException.class,
-                () -> parser.parse("deadline /by 2026-12-01 1800"));
+        String input = "deadline /by 2026-12-01 1800";
+        assertThrows(InvalidDeadlineCommandException.class, () -> parser.parse(input));
     }
 
     @Test
@@ -94,43 +94,43 @@ class ParserTest {
     @Test
     @DisplayName("Should throw exception for event missing description")
     void testEventMissingDescription() {
-        assertThrows(InvalidEventCommandException.class,
-                () -> parser.parse("event /from 2026-02-04 1400 /to 2026-02-04 1600"));
+        String input = "event /from 2026-02-04 1400 /to 2026-02-04 1600";
+        assertThrows(InvalidEventCommandException.class, () -> parser.parse(input));
     }
 
     @Test
     @DisplayName("Should throw exception for event missing /from delimiter")
     void testEventMissingFromDelimiter() {
-        assertThrows(InvalidEventCommandException.class,
-                () -> parser.parse("event meeting /to 2026-02-04 1600"));
+        String input = "event meeting /to 2026-02-04 1600";
+        assertThrows(InvalidEventCommandException.class, () -> parser.parse(input));
     }
 
     @Test
     @DisplayName("Should throw exception for event missing /to delimiter")
     void testEventMissingToDelimiter() {
-        assertThrows(InvalidEventCommandException.class,
-                () -> parser.parse("event meeting /from 2026-02-04 1400"));
+        String input = "event meeting /from 2026-02-04 1400";
+        assertThrows(InvalidEventCommandException.class, () -> parser.parse(input));
     }
 
     @Test
     @DisplayName("Should throw exception for event missing /from datetime content")
     void testEventMissingFromDateTimeContent() {
-        assertThrows(InvalidEventCommandException.class,
-                () -> parser.parse("event meeting /from /to 2026-02-04 1600"));
+        String input = "event meeting /from /to 2026-02-04 1600";
+        assertThrows(InvalidEventCommandException.class, () -> parser.parse(input));
     }
 
     @Test
     @DisplayName("Should throw exception for event missing /to datetime content")
     void testEventMissingToDateTimeContent() {
-        assertThrows(InvalidEventCommandException.class,
-                () -> parser.parse("event meeting /from 2026-02-04 1400 /to "));
+        String input = "event meeting /from 2026-02-04 1400 /to ";
+        assertThrows(InvalidEventCommandException.class, () -> parser.parse(input));
     }
 
     @Test
     @DisplayName("Should throw exception when event end date is before start date")
     void testEventEndDateBeforeStartDate() {
-        assertThrows(InvalidEventCommandException.class,
-                () -> parser.parse("event party /from 2026-02-04 2000 /to 2026-02-04 1800"));
+        String input = "event party /from 2026-02-04 2000 /to 2026-02-04 1800";
+        assertThrows(InvalidEventCommandException.class, () -> parser.parse(input));
     }
 
     @Test

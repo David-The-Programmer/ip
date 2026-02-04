@@ -8,6 +8,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import atom.task.Task;
+
 /**
  * Handles the loading and saving of task data to the local file system.
  */

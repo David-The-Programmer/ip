@@ -325,6 +325,25 @@ public class UserInterface implements CommandHandler {
     }
 
     /**
+     * Processes the {@code FindCommand} by searching for tasks that match the specified keyword.
+     * If matches are found, they are printed to the console in a numbered list;
+     * otherwise, a message is displayed informing the user that no matches were found.
+     *
+     * @param command The {@code FindCommand} containing the search keyword.
+     */
+    public void handle(FindCommand command) {
+        List<Task> tasksWithKeyword = taskService.findTaskWithKeyword(command.getKeyword());
+        if (tasksWithKeyword.size() == 0) {
+            System.out.println("There are no matching tasks in your list, please try again.");
+            return;
+        }
+        System.out.println("The following tasks match the keyword: " + command.getKeyword() + "\n");
+        for (int i = 1; i <= tasksWithKeyword.size(); i++) {
+            System.out.println(i + "." + tasksWithKeyword.get(i - 1));
+        }
+    }
+
+    /**
      * Displays all valid commands and their formats.
      */
     public void showAllCommands() {
@@ -343,17 +362,5 @@ public class UserInterface implements CommandHandler {
     public void showUnknownCommandRemedy(String userInput) {
         System.out.println("'" + userInput + "' command not found (unknown)");
         showAllCommands();
-    }
-
-    public void handle(FindCommand command) {
-        List<Task> tasksWithKeyword = taskService.findTaskWithKeyword(command.getKeyword());
-        if (tasksWithKeyword.size() == 0) {
-            System.out.println("There are no matching tasks in your list, please try again.");
-            return;
-        }
-        System.out.println("The following tasks match the keyword: " + command.getKeyword() + "\n");
-        for (int i = 1; i <= tasksWithKeyword.size(); i++) {
-            System.out.println(i + "." + tasksWithKeyword.get(i - 1));
-        }
     }
 }

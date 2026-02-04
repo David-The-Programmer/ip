@@ -6,8 +6,6 @@ import atom.task.Deadline;
 import atom.task.Event;
 import atom.task.ToDo;
 
-import java.time.format.DateTimeFormatter;
-
 /**
  * Serialises Task objects into a specific string format for file storage.
  */
