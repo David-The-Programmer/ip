@@ -52,6 +52,12 @@ public class TaskDeserialiser implements Deserialiser {
             throw new DeserialiserException(message, exception, "");
         }
 
+        if (descriptionLength >= remaining.length()) {
+            String message = "description length " + "'" + result[0] + "'";
+            message += " cannot exceed actual description";
+            message += " from serialisedTask: '" + serialisedTask + "'";
+            throw new DeserialiserException(message, null, "");
+        }
         String taskDescription = remaining.substring(0, descriptionLength);
         remaining = remaining.substring(descriptionLength + 1);
 
