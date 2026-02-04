@@ -1,5 +1,7 @@
 package atom.ui;
 
+import java.util.Scanner;
+
 import atom.command.ByeCommand;
 import atom.command.Command;
 import atom.command.DeadlineCommand;
@@ -21,7 +23,6 @@ import atom.task.TaskAlreadyMarkedIncompleteException;
 import atom.task.TaskNotFoundException;
 import atom.task.TaskService;
 import atom.task.ToDo;
-import java.util.Scanner;
 
 /**
  * Handles user interaction and command execution for the Atom application.

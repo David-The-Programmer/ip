@@ -1,12 +1,14 @@
 package atom.task;
 
-import atom.storage.Serialiser;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import atom.storage.Serialiser;
 
 /**
  * Represents a task with a specific deadline.
  */
+
 public class Deadline extends Task {
     private LocalDateTime by;
 

@@ -1,12 +1,13 @@
 package atom;
 
+import java.util.Scanner;
+
 import atom.parser.Parser;
 import atom.storage.Storage;
 import atom.storage.TaskDeserialiser;
 import atom.storage.TaskSerialiser;
 import atom.task.TaskService;
 import atom.ui.UserInterface;
-import java.util.Scanner;
 
 /**
  * Entry point for the Atom application.
