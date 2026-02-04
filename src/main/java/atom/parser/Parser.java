@@ -115,7 +115,7 @@ public class Parser {
             }
             if (toDateTime.isBefore(fromDateTime)) {
                 String message = "/from datetime cannot be later than /to datetime";
-                throw new InvalidDeadlineCommandException(message, null);
+                throw new InvalidEventCommandException(message, null);
             }
             return new EventCommand(description, fromDateTime, toDateTime);
         }
