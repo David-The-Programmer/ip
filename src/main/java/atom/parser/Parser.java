@@ -1,5 +1,7 @@
 package atom.parser;
 
+import java.time.LocalDateTime;
+
 import atom.command.ByeCommand;
 import atom.command.Command;
 import atom.command.DeadlineCommand;
@@ -9,8 +11,6 @@ import atom.command.ListCommand;
 import atom.command.MarkCommand;
 import atom.command.ToDoCommand;
 import atom.command.UnmarkCommand;
-
-import java.time.LocalDateTime;
 
 public class Parser {
 

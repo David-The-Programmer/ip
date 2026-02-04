@@ -1,6 +1,5 @@
 package atom.storage;
 
-import atom.task.Task;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Files;
@@ -8,6 +7,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+
+import atom.task.Task;
 
 public class Storage {
     private Path saveFilePath;

@@ -1,13 +1,15 @@
 package atom.parser;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.DisplayName;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.time.LocalDateTime;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import atom.command.ByeCommand;
 import atom.command.Command;
@@ -17,9 +19,6 @@ import atom.command.EventCommand;
 import atom.command.ListCommand;
 import atom.command.MarkCommand;
 import atom.command.ToDoCommand;
-import atom.command.UnmarkCommand;
-
-import java.time.LocalDateTime;
 
 class ParserTest {
 

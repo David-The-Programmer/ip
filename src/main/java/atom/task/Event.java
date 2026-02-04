@@ -1,8 +1,9 @@
 package atom.task;
 
-import atom.storage.Serialiser;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import atom.storage.Serialiser;
 
 public class Event extends Task {
     private LocalDateTime from;
