@@ -12,8 +12,24 @@ import atom.command.UnmarkCommand;
 
 import java.time.LocalDateTime;
 
+/**
+ * Parses user input into specific Command objects for execution.
+ * This class handles the logic for validating input formats and extracting parameters
+ * such as descriptions, dates, and task numbers.
+ */
 public class Parser {
 
+    /**
+     * Parses the raw input string from the user into a Command.
+     * @param rawCommand The full command string entered by the user.
+     * @return A Command object representing the user's intent, or null if unrecognised.
+     * @throws InvalidTodoCommandException If a 'todo' command is malformed.
+     * @throws InvalidDeleteCommandException If a 'delete' command is missing a valid number.
+     * @throws InvalidEventCommandException If an 'event' command is malformed or dates are invalid.
+     * @throws InvalidDeadlineCommandException If a 'deadline' command is malformed.
+     * @throws InvalidMarkCommandException If a 'mark' command is missing a valid number.
+     * @throws InvalidUnmarkCommandException If an 'unmark' command is missing a valid number.
+     */
     public Command parse(String rawCommand)
             throws InvalidTodoCommandException, InvalidDeleteCommandException, InvalidEventCommandException,
             InvalidDeadlineCommandException, InvalidMarkCommandException, InvalidUnmarkCommandException {

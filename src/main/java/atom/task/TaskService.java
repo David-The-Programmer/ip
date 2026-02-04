@@ -2,17 +2,34 @@ package atom.task;
 
 import java.util.List;
 
+/**
+ * Service class for managing the list of tasks.
+ */
 public class TaskService {
     private List<Task> tasks;
 
+    /**
+     * Initializes the TaskService with a list of tasks.
+     * @param tasks Initial list of tasks.
+     */
     public TaskService(List<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Retrieves the full list of tasks.
+     * @return List of tasks.
+     */
     public List<Task> getTasks() {
         return this.tasks;
     }
 
+    /**
+     * Retrieves a specific task by its display number.
+     * @param taskNumber The 1-based index of the task.
+     * @return The requested task.
+     * @throws TaskNotFoundException If the index is out of bounds.
+     */
     public Task getTask(int taskNumber) throws TaskNotFoundException {
         int taskIndex = taskNumber - 1;
         if (taskIndex < 0 || taskIndex >= this.tasks.size()) {
@@ -22,10 +39,19 @@ public class TaskService {
         return this.tasks.get(taskIndex);
     }
 
+    /**
+     * Adds a new task to the service.
+     * @param task The task to be added.
+     */
     public void addTask(Task task) {
         this.tasks.add(task);
     }
 
+    /**
+     * Removes a task from the list by its display number.
+     * @param taskNumber The 1-based index of the task.
+     * @throws TaskNotFoundException If the index is out of bounds.
+     */
     public void removeTask(int taskNumber) throws TaskNotFoundException {
         int taskIndex = taskNumber - 1;
         if (taskIndex < 0 || taskIndex >= this.tasks.size()) {
@@ -35,6 +61,12 @@ public class TaskService {
         this.tasks.remove(taskIndex);
     }
 
+    /**
+     * Marks a task as complete.
+     * @param taskNumber The 1-based index of the task.
+     * @throws TaskNotFoundException If the index is out of bounds.
+     * @throws TaskAlreadyMarkedCompleteException If the task is already complete.
+     */
     public void markTaskAsComplete(int taskNumber)
             throws TaskNotFoundException, TaskAlreadyMarkedCompleteException {
         int taskIndex = taskNumber - 1;
@@ -49,6 +81,12 @@ public class TaskService {
         this.tasks.get(taskIndex).markAsComplete();
     }
 
+    /**
+     * Marks a task as incomplete.
+     * @param taskNumber The 1-based index of the task.
+     * @throws TaskNotFoundException If the index is out of bounds.
+     * @throws TaskAlreadyMarkedIncompleteException If the task is already incomplete.
+     */
     public void markTaskAsIncomplete(int taskNumber)
             throws TaskNotFoundException, TaskAlreadyMarkedIncompleteException {
         int taskIndex = taskNumber - 1;

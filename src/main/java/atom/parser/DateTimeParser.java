@@ -8,11 +8,19 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * Utility class for parsing date-time strings into {@code LocalDateTime} objects.
+ * Supports multiple date formats and a strict 24-hour time format (HHmm).
+ */
 public final class DateTimeParser {
 
     private static final Map<String, String> DATE_PATTERNS = createPatternMap();
     private static final String TIME_REGEX = "^\\d{4}$";
 
+    /**
+     * Creates and populates the map of supported date patterns and their regex equivalents.
+     * @return An unmodifiable map of date format patterns to regex strings.
+     */
     private static Map<String, String> createPatternMap() {
         Map<String, String> patterns = new LinkedHashMap<>();
         patterns.put("yyyy-MM-dd", "^\\d{4}-\\d{2}-\\d{2}$");
@@ -22,6 +30,13 @@ public final class DateTimeParser {
         return Collections.unmodifiableMap(patterns);
     }
 
+    /**
+     * Parses a raw input string into a {@code LocalDateTime} object.
+     * Validates both the date format and the time format strictly.
+     * @param input The raw input string containing date and time.
+     * @return A {@code LocalDateTime} representation of the input.
+     * @throws DateTimeParserException If the input is empty, malformed, or contains an invalid calendar date.
+     */
     public static LocalDateTime parse(String input) throws DateTimeParserException {
         if (input == null || input.isBlank()) {
             throw new DateTimeParserException("Input is empty.", null, "Please provide a valid date.");
