@@ -1,5 +1,6 @@
 package atom.ui;
 
+import java.util.List;
 import java.util.Scanner;
 
 import atom.command.ByeCommand;
@@ -7,6 +8,7 @@ import atom.command.Command;
 import atom.command.DeadlineCommand;
 import atom.command.DeleteCommand;
 import atom.command.EventCommand;
+import atom.command.FindCommand;
 import atom.command.ListCommand;
 import atom.command.MarkCommand;
 import atom.command.ToDoCommand;
@@ -341,5 +343,17 @@ public class UserInterface implements CommandHandler {
     public void showUnknownCommandRemedy(String userInput) {
         System.out.println("'" + userInput + "' command not found (unknown)");
         showAllCommands();
+    }
+
+    public void handle(FindCommand command) {
+        List<Task> tasksWithKeyword = taskService.findTaskWithKeyword(command.getKeyword());
+        if (tasksWithKeyword.size() == 0) {
+            System.out.println("There are no matching tasks in your list, please try again.");
+            return;
+        }
+        System.out.println("The following tasks match the keyword: " + command.getKeyword() + "\n");
+        for (int i = 1; i <= tasksWithKeyword.size(); i++) {
+            System.out.println(i + "." + tasksWithKeyword.get(i - 1));
+        }
     }
 }

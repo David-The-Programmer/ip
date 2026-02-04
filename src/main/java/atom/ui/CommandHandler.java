@@ -4,6 +4,7 @@ import atom.command.ByeCommand;
 import atom.command.DeadlineCommand;
 import atom.command.DeleteCommand;
 import atom.command.EventCommand;
+import atom.command.FindCommand;
 import atom.command.ListCommand;
 import atom.command.MarkCommand;
 import atom.command.ToDoCommand;
@@ -60,4 +61,10 @@ public interface CommandHandler {
      * @param command The unmark command.
      */
     public void handle(UnmarkCommand command);
+
+    /**
+     * Handles the execution of an find command.
+     * @param command The find command.
+     */
+    public void handle(FindCommand command);
 }

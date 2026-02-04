@@ -1,5 +1,6 @@
 package atom.task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -99,5 +100,20 @@ public class TaskService {
             throw new TaskAlreadyMarkedIncompleteException(message, null);
         }
         this.tasks.get(taskIndex).markAsIncomplete();
+    }
+
+    /**
+     * Searches the task list for tasks whose descriptions contain the specified keyword.
+     * @param keyword The string to match against task descriptions.
+     * @return A list of tasks that contain the given keyword.
+     */
+    public List<Task> findTaskWithKeyword(String keyword) {
+        List<Task> tasksContainingKeyword = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(keyword)) {
+                tasksContainingKeyword.add(task);
+            }
+        }
+        return tasksContainingKeyword;
     }
 }
