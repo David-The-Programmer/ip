@@ -5,6 +5,7 @@ import atom.command.Command;
 import atom.command.DeadlineCommand;
 import atom.command.DeleteCommand;
 import atom.command.EventCommand;
+import atom.command.FindCommand;
 import atom.command.ListCommand;
 import atom.command.MarkCommand;
 import atom.command.ToDoCommand;
@@ -16,7 +17,8 @@ public class Parser {
 
     public Command parse(String rawCommand)
             throws InvalidTodoCommandException, InvalidDeleteCommandException, InvalidEventCommandException,
-            InvalidDeadlineCommandException, InvalidMarkCommandException, InvalidUnmarkCommandException {
+            InvalidDeadlineCommandException, InvalidMarkCommandException, InvalidUnmarkCommandException,
+            InvalidFindCommandException {
         if (rawCommand.equals("bye")) {
             return new ByeCommand();
         }
@@ -34,6 +36,17 @@ public class Parser {
                 throw new InvalidTodoCommandException("'todo' command is missing a description", null);
             }
             return new ToDoCommand(subcommands[1]);
+        }
+
+        if (subcommands[0].equals("find")) {
+            if (subcommands.length < 2) {
+                throw new InvalidFindCommandException("'find' command is missing a keyword", null);
+            }
+            subcommands[1] = subcommands[1].trim();
+            if (subcommands[1].equals("")) {
+                throw new InvalidFindCommandException("'todo' command is missing a keyword", null);
+            }
+            return new FindCommand(subcommands[1]);
         }
 
         if (subcommands[0].equals("deadline")) {
