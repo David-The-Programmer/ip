@@ -9,10 +9,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.HashSet;
 
+/**
+ * Deserialises strings from storage back into Task objects.
+ */
 public class TaskDeserialiser implements Deserialiser {
     private Task deserialisedTask;
     private String serialisedTask;
 
+    /**
+     * Parses a serialised string into a Task object.
+     * @param serialisedTask The raw string from the data file.
+     * @throws DeserialiserException If the string format is invalid or data is corrupted.
+     */
     @Override
     public void deserialise(String serialisedTask) throws DeserialiserException {
         this.serialisedTask = serialisedTask.trim();
@@ -117,6 +125,10 @@ public class TaskDeserialiser implements Deserialiser {
         }
     }
 
+    /**
+     * Returns the task object generated from deserialisation.
+     * @return The resulting Task object.
+     */
     public Task getDeserialisedTask() {
         return deserialisedTask;
     }

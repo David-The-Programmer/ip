@@ -8,7 +8,16 @@ import atom.task.TaskService;
 import atom.ui.UserInterface;
 import java.util.Scanner;
 
+/**
+ * Entry point for the Atom application.
+ * Initializes core components and starts the user interface.
+ */
 public class Atom {
+
+    /**
+     * Main method to launch the application.
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) {
         TaskSerialiser taskSerialiser = new TaskSerialiser();
         TaskDeserialiser taskDeserialiser = new TaskDeserialiser();

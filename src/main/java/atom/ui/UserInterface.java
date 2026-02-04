@@ -23,12 +23,22 @@ import atom.task.TaskService;
 import atom.task.ToDo;
 import java.util.Scanner;
 
+/**
+ * Handles user interaction and command execution for the Atom application.
+ */
 public class UserInterface implements CommandHandler {
     private Storage storage;
     private TaskService taskService;
     private Parser parser;
     private Scanner scanner;
 
+    /**
+     * Initializes the user interface with required dependencies.
+     * @param parser Command parser.
+     * @param taskService Task management service.
+     * @param storage Data persistence handler.
+     * @param scanner Input scanner.
+     */
     public UserInterface(Parser parser, TaskService taskService, Storage storage, Scanner scanner) {
         this.storage = storage;
         this.taskService = taskService;
@@ -36,6 +46,9 @@ public class UserInterface implements CommandHandler {
         this.scanner = scanner;
     }
 
+    /**
+     * Runs the main application loop to process user commands.
+     */
     public void run() {
         showWelcomeMessage();
         while (true) {
@@ -58,19 +71,26 @@ public class UserInterface implements CommandHandler {
         }
     }
 
+    /**
+     * Displays the welcome message and application logo.
+     */
     public void showWelcomeMessage() {
-        String logo = "          :::        :::::::::::    ::::::::          :::   ::: \n"
+        String logo = "          :::         :::::::::::    ::::::::          :::    ::: \n"
                 + "       :+: :+:          :+:       :+:    :+:        :+:+: :+:+: \n"
                 + "     +:+   +:+         +:+       +:+    +:+       +:+ +:+:+ +:+ \n"
-                + "   +#++:++#++:        +#+       +#+    +:+       +#+  +:+  +#+  \n"
-                + "  +#+     +#+        +#+       +#+    +#+       +#+       +#+   \n"
-                + " #+#     #+# #+#    #+# #+#   #+#    #+# #+#   #+#       #+# #+#\n"
+                + "   +#++:++#++:         +#+       +#+    +:+       +#+  +:+  +#+  \n"
+                + "  +#+     +#+         +#+       +#+    +#+       +#+       +#+   \n"
+                + " #+#     #+# #+#    #+# #+#   #+#    #+# #+#   #+#       #+# #+\n"
                 + "###     ### ###    ### ###    ########  ###   ###       ###  ###\n";
         System.out.println(logo);
         System.out.println("Hello, I am an Assistive Task Organisation Manager, or A.T.O.M.");
         System.out.println("How can I help you?");
     }
 
+    /**
+     * Retrieves user input from the console.
+     * @return The raw input string.
+     */
     public String getInput() {
         System.out.print("\n> ");
         String userInput = scanner.nextLine();
@@ -78,10 +98,18 @@ public class UserInterface implements CommandHandler {
         return userInput;
     }
 
+    /**
+     * Processes a goodbye command.
+     * @param command The bye command instance.
+     */
     public void handle(ByeCommand command) {
         System.out.println("Goodbye! Exiting...");
     }
 
+    /**
+     * Processes a list command to show all tasks.
+     * @param command The list command instance.
+     */
     public void handle(ListCommand command) {
         int taskSize = taskService.getTasks().size();
         try {
@@ -96,6 +124,10 @@ public class UserInterface implements CommandHandler {
         }
     }
 
+    /**
+     * Processes a todo command to add a new todo task.
+     * @param command The todo command instance.
+     */
     public void handle(ToDoCommand command) {
         try {
             taskService.addTask(new ToDo(command.getDescription()));
@@ -125,6 +157,10 @@ public class UserInterface implements CommandHandler {
         }
     }
 
+    /**
+     * Processes a deadline command to add a new deadline task.
+     * @param command The deadline command instance.
+     */
     public void handle(DeadlineCommand command) {
         try {
             taskService.addTask(new Deadline(command.getDescription(), command.getDateTime()));
@@ -154,6 +190,10 @@ public class UserInterface implements CommandHandler {
         }
     }
 
+    /**
+     * Processes an event command to add a new event task.
+     * @param command The event command instance.
+     */
     public void handle(EventCommand command) {
         try {
             taskService.addTask(new Event(command.getDescription(), command.getStartDateTime(),
@@ -184,6 +224,10 @@ public class UserInterface implements CommandHandler {
         }
     }
 
+    /**
+     * Processes a mark command to complete a task.
+     * @param command The mark command instance.
+     */
     public void handle(MarkCommand command) {
         try {
             taskService.markTaskAsComplete(command.getTaskNumber());
@@ -213,6 +257,10 @@ public class UserInterface implements CommandHandler {
         }
     }
 
+    /**
+     * Processes an unmark command to revert a task to incomplete.
+     * @param command The unmark command instance.
+     */
     public void handle(UnmarkCommand command) {
         try {
             taskService.markTaskAsIncomplete(command.getTaskNumber());
@@ -242,6 +290,10 @@ public class UserInterface implements CommandHandler {
         }
     }
 
+    /**
+     * Processes a delete command to remove a task.
+     * @param command The delete command instance.
+     */
     public void handle(DeleteCommand command) {
         try {
             Task taskToDelete = taskService.getTask(command.getTaskNumber());
@@ -269,6 +321,9 @@ public class UserInterface implements CommandHandler {
         }
     }
 
+    /**
+     * Displays all valid commands and their formats.
+     */
     public void showAllCommands() {
         String message = "The following are the only valid commands:\n\n" + "   todo <description>\n\n"
                 + "   deadline <description> /by <datetime of deadline>\n\n"
@@ -278,6 +333,10 @@ public class UserInterface implements CommandHandler {
         System.out.println(message);
     }
 
+    /**
+     * Informs the user of an unknown command and suggests valid ones.
+     * @param userInput The invalid input string.
+     */
     public void showUnknownCommandRemedy(String userInput) {
         System.out.println("'" + userInput + "' command not found (unknown)");
         showAllCommands();

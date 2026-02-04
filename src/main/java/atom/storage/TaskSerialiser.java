@@ -6,9 +6,16 @@ import atom.task.ToDo;
 
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Serialises Task objects into a specific string format for file storage.
+ */
 public class TaskSerialiser implements Serialiser {
     private String serialisedTask;
 
+    /**
+     * Serialises a ToDo task.
+     * @param task The ToDo task to serialise.
+     */
     @Override
     public void serialise(ToDo task) {
         int descriptionLength = task.getDescription().length();
@@ -22,6 +29,10 @@ public class TaskSerialiser implements Serialiser {
         }
     }
 
+    /**
+     * Serialises a Deadline task.
+     * @param task The Deadline task to serialise.
+     */
     @Override
     public void serialise(Deadline task) {
         int descriptionLength = task.getDescription().length();
@@ -37,6 +48,10 @@ public class TaskSerialiser implements Serialiser {
         this.serialisedTask += dateTimeStr;
     }
 
+    /**
+     * Serialises an Event task.
+     * @param task The Event task to serialise.
+     */
     @Override
     public void serialise(Event task) {
         int descriptionLength = task.getDescription().length();
@@ -54,6 +69,10 @@ public class TaskSerialiser implements Serialiser {
         this.serialisedTask += endDateTimeStr;
     }
 
+    /**
+     * Retrieves the resulting serialised string.
+     * @return The serialised task string.
+     */
     public String getSerialisedTask() {
         return this.serialisedTask;
     }
