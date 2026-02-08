@@ -1,11 +1,11 @@
 package atom.command;
 
-import atom.ui.CommandHandler;
+import atom.controller.CommandHandler;
 
 /**
  * Represents a command to search for tasks that contain a specific keyword in their description.
  */
-public class FindCommand extends Command {
+public class FindCommand implements Command {
     private String keyword;
 
     /**
@@ -13,7 +13,6 @@ public class FindCommand extends Command {
      * @param keyword The string to search for within task descriptions.
      */
     public FindCommand(String keyword) {
-        super();
         this.keyword = keyword;
     }
 
@@ -29,6 +28,7 @@ public class FindCommand extends Command {
      * Accepts a command handler to execute the search logic.
      * @param handler The command handler responsible for processing this command.
      */
+    @Override
     public void acceptHandler(CommandHandler handler) {
         handler.handle(this);
     }

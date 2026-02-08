@@ -2,14 +2,14 @@ package atom.command;
 
 import java.time.LocalDateTime;
 
-import atom.ui.CommandHandler;
+import atom.controller.CommandHandler;
 
 /**
  * Represents a command to create and add a new Deadline task to the task list.
  * A Deadline task includes a description and a specific date-time by which
  * the task must be completed.
  */
-public class DeadlineCommand extends Command {
+public class DeadlineCommand implements Command {
     private String description;
     private LocalDateTime dateTime;
 
@@ -19,7 +19,6 @@ public class DeadlineCommand extends Command {
      * @param dateTime The date and time representing the deadline.
      */
     public DeadlineCommand(String description, LocalDateTime dateTime) {
-        super();
         this.description = description;
         this.dateTime = dateTime;
     }
@@ -44,6 +43,7 @@ public class DeadlineCommand extends Command {
      * Accepts a command handler to process the addition of the Deadline task.
      * @param handler The command handler instance.
      */
+    @Override
     public void acceptHandler(CommandHandler handler) {
         handler.handle(this);
     }

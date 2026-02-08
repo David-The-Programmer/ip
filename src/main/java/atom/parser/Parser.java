@@ -30,6 +30,7 @@ public class Parser {
      * @throws InvalidDeadlineCommandException If a 'deadline' command is malformed.
      * @throws InvalidMarkCommandException If a 'mark' command is missing a valid number.
      * @throws InvalidUnmarkCommandException If an 'unmark' command is missing a valid number.
+     * @throws InvalidFindCommandException If an 'find' command is missing a keyword.
      */
     public Command parse(String rawCommand)
             throws InvalidTodoCommandException, InvalidDeleteCommandException, InvalidEventCommandException,

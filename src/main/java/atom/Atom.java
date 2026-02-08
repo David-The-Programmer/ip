@@ -2,11 +2,13 @@ package atom;
 
 import java.util.Scanner;
 
+import atom.controller.Controller;
 import atom.parser.Parser;
 import atom.storage.Storage;
 import atom.storage.TaskDeserialiser;
 import atom.storage.TaskSerialiser;
 import atom.task.TaskService;
+import atom.ui.CommandLineInterface;
 import atom.ui.UserInterface;
 
 /**
@@ -26,7 +28,8 @@ public class Atom {
         TaskService taskService = new TaskService(storage.readTasks());
         Scanner scanner = new Scanner(System.in);
         Parser parser = new Parser();
-        UserInterface userInterface = new UserInterface(parser, taskService, storage, scanner);
-        userInterface.run();
+        Controller controller = new Controller(parser, taskService, storage);
+        UserInterface commandLineInterface = new CommandLineInterface(controller, scanner);
+        commandLineInterface.run();
     }
 }

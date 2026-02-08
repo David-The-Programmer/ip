@@ -2,14 +2,14 @@ package atom.command;
 
 import java.time.LocalDateTime;
 
-import atom.ui.CommandHandler;
+import atom.controller.CommandHandler;
 
 /**
  * Represents a command to create and add a new Event task to the task list.
  * An Event task includes a description and a specific time range defined by
  * a start and end date-time.
  */
-public class EventCommand extends Command {
+public class EventCommand implements Command {
     private String description;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
@@ -21,7 +21,6 @@ public class EventCommand extends Command {
      * @param endDateTime The date and time when the event ends.
      */
     public EventCommand(String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        super();
         this.description = description;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
@@ -55,6 +54,7 @@ public class EventCommand extends Command {
      * Accepts a command handler to process the addition of the Event task.
      * @param handler The command handler instance.
      */
+    @Override
     public void acceptHandler(CommandHandler handler) {
         handler.handle(this);
     }
