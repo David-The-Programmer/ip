@@ -8,8 +8,8 @@ import atom.storage.Storage;
 import atom.storage.TaskDeserialiser;
 import atom.storage.TaskSerialiser;
 import atom.task.TaskService;
-import atom.ui.CommandLineInterface;
-import atom.ui.GraphicalUserInterface;
+import atom.ui.cli.CommandLineInterface;
+import atom.ui.gui.GraphicalUserInterface;
 import javafx.application.Application;
 
 /**

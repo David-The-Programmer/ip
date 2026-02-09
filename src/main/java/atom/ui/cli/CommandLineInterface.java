@@ -1,4 +1,4 @@
-package atom.ui;
+package atom.ui.cli;
 
 import java.util.List;
 import java.util.Scanner;
@@ -12,11 +12,13 @@ import atom.command.FindCommandResponse;
 import atom.command.ListCommandResponse;
 import atom.command.MarkCommandResponse;
 import atom.command.ToDoCommandResponse;
+import atom.command.UnknownCommandResponse;
 import atom.command.UnmarkCommandResponse;
 import atom.command.UserErrorCommandResponse;
 import atom.command.SystemErrorCommandResponse;
 import atom.controller.Controller;
 import atom.task.Task;
+import atom.ui.CommandResponseHandler;
 
 /**
  * Handles user interaction and command execution for the Atom application.
@@ -44,10 +46,6 @@ public class CommandLineInterface implements CommandResponseHandler {
         while (true) {
             String userInput = getInput();
             CommandResponse response = controller.getResponse(userInput);
-            if (response == null) {
-                showUnknownCommandRemedy(userInput);
-                continue;
-            }
             response.acceptResponseHandler(this);
             if (response instanceof ByeCommandResponse) {
                 break;
@@ -82,28 +80,6 @@ public class CommandLineInterface implements CommandResponseHandler {
         String userInput = scanner.nextLine();
         System.out.println();
         return userInput;
-    }
-
-    /**
-     * Displays all valid commands and their formats.
-     */
-    public void showAllCommands() {
-        String message = "The following are the only valid commands:\n\n" + "   todo <description>\n\n"
-            + "   deadline <description> /by <datetime of deadline>\n\n"
-            + "   event <description> /from <datetime that event starts> /to <datetime that event ends>\n\n"
-            + "   list\n\n" + "   mark <task number shown after entering the list command>\n\n"
-            + "   unmark <task number shown after entering the list command>\n\n" + "   bye";
-        System.out.println(message);
-    }
-
-    /**
-     * Informs the user of an unknown command and suggests valid ones.
-     *
-     * @param userInput The invalid input string.
-     */
-    public void showUnknownCommandRemedy(String userInput) {
-        System.out.println("'" + userInput + "' command not found (unknown)");
-        showAllCommands();
     }
 
     /**
@@ -176,7 +152,7 @@ public class CommandLineInterface implements CommandResponseHandler {
      * @param response The unmark command response instance.
      */
     public void handleResponse(UnmarkCommandResponse response) {
-        System.out.println("Great Job! This task is marked as incomplete:");
+        System.out.println("Alright. This task is marked as incomplete:");
         System.out.println(response.getTask());
     }
 
@@ -216,5 +192,23 @@ public class CommandLineInterface implements CommandResponseHandler {
         System.out.println("ERROR: " + exception.getMessage());
         System.out.println("Here's the full error stack trace: ");
         exception.printStackTrace();
+    }
+
+    /**
+     * Informs the user of an unknown command and suggests valid ones.
+     *
+     * @param response Response instance that contains the invalid input string.
+     */
+    public void handleResponse(UnknownCommandResponse response) {
+        String userInput = response.getUserInput();
+        System.out.println("'" + userInput + "' command not found (unknown)");
+        String message = "The following are the only valid commands:\n\n" + "   todo <description>\n\n"
+            + "   deadline <description> /by <datetime of deadline>\n\n"
+            + "   event <description> /from <datetime that event starts> /to <datetime that event ends>\n\n"
+            + "   list\n\n" + "   mark <task number shown after entering the list command>\n\n"
+            + "   unmark <task number shown after entering the list command>\n\n"
+            + "   find <keyword in description>\n\n"
+            + "   bye";
+        System.out.println(message);
     }
 }

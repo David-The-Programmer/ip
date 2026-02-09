@@ -20,6 +20,7 @@ import atom.command.MarkCommand;
 import atom.command.MarkCommandResponse;
 import atom.command.ToDoCommand;
 import atom.command.ToDoCommandResponse;
+import atom.command.UnknownCommandResponse;
 import atom.command.UnmarkCommand;
 import atom.command.UnmarkCommandResponse;
 import atom.command.UserErrorCommandResponse;
@@ -45,9 +46,10 @@ public class Controller implements CommandHandler {
 
     /**
      * Initializes the user interface with required dependencies.
-     * @param parser Command parser.
+     *
+     * @param parser      Command parser.
      * @param taskService Task management service.
-     * @param storage Data persistence handler.
+     * @param storage     Data persistence handler.
      */
     public Controller(Parser parser, TaskService taskService, Storage storage) {
         this.parser = parser;
@@ -63,7 +65,7 @@ public class Controller implements CommandHandler {
             return new UserErrorCommandResponse(e);
         }
         if (command == null) {
-            return null;
+            return new UnknownCommandResponse(userInput);
         }
         command.acceptHandler(this);
         return commandResponse;
@@ -72,6 +74,7 @@ public class Controller implements CommandHandler {
 
     /**
      * Processes a goodbye command.
+     *
      * @param command The bye command instance.
      */
     public void handle(ByeCommand command) {
@@ -80,6 +83,7 @@ public class Controller implements CommandHandler {
 
     /**
      * Processes a list command to show all tasks.
+     *
      * @param command The list command instance.
      */
     public void handle(ListCommand command) {
@@ -88,6 +92,7 @@ public class Controller implements CommandHandler {
 
     /**
      * Processes a todo command to add a new todo task.
+     *
      * @param command The todo command instance.
      */
     public void handle(ToDoCommand command) {
@@ -104,6 +109,7 @@ public class Controller implements CommandHandler {
 
     /**
      * Processes a deadline command to add a new deadline task.
+     *
      * @param command The deadline command instance.
      */
     public void handle(DeadlineCommand command) {
@@ -121,6 +127,7 @@ public class Controller implements CommandHandler {
 
     /**
      * Processes an event command to add a new event task.
+     *
      * @param command The event command instance.
      */
     public void handle(EventCommand command) {
@@ -138,6 +145,7 @@ public class Controller implements CommandHandler {
 
     /**
      * Processes a mark command to complete a task.
+     *
      * @param command The mark command instance.
      */
     public void handle(MarkCommand command) {
@@ -156,6 +164,7 @@ public class Controller implements CommandHandler {
 
     /**
      * Processes an unmark command to revert a task to incomplete.
+     *
      * @param command The unmark command instance.
      */
     public void handle(UnmarkCommand command) {
@@ -174,6 +183,7 @@ public class Controller implements CommandHandler {
 
     /**
      * Processes a delete command to remove a task.
+     *
      * @param command The delete command instance.
      */
     public void handle(DeleteCommand command) {
