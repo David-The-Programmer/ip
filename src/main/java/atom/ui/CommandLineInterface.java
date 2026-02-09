@@ -16,22 +16,20 @@ import atom.command.UnmarkCommandResponse;
 import atom.command.UserErrorCommandResponse;
 import atom.command.SystemErrorCommandResponse;
 import atom.controller.Controller;
-import atom.task.Deadline;
-import atom.task.Event;
 import atom.task.Task;
-import atom.task.ToDo;
 
 /**
  * Handles user interaction and command execution for the Atom application.
  */
-public class CommandLineInterface implements UserInterface {
+public class CommandLineInterface implements CommandResponseHandler {
     private Controller controller;
     private Scanner scanner;
 
     /**
      * Initializes the CLI with required dependencies.
+     *
      * @param controller main controller
-     * @param scanner Input scanner.
+     * @param scanner    Input scanner.
      */
     public CommandLineInterface(Controller controller, Scanner scanner) {
         this.controller = controller;
@@ -62,12 +60,12 @@ public class CommandLineInterface implements UserInterface {
      */
     public void showWelcomeMessage() {
         String logo = "         :::         :::::::::::    ::::::::          :::    ::: \n"
-                + "       :+: :+:          :+:       :+:    :+:        :+:+: :+:+: \n"
-                + "     +:+   +:+         +:+       +:+    +:+       +:+ +:+:+ +:+ \n"
-                + "   +#++:++#++:         +#+       +#+    +:+       +#+  +:+  +#+  \n"
-                + "  +#+     +#+         +#+       +#+    +#+       +#+       +#+   \n"
-                + " #+#     #+# #+#    #+# #+#   #+#    #+# #+#   #+#       #+# #+\n"
-                + "###     ### ###    ### ###    ########  ###   ###       ###  ###\n";
+            + "       :+: :+:          :+:       :+:    :+:        :+:+: :+:+: \n"
+            + "     +:+   +:+         +:+       +:+    +:+       +:+ +:+:+ +:+ \n"
+            + "   +#++:++#++:         +#+       +#+    +:+       +#+  +:+  +#+  \n"
+            + "  +#+     +#+         +#+       +#+    +#+       +#+       +#+   \n"
+            + " #+#     #+# #+#    #+# #+#   #+#    #+# #+#   #+#       #+# #+\n"
+            + "###     ### ###    ### ###    ########  ###   ###       ###  ###\n";
         System.out.println(logo);
         System.out.println("Hello, I am an Assistive Task Organisation Manager, or A.T.O.M.");
         System.out.println("How can I help you?");
@@ -76,6 +74,7 @@ public class CommandLineInterface implements UserInterface {
 
     /**
      * Retrieves user input from the console.
+     *
      * @return The raw input string.
      */
     public String getInput() {
@@ -90,15 +89,16 @@ public class CommandLineInterface implements UserInterface {
      */
     public void showAllCommands() {
         String message = "The following are the only valid commands:\n\n" + "   todo <description>\n\n"
-                + "   deadline <description> /by <datetime of deadline>\n\n"
-                + "   event <description> /from <datetime that event starts> /to <datetime that event ends>\n\n"
-                + "   list\n\n" + "   mark <task number shown after entering the list command>\n\n"
-                + "   unmark <task number shown after entering the list command>\n\n" + "   bye";
+            + "   deadline <description> /by <datetime of deadline>\n\n"
+            + "   event <description> /from <datetime that event starts> /to <datetime that event ends>\n\n"
+            + "   list\n\n" + "   mark <task number shown after entering the list command>\n\n"
+            + "   unmark <task number shown after entering the list command>\n\n" + "   bye";
         System.out.println(message);
     }
 
     /**
      * Informs the user of an unknown command and suggests valid ones.
+     *
      * @param userInput The invalid input string.
      */
     public void showUnknownCommandRemedy(String userInput) {
@@ -108,6 +108,7 @@ public class CommandLineInterface implements UserInterface {
 
     /**
      * Handles a goodbye command response
+     *
      * @param response The bye command response instance.
      */
     public void handleResponse(ByeCommandResponse response) {
@@ -116,6 +117,7 @@ public class CommandLineInterface implements UserInterface {
 
     /**
      * Handles a list command response to show all tasks.
+     *
      * @param response The list command response instance.
      */
     public void handleResponse(ListCommandResponse response) {
@@ -127,6 +129,7 @@ public class CommandLineInterface implements UserInterface {
 
     /**
      * Processes a todo command response to add a new todo task.
+     *
      * @param response The todo command response instance.
      */
     public void handleResponse(ToDoCommandResponse response) {
@@ -137,6 +140,7 @@ public class CommandLineInterface implements UserInterface {
 
     /**
      * Processes a deadline command response to add a new deadline task.
+     *
      * @param response The deadline command response instance.
      */
     public void handleResponse(DeadlineCommandResponse response) {
@@ -147,6 +151,7 @@ public class CommandLineInterface implements UserInterface {
 
     /**
      * Processes a event command response to add a new event task.
+     *
      * @param response The event command response instance.
      */
     public void handleResponse(EventCommandResponse response) {
@@ -157,6 +162,7 @@ public class CommandLineInterface implements UserInterface {
 
     /**
      * Processes a mark command response to complete a task
+     *
      * @param response The mark command response instance.
      */
     public void handleResponse(MarkCommandResponse response) {
@@ -166,6 +172,7 @@ public class CommandLineInterface implements UserInterface {
 
     /**
      * Processes a unmark command response to mark a task as incomplete
+     *
      * @param response The unmark command response instance.
      */
     public void handleResponse(UnmarkCommandResponse response) {
@@ -175,6 +182,7 @@ public class CommandLineInterface implements UserInterface {
 
     /**
      * Processes a delete command response to remove a task
+     *
      * @param response The delete command response instance.
      */
     public void handleResponse(DeleteCommandResponse response) {
@@ -184,6 +192,7 @@ public class CommandLineInterface implements UserInterface {
 
     /**
      * Processes a find command response to find a task
+     *
      * @param response The find command response instance.
      */
     public void handleResponse(FindCommandResponse response) {

@@ -9,7 +9,8 @@ import atom.storage.TaskDeserialiser;
 import atom.storage.TaskSerialiser;
 import atom.task.TaskService;
 import atom.ui.CommandLineInterface;
-import atom.ui.UserInterface;
+import atom.ui.GraphicalUserInterface;
+import javafx.application.Application;
 
 /**
  * Entry point for the Atom application.
@@ -19,6 +20,7 @@ public class Atom {
 
     /**
      * Main method to launch the application.
+     *
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
@@ -29,7 +31,12 @@ public class Atom {
         Scanner scanner = new Scanner(System.in);
         Parser parser = new Parser();
         Controller controller = new Controller(parser, taskService, storage);
-        UserInterface commandLineInterface = new CommandLineInterface(controller, scanner);
-        commandLineInterface.run();
+        if (args.length > 0 && args[0].equals("--cli")) {
+            CommandLineInterface commandLineInterface = new CommandLineInterface(controller, scanner);
+            commandLineInterface.run();
+        } else {
+            GraphicalUserInterface.setController(controller);
+            Application.launch(GraphicalUserInterface.class, args);
+        }
     }
 }
