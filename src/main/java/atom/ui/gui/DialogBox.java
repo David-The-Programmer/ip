@@ -1,17 +1,43 @@
 package atom.ui.gui;
 
+import java.io.IOException;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
 public class DialogBox extends HBox {
 
-    private Label text;
+    @FXML
+    private Label dialog;
 
-    public DialogBox(String s) {
-        text = new Label(s);
-        text.setWrapText(true);
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text);
+    private DialogBox(String text) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(DialogBox.class.getResource("/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        dialog.setText(text);
+    }
+
+    private void flip() {
+//        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+//        Collections.reverse(tmp);
+//        getChildren().setAll(tmp);
+        setAlignment(Pos.TOP_LEFT);
+    }
+
+    public static DialogBox getUserDialog(String text) {
+        return new DialogBox(text);
+    }
+
+    public static DialogBox getAtomDialog(String text) {
+        var db = new DialogBox(text);
+        db.flip();
+        return db;
     }
 }

@@ -35,7 +35,7 @@ public class Atom {
             CommandLineInterface commandLineInterface = new CommandLineInterface(controller, scanner);
             commandLineInterface.run();
         } else {
-            GraphicalUserInterface.setController(controller);
+            GraphicalUserInterface.setAtomController(controller);
             Application.launch(GraphicalUserInterface.class, args);
         }
     }
