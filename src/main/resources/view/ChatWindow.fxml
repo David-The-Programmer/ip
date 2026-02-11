@@ -6,19 +6,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+<AnchorPane prefHeight="741.0" prefWidth="566.0" stylesheets="@../css/chat-window.css"
+            xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="atom.ui.gui.ChatWindow">
     <children>
-        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0"
-                   AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="76.0"/>
-        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput"
-                prefHeight="41.0" prefWidth="76.0" text="Send" AnchorPane.bottomAnchor="1.0"
-                AnchorPane.rightAnchor="0.0"/>
-        <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0"
-                    prefWidth="400.0" vvalue="1.0" AnchorPane.bottomAnchor="43.0" AnchorPane.leftAnchor="0.0"
+        <TextField fx:id="userInput" layoutX="8.0" layoutY="677.0" onAction="#handleUserInput" prefHeight="50.0"
+                   prefWidth="342.0" promptText="Write a command..." AnchorPane.bottomAnchor="14.0"
+                   AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="50.0"/>
+        <Button fx:id="sendButton" layoutX="522.0" layoutY="683.0" mnemonicParsing="false" onAction="#handleUserInput"
+                prefHeight="38.0" prefWidth="38.0" text="➤" AnchorPane.bottomAnchor="20.0"
+                AnchorPane.rightAnchor="6.0"/>
+        <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" prefHeight="664.0"
+                    prefWidth="566.0" vvalue="1.0" AnchorPane.bottomAnchor="77.0" AnchorPane.leftAnchor="0.0"
                     AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <content>
-                <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0"/>
+                <VBox fx:id="dialogContainer" focusTraversable="true" pickOnBounds="false" prefHeight="552.0"
+                      prefWidth="388.0"/>
             </content>
         </ScrollPane>
     </children>

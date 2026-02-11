@@ -19,6 +19,7 @@ import atom.command.UserErrorCommandResponse;
 import atom.controller.Controller;
 import atom.task.Task;
 import atom.ui.CommandResponseHandler;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -43,12 +44,23 @@ public class ChatWindow extends AnchorPane implements CommandResponseHandler {
 
     @FXML
     public void initialize() {
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.heightProperty().addListener((observable) -> {
+            scrollPane.setVvalue(1.0);
+        });
+        sendButton.disableProperty().bind(
+            Bindings.createBooleanBinding(
+                () -> userInput.getText().trim().isEmpty(),
+                userInput.textProperty()
+            )
+        );
     }
 
     @FXML
     private void handleUserInput() {
         String userInputStr = userInput.getText();
+        if (userInputStr.trim().isEmpty()) {
+            return;
+        }
         dialogContainer.getChildren().add(DialogBox.getUserDialog(userInputStr));
         CommandResponse response = atomController.getResponse(userInputStr);
         response.acceptResponseHandler(this);

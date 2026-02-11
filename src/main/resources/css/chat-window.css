@@ -1,0 +1,77 @@
+.root {
+    -fx-background-color: #17212b;
+    -fx-font-family: "Segoe UI", "Ubuntu", sans-serif;
+    -fx-font-size: 1.2em;
+}
+
+#userInput {
+    -fx-background-color: #242f3d;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #7f91a4;
+    -fx-background-radius: 20px;
+    -fx-padding: 10px 15px;
+    -fx-border-color: transparent;
+}
+
+.text-field:focused {
+    -fx-border-color: #5288c1;
+    -fx-border-radius: 20;
+}
+
+#sendButton {
+    -fx-background-color: #5288c1;
+    -fx-text-fill: white;
+    -fx-background-radius: 50%;
+    -fx-min-width: 35px;
+    -fx-min-height: 35px;
+    -fx-font-size: 16px;
+}
+
+#sendButton:disabled {
+    -fx-text-fill: #495969;
+    -fx-opacity: 0.6;
+    -fx-cursor: default;
+}
+
+.button:hover {
+    -fx-text-fill: #6ab3f3;
+}
+
+.scroll-pane,
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #ff9cb4;
+    -fx-background-radius: 1em;
+}
+
+.scroll-pane > .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-padding: 0 2 0 2;
+    -fx-pref-width: 8;
+}
+
+.scroll-pane > .scroll-bar:vertical > .thumb {
+    -fx-background-color: #3d4b59;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10;
+}
+
+.scroll-pane > .scroll-bar:vertical > .thumb:hover {
+    -fx-background-color: #5288c1;
+}
+
+.scroll-pane > .scroll-bar > .increment-button,
+.scroll-pane > .scroll-bar > .decrement-button {
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+}
+
+.scroll-pane > .scroll-bar > .increment-arrow,
+.scroll-pane > .scroll-bar > .decrement-arrow {
+    -fx-shape: "";
+    -fx-padding: 0;
+}
+
