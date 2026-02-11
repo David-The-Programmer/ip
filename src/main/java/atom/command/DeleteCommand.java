@@ -1,11 +1,11 @@
 package atom.command;
 
-import atom.ui.CommandHandler;
+import atom.controller.CommandHandler;
 
 /**
  * Represents a command to remove a specific task from the task list.
  */
-public class DeleteCommand extends Command {
+public class DeleteCommand implements Command {
     private int taskNumber;
 
     /**
@@ -13,7 +13,6 @@ public class DeleteCommand extends Command {
      * @param taskNumber The 1-based index of the task to be deleted.
      */
     public DeleteCommand(int taskNumber) {
-        super();
         this.taskNumber = taskNumber;
     }
 

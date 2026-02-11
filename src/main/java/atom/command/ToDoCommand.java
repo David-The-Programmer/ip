@@ -1,11 +1,11 @@
 package atom.command;
 
-import atom.ui.CommandHandler;
+import atom.controller.CommandHandler;
 
 /**
  * Represents a command to create and add a new ToDo task to the task list.
  */
-public class ToDoCommand extends Command {
+public class ToDoCommand implements Command {
     private String description;
 
     /**
@@ -13,7 +13,6 @@ public class ToDoCommand extends Command {
      * @param description The text describing the task to be done.
      */
     public ToDoCommand(String description) {
-        super();
         this.description = description;
     }
 
@@ -29,6 +28,7 @@ public class ToDoCommand extends Command {
      * Accepts a command handler to process the addition of the ToDo task.
      * @param handler The command handler instance.
      */
+    @Override
     public void acceptHandler(CommandHandler handler) {
         handler.handle(this);
     }

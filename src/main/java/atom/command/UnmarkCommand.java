@@ -1,11 +1,11 @@
 package atom.command;
 
-import atom.ui.CommandHandler;
+import atom.controller.CommandHandler;
 
 /**
  * Represents a command to mark a specific task as incomplete.
  */
-public class UnmarkCommand extends Command {
+public class UnmarkCommand implements Command {
     private int taskNumber;
 
     /**
@@ -13,7 +13,6 @@ public class UnmarkCommand extends Command {
      * @param taskNumber The 1-based index of the task in the task list.
      */
     public UnmarkCommand(int taskNumber) {
-        super();
         this.taskNumber = taskNumber;
     }
 
@@ -29,6 +28,7 @@ public class UnmarkCommand extends Command {
      * Accepts a command handler to execute the unmarking logic.
      * @param handler The command handler instance.
      */
+    @Override
     public void acceptHandler(CommandHandler handler) {
         handler.handle(this);
     }

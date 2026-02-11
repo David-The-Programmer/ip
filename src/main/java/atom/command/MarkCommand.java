@@ -1,11 +1,11 @@
 package atom.command;
 
-import atom.ui.CommandHandler;
+import atom.controller.CommandHandler;
 
 /**
  * Represents a command to mark a specific task as completed in the task list.
  */
-public class MarkCommand extends Command {
+public class MarkCommand implements Command {
     private int taskNumber;
 
     /**
@@ -13,7 +13,6 @@ public class MarkCommand extends Command {
      * @param taskNumber The 1-based index of the task to be marked.
      */
     public MarkCommand(int taskNumber) {
-        super();
         this.taskNumber = taskNumber;
     }
 
@@ -29,6 +28,7 @@ public class MarkCommand extends Command {
      * Accepts a command handler to execute the marking logic.
      * @param handler The command handler responsible for processing this command.
      */
+    @Override
     public void acceptHandler(CommandHandler handler) {
         handler.handle(this);
     }
