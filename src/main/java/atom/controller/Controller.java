@@ -68,6 +68,7 @@ public class Controller implements CommandHandler {
             return new UnknownCommandResponse(userInput);
         }
         command.acceptHandler(this);
+        assert commandResponse != null;
         return commandResponse;
     }
 

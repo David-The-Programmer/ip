@@ -20,11 +20,15 @@ public class Storage {
 
     /**
      * Private constructor for Storage.
-     * @param saveFilePath Path to the save file.
-     * @param taskSerialiser Serialiser for converting tasks to strings.
+     *
+     * @param saveFilePath     Path to the save file.
+     * @param taskSerialiser   Serialiser for converting tasks to strings.
      * @param taskDeserialiser Deserialiser for converting strings to tasks.
      */
     private Storage(Path saveFilePath, TaskSerialiser taskSerialiser, TaskDeserialiser taskDeserialiser) {
+        assert saveFilePath != null;
+        assert taskSerialiser != null;
+        assert taskDeserialiser != null;
         this.saveFilePath = saveFilePath;
         this.taskSerialiser = taskSerialiser;
         this.taskDeserialiser = taskDeserialiser;
@@ -32,9 +36,10 @@ public class Storage {
 
     /**
      * Initializes the storage by creating directories and the save file if they do not exist.
+     *
      * @param saveFilePathStr String representation of the file path.
-     * @param serialiser The serialiser to be used.
-     * @param deserialiser The deserialiser to be used.
+     * @param serialiser      The serialiser to be used.
+     * @param deserialiser    The deserialiser to be used.
      * @return A new instance of Storage.
      * @throws StorageInitException If directory or file creation fails.
      */
@@ -58,9 +63,10 @@ public class Storage {
 
     /**
      * Persists the list of tasks to the save file.
+     *
      * @param tasks The list of tasks to save.
      * @throws StorageAccessDeniedException If the application lacks file permissions.
-     * @throws StorageWriteException If an I/O error occurs during writing.
+     * @throws StorageWriteException        If an I/O error occurs during writing.
      */
     public void saveTasks(List<Task> tasks) throws StorageAccessDeniedException, StorageWriteException {
         String serialisedTaskList = "";
@@ -81,6 +87,7 @@ public class Storage {
 
     /**
      * Reads and parses tasks from the save file.
+     *
      * @return A list of tasks retrieved from storage.
      * @throws StorageReadException If the file cannot be read or deserialisation fails.
      */
