@@ -19,17 +19,16 @@ public class RawCommandStream {
      * Returns true if there are no more tokens left in the stream, false otherwise.
      *
      * @return boolean to determine if stream is exhausted.
-     * @throws NoSuchElementException If invoked when hasNext() returns false, i,e, stream is empty.
      */
     public boolean isExhausted() {
-        return this.index >= this.rawCommand.length();
+        return index >= rawCommand.length();
     }
 
     /**
-     * Returns the next word (segment until earliest space character) and advances the cursor.
+     * Returns the next word (segment until earliest space character) in the stream.
      *
-     * @return Segment before the earliest space character.
-     * @throws NoSuchElementException If invoked when hasNext() returns false, i,e, stream is empty.
+     * @return Segment before the earliest space character in the stream.
+     * @throws NoSuchElementException If invoked when isExhausted returns true, i,e, stream is empty.
      */
     public String nextWord() throws NoSuchElementException {
         if (isExhausted()) {
@@ -45,11 +44,11 @@ public class RawCommandStream {
     }
 
     /**
-     * Returns the string segment up to the specified delimiter and advances the cursor.
+     * Returns the next string segment in the stream up to the specified delimiter.
      *
      * @param delimiter The sequence marking the end of the segment.
      * @return Segment before the delimiter.
-     * @throws NoSuchElementException If invoked when hasNext() returns false, i,e, stream is empty.
+     * @throws NoSuchElementException If invoked when isExhausted() returns true, i,e, stream is empty.
      */
     public String nextUntil(String delimiter) throws NoSuchElementException {
         if (isExhausted()) {
@@ -65,9 +64,9 @@ public class RawCommandStream {
     }
 
     /**
-     * Returns the remaining substring of the raw command given
+     * Returns the remaining substring of the stream.
      *
-     * @return remaining substring of the raw command given
+     * @return remaining substring of the stream.
      * @throws NoSuchElementException If invoked when hasNext() returns false, i,e, stream is empty.
      */
     public String nextRemaining() {
