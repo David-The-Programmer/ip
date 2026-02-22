@@ -202,7 +202,8 @@ public class CommandLineInterface implements CommandResponseHandler {
     public void handleResponse(UnknownCommandResponse response) {
         String userInput = response.getUserInput();
         System.out.println("'" + userInput + "' command not found (unknown)");
-        String message = "The following are the only valid commands:\n\n" + "   todo <description>\n\n"
+        String message = "The following are the only valid commands:\n\n"
+            + "   todo <description>\n\n"
             + "   deadline <description> /by <datetime of deadline>\n\n"
             + "   event <description> /from <datetime that event starts> /to <datetime that event ends>\n\n"
             + "   list\n\n" + "   mark <task number shown after entering the list command>\n\n"

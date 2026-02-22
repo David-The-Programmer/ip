@@ -26,6 +26,7 @@ import atom.command.UnmarkCommandResponse;
 import atom.command.UserErrorCommandResponse;
 import atom.command.SystemErrorCommandResponse;
 import atom.parser.Parser;
+import atom.parser.UnknownCommandException;
 import atom.storage.Storage;
 import atom.storage.StorageAccessDeniedException;
 import atom.storage.StorageWriteException;
@@ -61,11 +62,10 @@ public class Controller implements CommandHandler {
         Command command = null;
         try {
             command = parser.parse(userInput);
+        } catch (UnknownCommandException e) {
+            return new UnknownCommandResponse(userInput);
         } catch (Exception e) {
             return new UserErrorCommandResponse(e);
-        }
-        if (command == null) {
-            return new UnknownCommandResponse(userInput);
         }
         command.acceptHandler(this);
         return commandResponse;
