@@ -32,6 +32,15 @@ public class RawCommandStream {
      * @throws NoSuchElementException If invoked when hasNext() returns false, i,e, stream is empty.
      */
     public String nextWord() throws NoSuchElementException {
+        if (isExhausted()) {
+            throw new NoSuchElementException();
+        }
+        while (!isExhausted() && rawCommand.charAt(index) == ' ') {
+            index++;
+        }
+        if (isExhausted()) {
+            return "";
+        }
         return nextUntil(" ");
     }
 

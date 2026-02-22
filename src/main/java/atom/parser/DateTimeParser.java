@@ -1,6 +1,7 @@
 package atom.parser;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
@@ -12,93 +13,90 @@ import java.util.Map;
  * Utility class for parsing date-time strings into {@code LocalDateTime} objects.
  * Supports multiple date formats and a strict 24-hour time format (HHmm).
  */
-public final class DateTimeParser {
+public class DateTimeParser {
 
-    private static final Map<String, String> DATE_PATTERNS = createPatternMap();
+    private static final Map<String, String> DATE_PATTERNS = createDatePatternMap();
     private static final String TIME_REGEX = "^\\d{4}$";
 
     /**
      * Creates and populates the map of supported date patterns and their regex equivalents.
+     *
      * @return An unmodifiable map of date format patterns to regex strings.
      */
-    private static Map<String, String> createPatternMap() {
-        Map<String, String> patterns = new LinkedHashMap<>();
-        patterns.put("yyyy-MM-dd", "^\\d{4}-\\d{2}-\\d{2}$");
-        patterns.put("yyyy/MM/dd", "^\\d{4}/\\d{2}/\\d{2}$");
-        patterns.put("dd/MM/yyyy", "^\\d{2}/\\d{2}/\\d{4}$");
-        patterns.put("dd-MM-yyyy", "^\\d{2}-\\d{2}-\\d{4}$");
-        return Collections.unmodifiableMap(patterns);
+    private static Map<String, String> createDatePatternMap() {
+        Map<String, String> dateFormats = new LinkedHashMap<>();
+        dateFormats.put("yyyy-MM-dd", "^\\d{4}-\\d{2}-\\d{2}$");
+        dateFormats.put("yyyy/MM/dd", "^\\d{4}/\\d{2}/\\d{2}$");
+        dateFormats.put("dd/MM/yyyy", "^\\d{2}/\\d{2}/\\d{4}$");
+        dateFormats.put("dd-MM-yyyy", "^\\d{2}-\\d{2}-\\d{4}$");
+        return Collections.unmodifiableMap(dateFormats);
     }
 
     /**
-     * Parses a raw input string into a {@code LocalDateTime} object.
-     * Validates both the date format and the time format strictly.
-     * @param input The raw input string containing date and time.
-     * @return A {@code LocalDateTime} representation of the input.
+     * Parses a raw input string into a {@code LocalDate} object.
+     *
+     * @param rawDate The raw input string containing a date
+     * @return A {@code LocalDate} representation of the input.
      * @throws DateTimeParserException If the input is empty, malformed, or contains an invalid calendar date.
      */
-    public static LocalDateTime parse(String input) throws DateTimeParserException {
-        if (input == null || input.isBlank()) {
-            throw new DateTimeParserException("Input is empty.", null, "Please provide a valid date.");
+    public static LocalDate parseDate(String rawDate) throws DateTimeParserException {
+        if (rawDate.isBlank()) {
+            throw new DateTimeParserException("date is empty.", null);
         }
 
-        String[] parts = input.trim().split(" ", 2);
-
-        if (parts.length < 2) {
-            StringBuilder sb = new StringBuilder();
-            sb.append("Invalid Datetime Syntax: '").append(parts[0]).append("'.\n\n");
-            sb.append("Supported datetime formats:\n");
-            for (String pattern : DATE_PATTERNS.keySet()) {
-                sb.append("  - ").append(pattern).append(" HHmm\n");
-            }
-            throw new DateTimeParserException(sb.toString(), null,
-                    "Please retry using one of the formats listed above.");
-        }
-
-        String datePart = parts[0];
-        String timePart = parts[1].trim();
-
-        String matchingFormat = null;
+        String matchingFormat = "";
         for (Map.Entry<String, String> entry : DATE_PATTERNS.entrySet()) {
-            if (datePart.matches(entry.getValue())) {
+            if (rawDate.matches(entry.getValue())) {
                 matchingFormat = entry.getKey();
                 break;
             }
         }
-
-        if (matchingFormat == null) {
-            StringBuilder sb = new StringBuilder();
-            sb.append("Invalid Datetime Syntax: '").append(datePart).append("'.\n\n");
-            sb.append("Supported datetime formats:\n");
-            for (String pattern : DATE_PATTERNS.keySet()) {
-                sb.append("  - ").append(pattern).append(" HHmm\n");
+        if (matchingFormat.isEmpty()) {
+            String message = "invalid date format, only the following formats are allowed: \n";
+            for (String format : DATE_PATTERNS.keySet()) {
+                message += String.format("  - %s\n", format);
             }
-            throw new DateTimeParserException(sb.toString(), null,
-                    "Please retry using one of the formats listed above.");
+            throw new DateTimeParserException(message, null);
         }
 
-        if (!timePart.matches(TIME_REGEX)) {
-            throw new DateTimeParserException(
-                    "Invalid Time Syntax: '" + timePart + "'. Expected HHmm (e.g., 1430).", null,
-                    "Please correct the time and try again based on the HHmm requirement.");
-        }
-
-        String fullPattern = matchingFormat.replace('y', 'u') + " HHmm";
-        DateTimeFormatter strictFormatter = DateTimeFormatter.ofPattern(fullPattern)
-                .withResolverStyle(ResolverStyle.STRICT);
-
+        String matchingDatePattern = matchingFormat.replace('y', 'u');
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(matchingDatePattern)
+            .withResolverStyle(ResolverStyle.STRICT);
         try {
-            return LocalDateTime.parse(datePart + " " + timePart, strictFormatter);
+            return LocalDate.parse(rawDate, dateFormat);
         } catch (DateTimeParseException e) {
-            String reason = e.getMessage();
-
-            if (reason.contains(": ")) {
-                reason = reason.split(": ")[1];
+            String message = e.getMessage();
+            if (message.contains(": ")) {
+                message = message.split(": ")[1];
             }
-            reason = reason.replace("MonthOfYear", "month").replace("DayOfMonth", "day")
-                    .replace("HourOfDay", "hour").replace("MinuteOfHour", "minute");
+            message = message.replace("MonthOfYear", "month").replace("DayOfMonth", "day");
+            throw new DateTimeParserException(message, e);
+        }
+    }
 
-            throw new DateTimeParserException(reason, e, "Please try again with a valid calendar date.");
+    /**
+     * Parses a raw input string into a {@code LocalTime} object.
+     *
+     * @param rawTime The raw input string containing a time
+     * @return A {@code LocalTime} representation of the input.
+     * @throws DateTimeParserException If the input is empty, malformed, or contains an invalid time
+     */
+    public static LocalTime parseTime(String rawTime) throws DateTimeParserException {
+        if (!rawTime.matches(TIME_REGEX)) {
+            String message = String.format("Invalid Time Syntax: '%s'. Expected HHmm (e.g., 1430).", rawTime);
+            throw new DateTimeParserException(message, null);
+        }
+        DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HHmm")
+            .withResolverStyle(ResolverStyle.STRICT);
+        try {
+            return LocalTime.parse(rawTime, timeFormat);
+        } catch (DateTimeParseException e) {
+            String message = e.getMessage();
+            if (message.contains(": ")) {
+                message = message.split(": ")[1];
+            }
+            message = message.replace("HourOfDay", "hour").replace("MinuteOfHour", "minute");
+            throw new DateTimeParserException(message, e);
         }
     }
 }

@@ -1,6 +1,8 @@
 package atom.parser;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import atom.command.ByeCommand;
 import atom.command.Command;
 import atom.command.DeadlineCommand;
@@ -184,17 +186,35 @@ public class Parser {
         }
 
         if (stream.isExhausted()) {
-            throw new InvalidDeadlineCommandException("'deadline' command is missing /by <datetime>", null);
+            throw new InvalidDeadlineCommandException("'deadline' command is missing /by <date> <time>", null);
         }
-        String rawDeadlineDateTime = stream.nextRemaining().trim();
-
-        LocalDateTime deadlineDateTime;
+        String rawDeadlineDate = stream.nextWord().trim();
+        if (rawDeadlineDate.isBlank()) {
+            throw new InvalidDeadlineCommandException("'deadline' command is missing a date after /by", null);
+        }
+        LocalDate deadlineDate;
         try {
-            deadlineDateTime = DateTimeParser.parse(rawDeadlineDateTime);
-            return new DeadlineCommand(description.trim(), deadlineDateTime);
+            deadlineDate = DateTimeParser.parseDate(rawDeadlineDate);
         } catch (DateTimeParserException e) {
             throw new InvalidDeadlineCommandException(e.getMessage(), e.getCause());
         }
+
+        if (stream.isExhausted()) {
+            throw new InvalidDeadlineCommandException("'deadline' command is missing a time after /by <date>", null);
+        }
+        String rawDeadlineTime = stream.nextRemaining().trim();
+        if (rawDeadlineTime.isBlank()) {
+            throw new InvalidDeadlineCommandException("'deadline' command is missing a time after /by <date>", null);
+        }
+        LocalTime deadlineTime;
+        try {
+            deadlineTime = DateTimeParser.parseTime(rawDeadlineTime);
+        } catch (DateTimeParserException e) {
+            throw new InvalidDeadlineCommandException(e.getMessage(), e.getCause());
+        }
+
+        LocalDateTime deadlineDateTime = LocalDateTime.of(deadlineDate, deadlineTime);
+        return new DeadlineCommand(description.trim(), deadlineDateTime);
     }
 
     /**
@@ -212,33 +232,78 @@ public class Parser {
         if (description.isBlank()) {
             throw new InvalidEventCommandException("'event' command cannot have a blank description", null);
         }
-
-        if (stream.isExhausted()) {
-            throw new InvalidEventCommandException("'event' command is missing /from <datetime>", null);
-        }
-        String rawStartDateTime = stream.nextUntil("/to");
-        LocalDateTime startDateTime;
-        try {
-            startDateTime = DateTimeParser.parse(rawStartDateTime);
-        } catch (DateTimeParserException e) {
-            throw new InvalidEventCommandException(e.getMessage(), e.getCause());
-        }
-
-        if (stream.isExhausted()) {
-            throw new InvalidEventCommandException("'event' command is missing /to <datetime>", null);
-        }
-        String rawEndDateTime = stream.nextRemaining();
-        LocalDateTime endDateTime;
-        try {
-            endDateTime = DateTimeParser.parse(rawEndDateTime);
-        } catch (DateTimeParserException e) {
-            throw new InvalidEventCommandException(e.getMessage(), e.getCause());
-        }
+        LocalDateTime startDateTime = parseEventCommandStartDateTime(stream);
+        LocalDateTime endDateTime = parseEventCommandEndDateTime(stream);
 
         if (endDateTime.isBefore(startDateTime)) {
-            String message = "/from <datetime> cannot be later than /to <datetime>";
+            String message = "/from <date> <time> cannot be later than /to <date> <time>";
             throw new InvalidEventCommandException(message, null);
         }
         return new EventCommand(description.trim(), startDateTime, endDateTime);
+    }
+
+    private LocalDateTime parseEventCommandStartDateTime(RawCommandStream stream) throws InvalidEventCommandException {
+        if (stream.isExhausted()) {
+            throw new InvalidEventCommandException("'event' command is missing /from <date> <time> /to <date> <time>",
+                null);
+        }
+        String rawStartDate = stream.nextWord().trim();
+        if (rawStartDate.isBlank()) {
+            throw new InvalidEventCommandException("'event' command is missing a date after /from", null);
+        }
+        LocalDate startDate;
+        try {
+            startDate = DateTimeParser.parseDate(rawStartDate);
+        } catch (DateTimeParserException e) {
+            throw new InvalidEventCommandException(e.getMessage(), e.getCause());
+        }
+
+        if (stream.isExhausted()) {
+            throw new InvalidEventCommandException("'event' command is missing a time after /from <date>", null);
+        }
+        String rawStartTime = stream.nextUntil("/to").trim();
+        if (rawStartTime.isBlank()) {
+            throw new InvalidEventCommandException("'event' command is missing a time after /from <date>", null);
+        }
+        LocalTime startTime;
+        try {
+            startTime = DateTimeParser.parseTime(rawStartTime);
+        } catch (DateTimeParserException e) {
+            throw new InvalidEventCommandException(e.getMessage(), e.getCause());
+        }
+
+        return LocalDateTime.of(startDate, startTime);
+    }
+
+    private LocalDateTime parseEventCommandEndDateTime(RawCommandStream stream) throws InvalidEventCommandException {
+        if (stream.isExhausted()) {
+            throw new InvalidEventCommandException("'event' command is missing /to <date> <time>", null);
+        }
+        String rawEndDate = stream.nextWord().trim();
+        if (rawEndDate.isBlank()) {
+            throw new InvalidEventCommandException("'event' command is missing a date after /to", null);
+        }
+        LocalDate endDate;
+        try {
+            endDate = DateTimeParser.parseDate(rawEndDate);
+        } catch (DateTimeParserException e) {
+            throw new InvalidEventCommandException(e.getMessage(), e.getCause());
+        }
+
+        if (stream.isExhausted()) {
+            throw new InvalidEventCommandException("'event' command is missing a time after /to <date>", null);
+        }
+        String rawEndTime = stream.nextRemaining().trim();
+        if (rawEndTime.isBlank()) {
+            throw new InvalidEventCommandException("'event' command is missing a time after /to <date>", null);
+        }
+        LocalTime endTime;
+        try {
+            endTime = DateTimeParser.parseTime(rawEndTime);
+        } catch (DateTimeParserException e) {
+            throw new InvalidEventCommandException(e.getMessage(), e.getCause());
+        }
+
+        return LocalDateTime.of(endDate, endTime);
     }
 }
