@@ -77,6 +77,7 @@ public class Controller implements CommandHandler {
             return new UserErrorCommandResponse(e);
         }
         command.acceptHandler(this);
+        assert commandResponse != null;
         return commandResponse;
     }
 

@@ -26,6 +26,9 @@ public class Storage {
      * @param taskDeserialiser Deserialiser for converting strings to tasks.
      */
     private Storage(Path saveFilePath, Serialiser taskSerialiser, Deserialiser taskDeserialiser) {
+        assert saveFilePath != null;
+        assert taskSerialiser != null;
+        assert taskDeserialiser != null;
         this.saveFilePath = saveFilePath;
         this.taskSerialiser = taskSerialiser;
         this.taskDeserialiser = taskDeserialiser;
