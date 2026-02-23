@@ -13,6 +13,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+
+/**
+ * Contains all logic for the entire app gui.
+ */
 public class GraphicalUserInterface extends Application {
     private static Controller atomController;
     private ScrollPane scrollPane;

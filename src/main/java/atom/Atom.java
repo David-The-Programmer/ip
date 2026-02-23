@@ -13,13 +13,12 @@ import atom.ui.gui.GraphicalUserInterface;
 import javafx.application.Application;
 
 /**
- * Entry point for the Atom application.
- * Initializes core components and starts the user interface.
+ * Launcher for atom application.
  */
 public class Atom {
 
     /**
-     * Main method to launch the application.
+     * Initialises and launches the atom application.
      *
      * @param args Command line arguments.
      */

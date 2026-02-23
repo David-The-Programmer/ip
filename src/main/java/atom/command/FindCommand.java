@@ -9,7 +9,8 @@ public class FindCommand implements Command {
     private String keyword;
 
     /**
-     * Initializes a new FindCommand with the specified search keyword.
+     * Constructs a new FindCommand with the specified search keyword.
+     *
      * @param keyword The string to search for within task descriptions.
      */
     public FindCommand(String keyword) {
@@ -18,6 +19,7 @@ public class FindCommand implements Command {
 
     /**
      * Retrieves the keyword used for the search.
+     *
      * @return The search keyword string.
      */
     public String getKeyword() {
@@ -26,6 +28,7 @@ public class FindCommand implements Command {
 
     /**
      * Accepts a command handler to execute the search logic.
+     *
      * @param handler The command handler responsible for processing this command.
      */
     @Override

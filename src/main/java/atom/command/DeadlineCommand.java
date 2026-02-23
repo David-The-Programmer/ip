@@ -6,17 +6,16 @@ import atom.controller.CommandHandler;
 
 /**
  * Represents a command to create and add a new Deadline task to the task list.
- * A Deadline task includes a description and a specific date-time by which
- * the task must be completed.
  */
 public class DeadlineCommand implements Command {
     private String description;
     private LocalDateTime dateTime;
 
     /**
-     * Initializes a new DeadlineCommand with the specified description and deadline.
+     * Constructs a new DeadlineCommand with the specified description and deadline.
+     *
      * @param description The text describing the task to be completed.
-     * @param dateTime The date and time representing the deadline.
+     * @param dateTime    The date and time representing the deadline.
      */
     public DeadlineCommand(String description, LocalDateTime dateTime) {
         this.description = description;
@@ -25,6 +24,7 @@ public class DeadlineCommand implements Command {
 
     /**
      * Retrieves the description of the deadline task.
+     *
      * @return The task description string.
      */
     public String getDescription() {
@@ -33,6 +33,7 @@ public class DeadlineCommand implements Command {
 
     /**
      * Retrieves the due date and time of the deadline task.
+     *
      * @return The deadline LocalDateTime.
      */
     public LocalDateTime getDateTime() {
@@ -41,6 +42,7 @@ public class DeadlineCommand implements Command {
 
     /**
      * Accepts a command handler to process the addition of the Deadline task.
+     *
      * @param handler The command handler instance.
      */
     @Override

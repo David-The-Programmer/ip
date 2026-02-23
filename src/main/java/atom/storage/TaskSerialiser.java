@@ -14,6 +14,7 @@ public class TaskSerialiser implements Serialiser {
 
     /**
      * Serialises a ToDo task.
+     *
      * @param task The ToDo task to serialise.
      */
     @Override
@@ -31,6 +32,7 @@ public class TaskSerialiser implements Serialiser {
 
     /**
      * Serialises a Deadline task.
+     *
      * @param task The Deadline task to serialise.
      */
     @Override
@@ -50,6 +52,7 @@ public class TaskSerialiser implements Serialiser {
 
     /**
      * Serialises an Event task.
+     *
      * @param task The Event task to serialise.
      */
     @Override
@@ -71,6 +74,7 @@ public class TaskSerialiser implements Serialiser {
 
     /**
      * Retrieves the resulting serialised string.
+     *
      * @return The serialised task string.
      */
     public String getSerialisedTask() {

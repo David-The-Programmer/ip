@@ -8,7 +8,8 @@ import atom.ui.CommandResponseHandler;
 public class ByeCommandResponse implements CommandResponse {
 
     /**
-     * Accepts a command response handler to process the bye command response
+     * Accepts a command response handler to process the bye command response.
+     *
      * @param handler The command response handler instance.
      */
     @Override

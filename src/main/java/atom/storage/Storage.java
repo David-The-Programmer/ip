@@ -19,7 +19,7 @@ public class Storage {
     private Deserialiser taskDeserialiser;
 
     /**
-     * Private constructor for Storage.
+     * Constructs storage instance.
      *
      * @param saveFilePath     Path to the save file.
      * @param taskSerialiser   Serialiser for converting tasks to strings.

@@ -9,6 +9,11 @@ public class SerialisedTaskStream {
     private int index;
     private String serialisedTask;
 
+    /**
+     * Constructs a stream given the serialised task string.
+     *
+     * @param serialisedTask Raw serialised task string.
+     */
     public SerialisedTaskStream(String serialisedTask) {
         this.serialisedTask = serialisedTask;
         this.index = 0;

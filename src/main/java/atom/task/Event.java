@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import atom.storage.Serialiser;
+
 /**
  * Represents a task that occurs within a specific time range.
  */
@@ -13,9 +14,10 @@ public class Event extends Task {
 
     /**
      * Initializes a new event task with start and end times.
+     *
      * @param description Task description.
-     * @param from Start date and time.
-     * @param to End date and time.
+     * @param from        Start date and time.
+     * @param to          End date and time.
      */
     public Event(String description, LocalDateTime from, LocalDateTime to) {
         super(description);
@@ -25,6 +27,7 @@ public class Event extends Task {
 
     /**
      * Gets the starting date and time of the event.
+     *
      * @return Start LocalDateTime.
      */
     public LocalDateTime getStartDateTime() {
@@ -33,6 +36,7 @@ public class Event extends Task {
 
     /**
      * Gets the ending date and time of the event.
+     *
      * @return End LocalDateTime.
      */
     public LocalDateTime getEndDateTime() {
@@ -41,6 +45,7 @@ public class Event extends Task {
 
     /**
      * Accepts a serialiser to process the event task.
+     *
      * @param serialiser The serialiser instance.
      */
     public void acceptSerialiser(Serialiser serialiser) {

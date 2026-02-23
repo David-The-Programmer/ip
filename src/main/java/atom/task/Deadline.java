@@ -13,9 +13,10 @@ public class Deadline extends Task {
     private LocalDateTime by;
 
     /**
-     * Initializes a new deadline task.
+     * Constructs a new deadline task.
+     *
      * @param description Task description.
-     * @param by Date and time of the deadline.
+     * @param by          Date and time of the deadline.
      */
     public Deadline(String description, LocalDateTime by) {
         super(description);
@@ -24,6 +25,7 @@ public class Deadline extends Task {
 
     /**
      * Gets the deadline date and time.
+     *
      * @return The deadline LocalDateTime.
      */
     public LocalDateTime getDateTime() {
@@ -32,6 +34,7 @@ public class Deadline extends Task {
 
     /**
      * Accepts a serialiser to process the deadline task.
+     *
      * @param serialiser The serialiser instance.
      */
     public void acceptSerialiser(Serialiser serialiser) {

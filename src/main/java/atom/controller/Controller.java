@@ -39,6 +39,9 @@ import atom.task.TaskNotFoundException;
 import atom.task.TaskService;
 import atom.task.ToDo;
 
+/**
+ * Contains all logic to process commands.
+ */
 public class Controller implements CommandHandler {
     private Storage storage;
     private TaskService taskService;
@@ -46,7 +49,7 @@ public class Controller implements CommandHandler {
     private CommandResponse commandResponse;
 
     /**
-     * Initializes the user interface with required dependencies.
+     * Constructs the atom controller.
      *
      * @param parser      Command parser.
      * @param taskService Task management service.
@@ -58,6 +61,12 @@ public class Controller implements CommandHandler {
         this.storage = storage;
     }
 
+    /**
+     * Returns a CommandResponse given user input (raw command string).
+     *
+     * @param userInput Raw command given by user.
+     * @return CommandResponse to corresponding raw command given.
+     */
     public CommandResponse getResponse(String userInput) {
         Command command = null;
         try {
@@ -201,11 +210,9 @@ public class Controller implements CommandHandler {
     }
 
     /**
-     * Processes the {@code FindCommand} by searching for tasks that match the specified keyword.
-     * If matches are found, they are printed to the console in a numbered list;
-     * otherwise, a message is displayed informing the user that no matches were found.
+     * Processes the find command by searching for tasks that match the specified keyword.
      *
-     * @param command The {@code FindCommand} containing the search keyword.
+     * @param command The find command instance containing the search keyword.
      */
     public void handle(FindCommand command) {
         List<Task> tasksWithKeyword = taskService.findTaskWithKeyword(command.getKeyword());

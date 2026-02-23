@@ -243,6 +243,13 @@ public class Parser {
         return new EventCommand(description.trim(), startDateTime, endDateTime);
     }
 
+    /**
+     * Parses segment of stream into Event start datetime.
+     *
+     * @param stream RawCommandStream object.
+     * @return LocalDateTime object.
+     * @throws InvalidEventCommandException If an 'event' command is malformed.
+     */
     private LocalDateTime parseEventCommandStartDateTime(RawCommandStream stream) throws InvalidEventCommandException {
         if (stream.isExhausted()) {
             throw new InvalidEventCommandException("'event' command is missing /from <date> <time> /to <date> <time>",
@@ -276,6 +283,13 @@ public class Parser {
         return LocalDateTime.of(startDate, startTime);
     }
 
+    /**
+     * Parses segment of stream into Event end datetime.
+     *
+     * @param stream RawCommandStream object.
+     * @return LocalDateTime object.
+     * @throws InvalidEventCommandException If an 'event' command is malformed.
+     */
     private LocalDateTime parseEventCommandEndDateTime(RawCommandStream stream) throws InvalidEventCommandException {
         if (stream.isExhausted()) {
             throw new InvalidEventCommandException("'event' command is missing /to <date> <time>", null);

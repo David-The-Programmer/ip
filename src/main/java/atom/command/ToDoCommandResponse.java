@@ -10,6 +10,12 @@ public class ToDoCommandResponse implements CommandResponse {
     private ToDo toDo;
     private int numRemainingTasks;
 
+    /**
+     * Constructs a new ToDoCommandResponse.
+     *
+     * @param toDo              ToDo task added.
+     * @param numRemainingTasks Number of tasks the user has remaining.
+     */
     public ToDoCommandResponse(ToDo toDo, int numRemainingTasks) {
         this.toDo = toDo;
         this.numRemainingTasks = numRemainingTasks;
@@ -25,6 +31,7 @@ public class ToDoCommandResponse implements CommandResponse {
 
     /**
      * Accepts a command response handler to process the todo command
+     *
      * @param handler The command handler instance.
      */
     @Override

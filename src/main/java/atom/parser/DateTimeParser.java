@@ -19,7 +19,7 @@ public class DateTimeParser {
     private static final String TIME_REGEX = "^\\d{4}$";
 
     /**
-     * Creates and populates the map of supported date patterns and their regex equivalents.
+     * Creates and returns the map of supported date patterns and their regex equivalents.
      *
      * @return An unmodifiable map of date format patterns to regex strings.
      */
@@ -36,7 +36,7 @@ public class DateTimeParser {
      * Parses a raw input string into a {@code LocalDate} object.
      *
      * @param rawDate The raw input string containing a date
-     * @return A {@code LocalDate} representation of the input.
+     * @return {@code LocalDate} representation of the input.
      * @throws DateTimeParserException If the input is empty, malformed, or contains an invalid calendar date.
      */
     public static LocalDate parseDate(String rawDate) throws DateTimeParserException {
@@ -78,7 +78,7 @@ public class DateTimeParser {
      * Parses a raw input string into a {@code LocalTime} object.
      *
      * @param rawTime The raw input string containing a time
-     * @return A {@code LocalTime} representation of the input.
+     * @return {@code LocalTime} representation of the input.
      * @throws DateTimeParserException If the input is empty, malformed, or contains an invalid time
      */
     public static LocalTime parseTime(String rawTime) throws DateTimeParserException {

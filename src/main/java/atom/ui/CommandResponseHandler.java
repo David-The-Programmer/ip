@@ -14,7 +14,7 @@ import atom.command.UnmarkCommandResponse;
 import atom.command.UserErrorCommandResponse;
 
 /**
- * Interface for handling various types of application commands.
+ * Handles command responses of various types of application commands.
  */
 public interface CommandResponseHandler {
     /**

@@ -8,6 +8,7 @@ import atom.task.Task;
 public interface Deserialiser {
     /**
      * Parses a serialised string into a Task object internal state.
+     *
      * @param serialisedTask The raw string representing a task.
      * @throws DeserialiserException If the string format is invalid.
      */
@@ -15,6 +16,7 @@ public interface Deserialiser {
 
     /**
      * Retrieves the Task object produced by the last deserialise operation.
+     *
      * @return The resulting Task object.
      */
     public Task getDeserialisedTask();

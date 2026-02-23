@@ -8,6 +8,10 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
+
+/**
+ * Contains all logic for the dialog box gui component.
+ */
 public class DialogBox extends HBox {
 
     @FXML
@@ -30,10 +34,20 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a user dialog box.
+     *
+     * @param text Text to display.
+     */
     public static DialogBox getUserDialog(String text) {
         return new DialogBox(text);
     }
 
+    /**
+     * Returns a atom dialog box.
+     *
+     * @param text Text to display.
+     */
     public static DialogBox getAtomDialog(String text) {
         var db = new DialogBox(text);
         db.flip();

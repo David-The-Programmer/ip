@@ -20,7 +20,8 @@ public class ListCommandResponse implements CommandResponse {
     }
 
     /**
-     * Accepts a command response handler to process the list command response
+     * Accepts a command response handler to process the list command response.
+     *
      * @param handler The command handler instance.
      */
     @Override

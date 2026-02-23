@@ -5,7 +5,7 @@ package atom.storage;
  */
 public class DeserialiserException extends Exception {
     /**
-     * Initializes the exception with a message and cause.
+     * Constructs the exception with a message and cause.
      *
      * @param message The detailed error message.
      * @param cause   The underlying cause of the exception.

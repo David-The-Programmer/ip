@@ -10,6 +10,12 @@ public class EventCommandResponse implements CommandResponse {
     private Event event;
     private int numTasksRemaining;
 
+    /**
+     * Constructs a EventCommandResponse instance.
+     *
+     * @param event             Event task object.
+     * @param numTasksRemaining Number of tasks the user has remaining.
+     */
     public EventCommandResponse(Event event, int numTasksRemaining) {
         this.event = event;
         this.numTasksRemaining = numTasksRemaining;
@@ -25,6 +31,7 @@ public class EventCommandResponse implements CommandResponse {
 
     /**
      * Accepts a command response handler to process the event command response
+     *
      * @param handler The command response handler instance.
      */
     @Override

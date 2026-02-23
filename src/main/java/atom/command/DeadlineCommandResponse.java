@@ -10,9 +10,15 @@ public class DeadlineCommandResponse implements CommandResponse {
     private Deadline deadline;
     private int numTasksRemaining;
 
-    public DeadlineCommandResponse(Deadline deadline, int numTaskRemaining) {
+    /**
+     * Constructs a DeadlineCommandResponse instance.
+     *
+     * @param deadline          Deadline task object.
+     * @param numTasksRemaining Number of tasks the user has remaining.
+     */
+    public DeadlineCommandResponse(Deadline deadline, int numTasksRemaining) {
         this.deadline = deadline;
-        this.numTasksRemaining = numTaskRemaining;
+        this.numTasksRemaining = numTasksRemaining;
     }
 
     public Deadline getDeadline() {

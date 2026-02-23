@@ -28,6 +28,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * Contains all logic for the chat window gui.
+ */
 public class ChatWindow extends AnchorPane implements CommandResponseHandler {
     private Controller atomController;
     @FXML
@@ -39,10 +42,18 @@ public class ChatWindow extends AnchorPane implements CommandResponseHandler {
     @FXML
     private Button sendButton;
 
+    /**
+     * Sets the atom controller (engine that contains all logic to handle commands).
+     *
+     * @param atomController Application engine that contains all logic to handle commands.
+     */
     public void setAtomController(Controller atomController) {
         this.atomController = atomController;
     }
 
+    /**
+     * Initialises the ChatWindow gui.
+     */
     @FXML
     public void initialize() {
         dialogContainer.heightProperty().addListener((observable) -> {
@@ -56,6 +67,9 @@ public class ChatWindow extends AnchorPane implements CommandResponseHandler {
         );
     }
 
+    /**
+     * Handles gui interactions when user enters input.
+     */
     @FXML
     private void handleUserInput() {
         String userInputStr = userInput.getText();
@@ -68,6 +82,11 @@ public class ChatWindow extends AnchorPane implements CommandResponseHandler {
         userInput.clear();
     }
 
+    /**
+     * Handles the gui interactions given a response to a todo command from the atom controller.
+     *
+     * @param response Response object from the atom controller.
+     */
     @Override
     public void handleResponse(ToDoCommandResponse response) {
         String responseStr = "Noted. The following task has been added: \n";
@@ -76,6 +95,11 @@ public class ChatWindow extends AnchorPane implements CommandResponseHandler {
         dialogContainer.getChildren().add(DialogBox.getAtomDialog(responseStr));
     }
 
+    /**
+     * Handles the gui interactions given a response to a deadline command from the atom controller.
+     *
+     * @param response Response object from the atom controller.
+     */
     @Override
     public void handleResponse(DeadlineCommandResponse response) {
         String responseStr = "Noted. The following task has been added: \n";
@@ -84,6 +108,11 @@ public class ChatWindow extends AnchorPane implements CommandResponseHandler {
         dialogContainer.getChildren().add(DialogBox.getAtomDialog(responseStr));
     }
 
+    /**
+     * Handles the gui interactions given a response to a event command from the atom controller.
+     *
+     * @param response Response object from the atom controller.
+     */
     @Override
     public void handleResponse(EventCommandResponse response) {
         String responseStr = "Noted. The following task has been added: \n";
@@ -92,6 +121,11 @@ public class ChatWindow extends AnchorPane implements CommandResponseHandler {
         dialogContainer.getChildren().add(DialogBox.getAtomDialog(responseStr));
     }
 
+    /**
+     * Handles the gui interactions given a response to a list command from the atom controller.
+     *
+     * @param response Response object from the atom controller.
+     */
     @Override
     public void handleResponse(ListCommandResponse response) {
         List<Task> tasks = response.getTasks();
@@ -102,12 +136,22 @@ public class ChatWindow extends AnchorPane implements CommandResponseHandler {
         dialogContainer.getChildren().add(DialogBox.getAtomDialog(responseStr));
     }
 
+    /**
+     * Handles the gui interactions given a response to a bye command from the atom controller.
+     *
+     * @param response Response object from the atom controller.
+     */
     @Override
     public void handleResponse(ByeCommandResponse response) {
         String responseStr = "Goodbye! Exiting...";
         dialogContainer.getChildren().add(DialogBox.getAtomDialog(responseStr));
     }
 
+    /**
+     * Handles the gui interactions given a response to a delete command from the atom controller.
+     *
+     * @param response Response object from the atom controller.
+     */
     @Override
     public void handleResponse(DeleteCommandResponse response) {
         String responseStr = "Understood. This task will be deleted: \n";
@@ -115,6 +159,11 @@ public class ChatWindow extends AnchorPane implements CommandResponseHandler {
         dialogContainer.getChildren().add(DialogBox.getAtomDialog(responseStr));
     }
 
+    /**
+     * Handles the gui interactions given a response to a mark command from the atom controller.
+     *
+     * @param response Response object from the atom controller.
+     */
     @Override
     public void handleResponse(MarkCommandResponse response) {
         String responseStr = "Great Job! This task is marked as complete: \n";
@@ -122,6 +171,11 @@ public class ChatWindow extends AnchorPane implements CommandResponseHandler {
         dialogContainer.getChildren().add(DialogBox.getAtomDialog(responseStr));
     }
 
+    /**
+     * Handles the gui interactions given a response to a unmark command from the atom controller.
+     *
+     * @param response Response object from the atom controller.
+     */
     @Override
     public void handleResponse(UnmarkCommandResponse response) {
         String responseStr = "Alright. This task is marked as incomplete: \n";
@@ -129,6 +183,11 @@ public class ChatWindow extends AnchorPane implements CommandResponseHandler {
         dialogContainer.getChildren().add(DialogBox.getAtomDialog(responseStr));
     }
 
+    /**
+     * Handles the gui interactions given a response to a find command from the atom controller.
+     *
+     * @param response Response object from the atom controller.
+     */
     @Override
     public void handleResponse(FindCommandResponse response) {
         List<Task> matchingTasks = response.getTasks();
@@ -145,12 +204,22 @@ public class ChatWindow extends AnchorPane implements CommandResponseHandler {
 
     }
 
+    /**
+     * Handles the gui interactions given a user error response from the atom controller.
+     *
+     * @param response Response object from the atom controller.
+     */
     @Override
     public void handleResponse(UserErrorCommandResponse response) {
         String responseStr = "ERROR: " + response.getException().getMessage();
         dialogContainer.getChildren().add(DialogBox.getAtomDialog(responseStr));
     }
 
+    /**
+     * Handles the gui interactions given a system error response from the atom controller.
+     *
+     * @param response Response object from the atom controller.
+     */
     @Override
     public void handleResponse(SystemErrorCommandResponse response) {
         Exception exception = response.getException();
@@ -163,6 +232,11 @@ public class ChatWindow extends AnchorPane implements CommandResponseHandler {
         dialogContainer.getChildren().add(DialogBox.getAtomDialog(responseStr));
     }
 
+    /**
+     * Handles the gui interactions given a response to an unknown command from the atom controller.
+     *
+     * @param response Response object from the atom controller.
+     */
     @Override
     public void handleResponse(UnknownCommandResponse response) {
         String userInput = response.getUserInput();

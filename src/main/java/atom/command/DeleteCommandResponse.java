@@ -9,6 +9,11 @@ import atom.ui.CommandResponseHandler;
 public class DeleteCommandResponse implements CommandResponse {
     private Task task;
 
+    /**
+     * Constructs a DeleteCommandResponse instance.
+     *
+     * @param task Task that was deleted.
+     */
     public DeleteCommandResponse(Task task) {
         this.task = task;
     }

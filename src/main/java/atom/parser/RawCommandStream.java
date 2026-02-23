@@ -10,6 +10,11 @@ public class RawCommandStream {
     private int index;
     private String rawCommand;
 
+    /**
+     * Constructs stream from raw command input given by user.
+     *
+     * @param rawCommand Raw command user input.
+     */
     public RawCommandStream(String rawCommand) {
         this.rawCommand = rawCommand;
         this.index = 0;

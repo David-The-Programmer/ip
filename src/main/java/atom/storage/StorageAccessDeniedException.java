@@ -7,9 +7,10 @@ public class StorageAccessDeniedException extends Exception {
     private String saveFilePath;
 
     /**
-     * Initializes the exception with a message, cause, and the path to the restricted file.
-     * @param message The error message.
-     * @param cause The underlying cause of the exception.
+     * Constructs the exception with a message, cause, and the path to the restricted file.
+     *
+     * @param message      The error message.
+     * @param cause        The underlying cause of the exception.
      * @param saveFilePath The file path where access was denied.
      */
     public StorageAccessDeniedException(String message, Throwable cause, String saveFilePath) {
@@ -19,6 +20,7 @@ public class StorageAccessDeniedException extends Exception {
 
     /**
      * Retrieves the file path that could not be accessed.
+     *
      * @return The save file path string.
      */
     public String getSaveFilePath() {
