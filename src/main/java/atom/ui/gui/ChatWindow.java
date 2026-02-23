@@ -23,6 +23,8 @@ import atom.command.UserErrorCommandResponse;
 import atom.controller.Controller;
 import atom.task.Task;
 import atom.ui.CommandResponseHandler;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -30,6 +32,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * Contains all logic for the chat window gui.
@@ -111,7 +114,7 @@ public class ChatWindow extends AnchorPane implements CommandResponseHandler {
     }
 
     /**
-     * Handles the gui interactions given a response to a event command from the atom controller.
+     * Handles the gui interactions given a response to an event command from the atom controller.
      *
      * @param response Response object from the atom controller.
      */
@@ -135,6 +138,11 @@ public class ChatWindow extends AnchorPane implements CommandResponseHandler {
         for (int i = 1; i <= tasks.size(); i++) {
             responseStr += i + ". " + tasks.get(i - 1) + "\n";
         }
+        if (responseStr.isEmpty()) {
+            String message = "There are 0 tasks in your list. Add tasks to get started! :)";
+            dialogContainer.getChildren().add(DialogBox.getAtomDialog(message));
+            return;
+        }
         dialogContainer.getChildren().add(DialogBox.getAtomDialog(responseStr));
     }
 
@@ -145,8 +153,13 @@ public class ChatWindow extends AnchorPane implements CommandResponseHandler {
      */
     @Override
     public void handleResponse(ByeCommandResponse response) {
-        String responseStr = "Goodbye! Exiting...";
+        String responseStr = "Goodbye! Closing in 3 seconds...";
         dialogContainer.getChildren().add(DialogBox.getAtomDialog(responseStr));
+        PauseTransition timeout = new PauseTransition(Duration.seconds(3));
+        timeout.setOnFinished(action -> {
+            Platform.exit();
+        });
+        timeout.play();
     }
 
     /**
@@ -174,7 +187,7 @@ public class ChatWindow extends AnchorPane implements CommandResponseHandler {
     }
 
     /**
-     * Handles the gui interactions given a response to a unmark command from the atom controller.
+     * Handles the gui interactions given a response to an unmark command from the atom controller.
      *
      * @param response Response object from the atom controller.
      */
@@ -200,7 +213,7 @@ public class ChatWindow extends AnchorPane implements CommandResponseHandler {
         }
         String responseStr = "The following tasks match the keyword: " + response.getKeyword() + "\n";
         for (int i = 1; i <= matchingTasks.size(); i++) {
-            responseStr += i + "." + matchingTasks.get(i - 1) + "\n";
+            responseStr += i + ". " + matchingTasks.get(i - 1) + "\n";
         }
         dialogContainer.getChildren().add(DialogBox.getAtomDialog(responseStr));
 
@@ -243,11 +256,14 @@ public class ChatWindow extends AnchorPane implements CommandResponseHandler {
     public void handleResponse(UnknownCommandResponse response) {
         String userInput = response.getUserInput();
         String responseStr = "'" + userInput + "' command not found (unknown)\n";
-        responseStr += "The following are the only valid commands:\n\n" + "   todo <description>\n\n"
-                + "   deadline <description> /by <datetime of deadline>\n\n"
-                + "   event <description> /from <datetime that event starts> /to <datetime that event ends>\n\n"
-                + "   list\n\n" + "   mark <task number shown after entering the list command>\n\n"
-                + "   unmark <task number shown after entering the list command>\n\n"
+        responseStr += "The following are the only valid commands:\n\n"
+                + "   todo <description>\n\n"
+                + "   deadline <description> /by <date> <time>\n\n"
+                + "   event <description> /from <start date> <start time> /to <end date> <end time>\n\n"
+                + "   list\n\n"
+                + "   mark <task number>\n\n"
+                + "   unmark <task number>\n\n"
+                + "   delete <task number a> <optional task number b> <optional task number c> ...\n\n"
                 + "   find <keyword in description>\n\n"
                 + "   bye";
         dialogContainer.getChildren().add(DialogBox.getAtomDialog(responseStr));
