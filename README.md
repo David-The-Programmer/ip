@@ -13,9 +13,9 @@ It's:
 All you need to do is,
 
 1. Ensure to install Java 17 on your computer system.
-2. Download the latest `atom.jar` file from [here](https://github.com/example/atom/releases).
+2. Download the latest `atom.jar` file from [here](https://github.com/David-The-Programmer/ip/releases).
 3. Move the `atom.jar` into a folder of your choosing.
-4. In your terminal `cd` to that folder and run java -jar atom.jar`.
+4. In your terminal `cd` to that folder and run `java -jar atom.jar`.
 
 A chat window should appear (similar to the one below):
 
