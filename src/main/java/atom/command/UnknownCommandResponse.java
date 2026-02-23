@@ -8,6 +8,11 @@ import atom.ui.CommandResponseHandler;
 public class UnknownCommandResponse implements CommandResponse {
     private String userInput;
 
+    /**
+     * Constructs a UnknownCommandResponse instance.
+     *
+     * @param userInput Unknown command given by user.
+     */
     public UnknownCommandResponse(String userInput) {
         this.userInput = userInput;
     }

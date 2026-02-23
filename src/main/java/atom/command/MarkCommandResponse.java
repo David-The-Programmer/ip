@@ -9,6 +9,11 @@ import atom.ui.CommandResponseHandler;
 public class MarkCommandResponse implements CommandResponse {
     private Task task;
 
+    /**
+     * Constructs a new MarkCommandResponse with task marked as complete.
+     *
+     * @param task Task object marked as complete.
+     */
     public MarkCommandResponse(Task task) {
         this.task = task;
     }
@@ -19,6 +24,7 @@ public class MarkCommandResponse implements CommandResponse {
 
     /**
      * Accepts a command response handler to process the mark command response
+     *
      * @param handler The command handler instance.
      */
     @Override

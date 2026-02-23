@@ -9,7 +9,8 @@ public class MarkCommand implements Command {
     private int taskNumber;
 
     /**
-     * Initializes a new MarkCommand with the target task index.
+     * Constructs a new MarkCommand with the target task index.
+     *
      * @param taskNumber The 1-based index of the task to be marked.
      */
     public MarkCommand(int taskNumber) {
@@ -18,6 +19,7 @@ public class MarkCommand implements Command {
 
     /**
      * Retrieves the index of the task to be marked as complete.
+     *
      * @return The task number.
      */
     public int getTaskNumber() {
@@ -26,6 +28,7 @@ public class MarkCommand implements Command {
 
     /**
      * Accepts a command handler to execute the marking logic.
+     *
      * @param handler The command handler responsible for processing this command.
      */
     @Override

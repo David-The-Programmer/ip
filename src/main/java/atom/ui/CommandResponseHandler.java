@@ -7,14 +7,14 @@ import atom.command.EventCommandResponse;
 import atom.command.FindCommandResponse;
 import atom.command.ListCommandResponse;
 import atom.command.MarkCommandResponse;
+import atom.command.SystemErrorCommandResponse;
 import atom.command.ToDoCommandResponse;
 import atom.command.UnknownCommandResponse;
 import atom.command.UnmarkCommandResponse;
 import atom.command.UserErrorCommandResponse;
-import atom.command.SystemErrorCommandResponse;
 
 /**
- * Interface for handling various types of application commands.
+ * Handles command responses of various types of application commands.
  */
 public interface CommandResponseHandler {
     /**

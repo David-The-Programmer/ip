@@ -1,8 +1,8 @@
 package atom.ui.gui;
 
 import java.io.IOException;
+
 import atom.controller.Controller;
-import atom.ui.CommandResponseHandler;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,6 +13,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+
+/**
+ * Contains all logic for the entire app gui.
+ */
 public class GraphicalUserInterface extends Application {
     private static Controller atomController;
     private ScrollPane scrollPane;
@@ -32,7 +36,7 @@ public class GraphicalUserInterface extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<ChatWindow>getController().setAtomController(atomController);  // inject the Duke instance
+            fxmlLoader.<ChatWindow>getController().setAtomController(atomController);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -9,7 +9,8 @@ public class UnmarkCommand implements Command {
     private int taskNumber;
 
     /**
-     * Initializes a new UnmarkCommand with the target task index.
+     * Constructs a new UnmarkCommand with the target task index.
+     *
      * @param taskNumber The 1-based index of the task in the task list.
      */
     public UnmarkCommand(int taskNumber) {
@@ -18,6 +19,7 @@ public class UnmarkCommand implements Command {
 
     /**
      * Gets the task number to be unmarked.
+     *
      * @return The task index.
      */
     public int getTaskNumber() {
@@ -26,6 +28,7 @@ public class UnmarkCommand implements Command {
 
     /**
      * Accepts a command handler to execute the unmarking logic.
+     *
      * @param handler The command handler instance.
      */
     @Override

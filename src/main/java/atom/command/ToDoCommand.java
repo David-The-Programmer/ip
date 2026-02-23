@@ -9,7 +9,8 @@ public class ToDoCommand implements Command {
     private String description;
 
     /**
-     * Initializes a new ToDoCommand with the specified task description.
+     * Constructs a new ToDoCommand with the specified task description.
+     *
      * @param description The text describing the task to be done.
      */
     public ToDoCommand(String description) {
@@ -18,6 +19,7 @@ public class ToDoCommand implements Command {
 
     /**
      * Retrieves the description of the ToDo task.
+     *
      * @return The task description string.
      */
     public String getDescription() {
@@ -26,6 +28,7 @@ public class ToDoCommand implements Command {
 
     /**
      * Accepts a command handler to process the addition of the ToDo task.
+     *
      * @param handler The command handler instance.
      */
     @Override

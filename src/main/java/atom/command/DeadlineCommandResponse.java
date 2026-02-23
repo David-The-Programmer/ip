@@ -1,7 +1,7 @@
 package atom.command;
 
-import atom.ui.CommandResponseHandler;
 import atom.task.Deadline;
+import atom.ui.CommandResponseHandler;
 
 /**
  * Represents the response of a deadline command execution.
@@ -10,9 +10,15 @@ public class DeadlineCommandResponse implements CommandResponse {
     private Deadline deadline;
     private int numTasksRemaining;
 
-    public DeadlineCommandResponse(Deadline deadline, int numTaskRemaining) {
+    /**
+     * Constructs a DeadlineCommandResponse instance.
+     *
+     * @param deadline          Deadline task object.
+     * @param numTasksRemaining Number of tasks the user has remaining.
+     */
+    public DeadlineCommandResponse(Deadline deadline, int numTasksRemaining) {
         this.deadline = deadline;
-        this.numTasksRemaining = numTaskRemaining;
+        this.numTasksRemaining = numTasksRemaining;
     }
 
     public Deadline getDeadline() {
@@ -25,6 +31,7 @@ public class DeadlineCommandResponse implements CommandResponse {
 
     /**
      * Accepts a command response handler to process the deadline command response
+     *
      * @param handler The command response handler instance.
      */
     @Override

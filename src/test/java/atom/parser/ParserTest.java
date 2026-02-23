@@ -47,8 +47,8 @@ class ParserTest {
     @Test
     @DisplayName("Should throw exception for todo missing a description")
     void testTodoMissingDescription() {
-        assertThrows(InvalidTodoCommandException.class, () -> parser.parse("todo"));
-        assertThrows(InvalidTodoCommandException.class, () -> parser.parse("todo   "));
+        assertThrows(InvalidToDoCommandException.class, () -> parser.parse("todo"));
+        assertThrows(InvalidToDoCommandException.class, () -> parser.parse("todo   "));
     }
 
     @Test
@@ -77,7 +77,7 @@ class ParserTest {
     @Test
     @DisplayName("Should throw exception for deadline missing /by datetime content")
     void testDeadlineMissingByDateTimeContent() {
-        assertThrows(InvalidEventCommandException.class, () -> parser.parse("deadline return book /by "));
+        assertThrows(InvalidDeadlineCommandException.class, () -> parser.parse("deadline return book /by "));
     }
 
     @Test
@@ -160,8 +160,9 @@ class ParserTest {
     }
 
     @Test
-    @DisplayName("Should return null when given an unknown command")
-    void testUnknownCommandReturnsNull() throws Exception {
-        assertNull(parser.parse("hello world"));
+    @DisplayName("Should throw exception when given an unknown command")
+    void testUnknownCommandReturnsNull() {
+        String input = "hello world";
+        assertThrows(UnknownCommandException.class, () -> parser.parse(input));
     }
 }

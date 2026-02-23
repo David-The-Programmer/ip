@@ -9,6 +9,7 @@ public class ListCommand implements Command {
 
     /**
      * Accepts a command handler to trigger the display of the task list.
+     *
      * @param handler The command handler instance.
      */
     @Override

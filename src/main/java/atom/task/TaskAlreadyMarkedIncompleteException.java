@@ -6,9 +6,10 @@ package atom.task;
 public class TaskAlreadyMarkedIncompleteException extends Exception {
 
     /**
-     * Initializes the exception with a message and a cause.
+     * Constructs the exception with a message and a cause.
+     *
      * @param message Error message.
-     * @param cause Underlying cause.
+     * @param cause   Underlying cause.
      */
     public TaskAlreadyMarkedIncompleteException(String message, Throwable cause) {
         super(message, cause);

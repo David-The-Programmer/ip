@@ -9,6 +9,11 @@ import atom.ui.CommandResponseHandler;
 public class UnmarkCommandResponse implements CommandResponse {
     private Task task;
 
+    /**
+     * Constructs a new UnmarkCommandResponse with task marked as incomplete.
+     *
+     * @param task Task object marked as incomplete.
+     */
     public UnmarkCommandResponse(Task task) {
         this.task = task;
     }
@@ -19,6 +24,7 @@ public class UnmarkCommandResponse implements CommandResponse {
 
     /**
      * Accepts a command response handler to process the unmark command response
+     *
      * @param handler The command handler instance.
      */
     @Override

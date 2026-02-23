@@ -19,16 +19,13 @@ public class Storage {
     private Deserialiser taskDeserialiser;
 
     /**
-     * Private constructor for Storage.
+     * Constructs storage instance.
      *
      * @param saveFilePath     Path to the save file.
      * @param taskSerialiser   Serialiser for converting tasks to strings.
      * @param taskDeserialiser Deserialiser for converting strings to tasks.
      */
-    private Storage(Path saveFilePath, TaskSerialiser taskSerialiser, TaskDeserialiser taskDeserialiser) {
-        assert saveFilePath != null;
-        assert taskSerialiser != null;
-        assert taskDeserialiser != null;
+    private Storage(Path saveFilePath, Serialiser taskSerialiser, Deserialiser taskDeserialiser) {
         this.saveFilePath = saveFilePath;
         this.taskSerialiser = taskSerialiser;
         this.taskDeserialiser = taskDeserialiser;
@@ -37,14 +34,14 @@ public class Storage {
     /**
      * Initializes the storage by creating directories and the save file if they do not exist.
      *
-     * @param saveFilePathStr String representation of the file path.
-     * @param serialiser      The serialiser to be used.
-     * @param deserialiser    The deserialiser to be used.
+     * @param saveFilePathStr  String representation of the file path.
+     * @param taskSerialiser   The serialiser to be used.
+     * @param taskDeserialiser The deserialiser to be used.
      * @return A new instance of Storage.
      * @throws StorageInitException If directory or file creation fails.
      */
-    public static Storage init(String saveFilePathStr, TaskSerialiser serialiser,
-                               TaskDeserialiser deserialiser) throws StorageInitException {
+    public static Storage init(String saveFilePathStr, Serialiser taskSerialiser,
+                               Deserialiser taskDeserialiser) throws StorageInitException {
         Path saveFilePath = Paths.get(saveFilePathStr);
         Path saveDirectory = saveFilePath.getParent();
         try {
@@ -58,7 +55,7 @@ public class Storage {
             String message = "Unable to init storage";
             throw new StorageInitException(message, e);
         }
-        return new Storage(saveFilePath, serialiser, deserialiser);
+        return new Storage(saveFilePath, taskSerialiser, taskDeserialiser);
     }
 
     /**
