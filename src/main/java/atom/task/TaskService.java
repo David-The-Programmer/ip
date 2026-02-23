@@ -1,6 +1,7 @@
 package atom.task;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,6 +26,10 @@ public class TaskService {
      */
     public List<Task> getTasks() {
         return this.tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -57,14 +62,17 @@ public class TaskService {
      *
      * @param taskNumber The 1-based index of the task.
      * @throws TaskNotFoundException If the index is out of bounds.
+     * @returns The removed task.
      */
-    public void removeTask(int taskNumber) throws TaskNotFoundException {
+    public Task removeTask(int taskNumber) throws TaskNotFoundException {
         int taskIndex = taskNumber - 1;
         if (taskIndex < 0 || taskIndex >= this.tasks.size()) {
             String message = "Task " + taskNumber + " cannot be found.";
             throw new TaskNotFoundException(message, taskNumber, null);
         }
+        Task removedTask = this.tasks.get(taskIndex);
         this.tasks.remove(taskIndex);
+        return removedTask;
     }
 
     /**
@@ -123,5 +131,31 @@ public class TaskService {
             }
         }
         return tasksContainingKeyword;
+    }
+
+    /**
+     * Removes multiple tasks specified from the list of tasks.
+     *
+     * @param taskNumbers List of 1-based index of the tasks to be removed.
+     * @return List of tasks removed.
+     * @throws TaskNotFoundException If any of the task numbers is out of bounds.
+     */
+    public List<Task> removeTasks(List<Integer> taskNumbers) throws TaskNotFoundException {
+        for (int number : taskNumbers) {
+            int taskIndex = number - 1;
+            if (taskIndex < 0 || taskIndex >= tasks.size()) {
+                String message = "Task " + number + " cannot be found.";
+                throw new TaskNotFoundException(message, number, null);
+            }
+        }
+        List<Task> removedTasks = new ArrayList<>();
+        for (int number : taskNumbers) {
+            removedTasks.add(tasks.get(number - 1));
+        }
+        Collections.sort(taskNumbers, Collections.reverseOrder());
+        for (int number : taskNumbers) {
+            tasks.remove(number - 1);
+        }
+        return removedTasks;
     }
 }

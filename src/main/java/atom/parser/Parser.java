@@ -3,6 +3,8 @@ package atom.parser;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import atom.command.ByeCommand;
 import atom.command.Command;
@@ -12,6 +14,7 @@ import atom.command.EventCommand;
 import atom.command.FindCommand;
 import atom.command.ListCommand;
 import atom.command.MarkCommand;
+import atom.command.MassDeleteCommand;
 import atom.command.ToDoCommand;
 import atom.command.UnmarkCommand;
 
@@ -38,7 +41,7 @@ public class Parser {
     public Command parse(String rawCommand)
             throws InvalidToDoCommandException, InvalidDeleteCommandException, InvalidEventCommandException,
             InvalidDeadlineCommandException, InvalidMarkCommandException, InvalidUnmarkCommandException,
-            InvalidFindCommandException, UnknownCommandException {
+            InvalidFindCommandException, UnknownCommandException, InvalidMassDeleteCommandException {
         RawCommandStream stream = new RawCommandStream(rawCommand.trim());
         if (stream.isExhausted()) {
             throw new UnknownCommandException("rawCommand is empty");
@@ -90,24 +93,63 @@ public class Parser {
     }
 
     /**
-     * Parses RawCommandStream into a DeleteCommand.
+     * Parses RawCommandStream into a DeleteCommand or MassDeleteCommand.
      *
      * @param stream RawCommandStream object.
-     * @return DeleteCommand object.
-     * @throws InvalidDeleteCommandException If a 'delete' command is missing a valid number.
+     * @return Command object.
+     * @throws InvalidDeleteCommandException     If a 'delete' command is missing a valid number.
+     * @throws InvalidMassDeleteCommandException If a 'delete' command on mass is malformed.
      */
-    private DeleteCommand parseDeleteCommand(RawCommandStream stream) throws InvalidDeleteCommandException {
+    private Command parseDeleteCommand(RawCommandStream stream)
+            throws InvalidDeleteCommandException, InvalidMassDeleteCommandException {
         if (stream.isExhausted()) {
             throw new InvalidDeleteCommandException("'delete' command is missing a number", null);
         }
-        String rawTaskNum = stream.nextRemaining();
+        String rawTaskNum = stream.nextWord().trim();
+        if (!stream.isExhausted()) {
+            return parseMassDeleteCommand(rawTaskNum, stream);
+        }
         try {
             int taskNumber = Integer.parseInt(rawTaskNum);
             return new DeleteCommand(taskNumber);
         } catch (NumberFormatException e) {
-            String message = String.format("'delete' command given invalid task number '%s'", rawTaskNum);
+            String message =
+                    String.format("'delete' command given invalid task number '%s', no tasks deleted.", rawTaskNum);
             throw new InvalidDeleteCommandException(message, e);
         }
+    }
+
+    /**
+     * Parses RawCommandStream into a MassDeleteCommand.
+     *
+     * @param stream RawCommandStream object.
+     * @return MassDeleteCommand object.
+     * @throws InvalidMassDeleteCommandException If a mass delete command is malformed.
+     */
+    private MassDeleteCommand parseMassDeleteCommand(String rawFirstTaskNum, RawCommandStream stream)
+            throws InvalidMassDeleteCommandException {
+        List<Integer> taskNumbers = new ArrayList<>();
+        try {
+            int taskNumber = Integer.parseInt(rawFirstTaskNum);
+            taskNumbers.add(taskNumber);
+        } catch (NumberFormatException e) {
+            String message =
+                    String.format("'delete' command given invalid task number '%s', no tasks deleted.",
+                            rawFirstTaskNum);
+            throw new InvalidMassDeleteCommandException(message, e);
+        }
+        while (!stream.isExhausted()) {
+            String rawTaskNum = stream.nextWord().trim();
+            try {
+                int taskNumber = Integer.parseInt(rawTaskNum);
+                taskNumbers.add(taskNumber);
+            } catch (NumberFormatException e) {
+                String message =
+                        String.format("'delete' command given invalid task number '%s', no tasks deleted.", rawTaskNum);
+                throw new InvalidMassDeleteCommandException(message, e);
+            }
+        }
+        return new MassDeleteCommand(taskNumbers);
     }
 
     /**

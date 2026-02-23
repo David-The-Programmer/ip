@@ -12,6 +12,9 @@ import atom.command.EventCommandResponse;
 import atom.command.FindCommandResponse;
 import atom.command.ListCommandResponse;
 import atom.command.MarkCommandResponse;
+import atom.command.MassDeleteCommandResponse;
+import atom.command.MassDeleteSystemErrorCommandResponse;
+import atom.command.MassDeleteUserErrorCommandResponse;
 import atom.command.SystemErrorCommandResponse;
 import atom.command.ToDoCommandResponse;
 import atom.command.UnknownCommandResponse;
@@ -247,6 +250,51 @@ public class ChatWindow extends AnchorPane implements CommandResponseHandler {
                 + "   unmark <task number shown after entering the list command>\n\n"
                 + "   find <keyword in description>\n\n"
                 + "   bye";
+        dialogContainer.getChildren().add(DialogBox.getAtomDialog(responseStr));
+    }
+
+    /**
+     * Handles the gui interactions of the response if user tries to delete multiple tasks.
+     *
+     * @param response The response given if user tries to delete multiple tasks.
+     */
+    @Override
+    public void handleResponse(MassDeleteCommandResponse response) {
+        List<Task> deletedTasks = response.getDeletedTasks();
+        String message = "Understood. The following tasks were deleted: \n";
+        for (Task task : deletedTasks) {
+            message += String.format("    - %s\n", task);
+        }
+        dialogContainer.getChildren().add(DialogBox.getAtomDialog(message));
+    }
+
+    /**
+     * Handles the gui interactions of the response after system error occurs upon mass delete command execution.
+     *
+     * @param response The response of internal system error after mass delete command execution.
+     */
+    @Override
+    public void handleResponse(MassDeleteSystemErrorCommandResponse response) {
+        Exception exception = response.getException();
+        String responseStr = "ERROR: " + exception.getMessage();
+        responseStr += "Here's the full error stack trace: \n";
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(stringWriter);
+        exception.printStackTrace(printWriter);
+        responseStr += stringWriter.toString();
+        responseStr += "\nNo tasks were deleted";
+        dialogContainer.getChildren().add(DialogBox.getAtomDialog(responseStr));
+    }
+
+    /**
+     * Handles the gui interactions of the response after user error occurs upon mass delete command execution.
+     *
+     * @param response The response of user error after mass delete command execution.
+     */
+    @Override
+    public void handleResponse(MassDeleteUserErrorCommandResponse response) {
+        String responseStr = "ERROR: " + response.getException().getMessage();
+        responseStr += "\nNo tasks were deleted";
         dialogContainer.getChildren().add(DialogBox.getAtomDialog(responseStr));
     }
 }

@@ -11,7 +11,7 @@ public class SystemErrorCommandResponse implements CommandResponse {
     /**
      * Constructs a SystemErrorCommandResponse instance.
      *
-     * @param exception Exception thrown by the atom controller in response to invalid command given by user.
+     * @param exception Exception thrown by the atom controller if internal error occurs.
      */
     public SystemErrorCommandResponse(Exception exception) {
         this.exception = exception;
