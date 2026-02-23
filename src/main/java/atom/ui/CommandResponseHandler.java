@@ -7,6 +7,9 @@ import atom.command.EventCommandResponse;
 import atom.command.FindCommandResponse;
 import atom.command.ListCommandResponse;
 import atom.command.MarkCommandResponse;
+import atom.command.MassDeleteCommandResponse;
+import atom.command.MassDeleteSystemErrorCommandResponse;
+import atom.command.MassDeleteUserErrorCommandResponse;
 import atom.command.SystemErrorCommandResponse;
 import atom.command.ToDoCommandResponse;
 import atom.command.UnknownCommandResponse;
@@ -81,23 +84,44 @@ public interface CommandResponseHandler {
     public void handleResponse(FindCommandResponse response);
 
     /**
-     * Handles the response after user caused error occurs upon execution of any command
+     * Handles the response after user caused error occurs upon execution of any command.
      *
-     * @param response The response of user error after command execution
+     * @param response The response of user error after command execution.
      */
     public void handleResponse(UserErrorCommandResponse response);
 
     /**
-     * Handles the response after internal system error occurs upon execution of any command
+     * Handles the response after internal system error occurs upon execution of any command.
      *
-     * @param response The response of internal system error after command execution
+     * @param response The response of internal system error after command execution.
      */
     public void handleResponse(SystemErrorCommandResponse response);
 
     /**
-     * Handles the response if user gives an unknown command
+     * Handles the response if user gives an unknown command.
      *
-     * @param response The response given if user gives unknown command
+     * @param response The response given if user gives unknown command.
      */
     public void handleResponse(UnknownCommandResponse response);
+
+    /**
+     * Handles the response if user tries to delete multiple tasks.
+     *
+     * @param response The response given if user tries to delete multiple tasks.
+     */
+    void handleResponse(MassDeleteCommandResponse response);
+
+    /**
+     * Handles the response after system error occurs upon mass delete command execution.
+     *
+     * @param response The response of internal system error after mass delete command execution.
+     */
+    void handleResponse(MassDeleteSystemErrorCommandResponse response);
+
+    /**
+     * Handles the response after user error occurs upon mass delete command execution.
+     *
+     * @param response The response of user error after mass delete command execution.
+     */
+    void handleResponse(MassDeleteUserErrorCommandResponse response);
 }

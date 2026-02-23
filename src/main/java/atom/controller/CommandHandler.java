@@ -7,6 +7,7 @@ import atom.command.EventCommand;
 import atom.command.FindCommand;
 import atom.command.ListCommand;
 import atom.command.MarkCommand;
+import atom.command.MassDeleteCommand;
 import atom.command.ToDoCommand;
 import atom.command.UnmarkCommand;
 
@@ -76,4 +77,11 @@ public interface CommandHandler {
      * @param command The find command.
      */
     public void handle(FindCommand command);
+
+    /**
+     * Handles the execution of a mass delete command.
+     *
+     * @param command The mass delete command.
+     */
+    public void handle(MassDeleteCommand command);
 }

@@ -18,6 +18,9 @@ import atom.command.ListCommand;
 import atom.command.ListCommandResponse;
 import atom.command.MarkCommand;
 import atom.command.MarkCommandResponse;
+import atom.command.MassDeleteCommand;
+import atom.command.MassDeleteCommandResponse;
+import atom.command.MassDeleteSystemErrorCommandResponse;
 import atom.command.SystemErrorCommandResponse;
 import atom.command.ToDoCommand;
 import atom.command.ToDoCommandResponse;
@@ -68,7 +71,7 @@ public class Controller implements CommandHandler {
      * @return CommandResponse to corresponding raw command given.
      */
     public CommandResponse getResponse(String userInput) {
-        Command command = null;
+        Command command;
         try {
             command = parser.parse(userInput);
         } catch (UnknownCommandException e) {
@@ -197,15 +200,16 @@ public class Controller implements CommandHandler {
      * @param command The delete command instance.
      */
     public void handle(DeleteCommand command) {
+        List<Task> currentTasks = taskService.getTasks();
         try {
             int taskNumber = command.getTaskNumber();
-            taskService.removeTask(taskNumber);
-            Task task = taskService.getTask(taskNumber);
+            Task removedTask = taskService.removeTask(taskNumber);
             storage.saveTasks(taskService.getTasks());
-            commandResponse = new DeleteCommandResponse(task);
+            commandResponse = new DeleteCommandResponse(removedTask);
         } catch (TaskNotFoundException e) {
             commandResponse = new UserErrorCommandResponse(e);
         } catch (StorageAccessDeniedException | StorageWriteException e) {
+            taskService.setTasks(currentTasks);
             commandResponse = new SystemErrorCommandResponse(e);
         }
     }
@@ -218,5 +222,26 @@ public class Controller implements CommandHandler {
     public void handle(FindCommand command) {
         List<Task> tasksWithKeyword = taskService.findTaskWithKeyword(command.getKeyword());
         commandResponse = new FindCommandResponse(tasksWithKeyword, command.getKeyword());
+    }
+
+    /**
+     * Handles the execution of a mass delete command.
+     *
+     * @param command The mass delete command.
+     */
+    @Override
+    public void handle(MassDeleteCommand command) {
+        List<Task> currentTasks = taskService.getTasks();
+        List<Integer> taskNumbersToDelete = command.getTaskNumbers();
+        try {
+            List<Task> deletedTasks = taskService.removeTasks(command.getTaskNumbers());
+            storage.saveTasks(taskService.getTasks());
+            commandResponse = new MassDeleteCommandResponse(deletedTasks);
+        } catch (TaskNotFoundException e) {
+            commandResponse = new UserErrorCommandResponse(e);
+        } catch (StorageAccessDeniedException | StorageWriteException e) {
+            taskService.setTasks(currentTasks);
+            commandResponse = new MassDeleteSystemErrorCommandResponse(e);
+        }
     }
 }

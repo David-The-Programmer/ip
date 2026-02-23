@@ -11,6 +11,9 @@ import atom.command.EventCommandResponse;
 import atom.command.FindCommandResponse;
 import atom.command.ListCommandResponse;
 import atom.command.MarkCommandResponse;
+import atom.command.MassDeleteCommandResponse;
+import atom.command.MassDeleteSystemErrorCommandResponse;
+import atom.command.MassDeleteUserErrorCommandResponse;
 import atom.command.SystemErrorCommandResponse;
 import atom.command.ToDoCommandResponse;
 import atom.command.UnknownCommandResponse;
@@ -58,12 +61,12 @@ public class CommandLineInterface implements CommandResponseHandler {
      */
     public void showWelcomeMessage() {
         String logo = "         :::         :::::::::::    ::::::::          :::    ::: \n"
-            + "       :+: :+:          :+:       :+:    :+:        :+:+: :+:+: \n"
-            + "     +:+   +:+         +:+       +:+    +:+       +:+ +:+:+ +:+ \n"
-            + "   +#++:++#++:         +#+       +#+    +:+       +#+  +:+  +#+  \n"
-            + "  +#+     +#+         +#+       +#+    +#+       +#+       +#+   \n"
-            + " #+#     #+# #+#    #+# #+#   #+#    #+# #+#   #+#       #+# #+\n"
-            + "###     ### ###    ### ###    ########  ###   ###       ###  ###\n";
+                + "       :+: :+:          :+:       :+:    :+:        :+:+: :+:+: \n"
+                + "     +:+   +:+         +:+       +:+    +:+       +:+ +:+:+ +:+ \n"
+                + "   +#++:++#++:         +#+       +#+    +:+       +#+  +:+  +#+  \n"
+                + "  +#+     +#+         +#+       +#+    +#+       +#+       +#+   \n"
+                + " #+#     #+# #+#    #+# #+#   #+#    #+# #+#   #+#       #+# #+\n"
+                + "###     ### ###    ### ###    ########  ###   ###       ###  ###\n";
         System.out.println(logo);
         System.out.println("Hello, I am an Assistive Task Organisation Manager, or A.T.O.M.");
         System.out.println("How can I help you?");
@@ -162,7 +165,7 @@ public class CommandLineInterface implements CommandResponseHandler {
      * @param response Response object from the atom controller.
      */
     public void handleResponse(DeleteCommandResponse response) {
-        System.out.println("Understood. This task will be deleted:");
+        System.out.println("Understood. This task is deleted:");
         System.out.println(response.getTask());
     }
 
@@ -213,13 +216,54 @@ public class CommandLineInterface implements CommandResponseHandler {
         String userInput = response.getUserInput();
         System.out.println("'" + userInput + "' command not found (unknown)");
         String message = "The following are the only valid commands:\n\n"
-            + "   todo <description>\n\n"
-            + "   deadline <description> /by <datetime of deadline>\n\n"
-            + "   event <description> /from <datetime that event starts> /to <datetime that event ends>\n\n"
-            + "   list\n\n" + "   mark <task number shown after entering the list command>\n\n"
-            + "   unmark <task number shown after entering the list command>\n\n"
-            + "   find <keyword in description>\n\n"
-            + "   bye";
+                + "   todo <description>\n\n"
+                + "   deadline <description> /by <datetime of deadline>\n\n"
+                + "   event <description> /from <datetime that event starts> /to <datetime that event ends>\n\n"
+                + "   list\n\n" + "   mark <task number shown after entering the list command>\n\n"
+                + "   unmark <task number shown after entering the list command>\n\n"
+                + "   find <keyword in description>\n\n"
+                + "   bye";
         System.out.println(message);
+    }
+
+    /**
+     * Handles the cli interactions given a response if user tries to delete multiple tasks.
+     *
+     * @param response The response given if user tries to delete multiple tasks.
+     */
+    @Override
+    public void handleResponse(MassDeleteCommandResponse response) {
+        List<Task> deletedTasks = response.getDeletedTasks();
+        String message = "Understood. The following tasks were deleted: \n";
+        for (Task task : deletedTasks) {
+            message += String.format("    - %s\n", task);
+        }
+        System.out.println(message);
+    }
+
+    /**
+     * Handles the cli interactions given a response after system error occurs upon mass delete command execution.
+     *
+     * @param response The response of internal system error after mass delete command execution.
+     */
+    @Override
+    public void handleResponse(MassDeleteSystemErrorCommandResponse response) {
+        Exception exception = response.getException();
+        System.out.println("ERROR: " + exception.getMessage());
+        System.out.println("Here's the full error stack trace: ");
+        exception.printStackTrace();
+        System.out.println("No tasks were deleted.");
+    }
+
+    /**
+     * Handles the cli interactions given a response after user error occurs upon mass delete command execution.
+     *
+     * @param response The response of user error after mass delete command execution.
+     */
+    @Override
+    public void handleResponse(MassDeleteUserErrorCommandResponse response) {
+        Exception exception = response.getException();
+        System.out.println("ERROR: " + exception.getMessage());
+        System.out.println("No tasks were deleted.");
     }
 }
