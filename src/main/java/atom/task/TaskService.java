@@ -10,7 +10,8 @@ public class TaskService {
     private List<Task> tasks;
 
     /**
-     * Initializes the TaskService with a list of tasks.
+     * Constructs the TaskService with a list of tasks.
+     *
      * @param tasks Initial list of tasks.
      */
     public TaskService(List<Task> tasks) {
@@ -19,6 +20,7 @@ public class TaskService {
 
     /**
      * Retrieves the full list of tasks.
+     *
      * @return List of tasks.
      */
     public List<Task> getTasks() {
@@ -27,6 +29,7 @@ public class TaskService {
 
     /**
      * Retrieves a specific task by its display number.
+     *
      * @param taskNumber The 1-based index of the task.
      * @return The requested task.
      * @throws TaskNotFoundException If the index is out of bounds.
@@ -42,6 +45,7 @@ public class TaskService {
 
     /**
      * Adds a new task to the service.
+     *
      * @param task The task to be added.
      */
     public void addTask(Task task) {
@@ -50,6 +54,7 @@ public class TaskService {
 
     /**
      * Removes a task from the list by its display number.
+     *
      * @param taskNumber The 1-based index of the task.
      * @throws TaskNotFoundException If the index is out of bounds.
      */
@@ -64,8 +69,9 @@ public class TaskService {
 
     /**
      * Marks a task as complete.
+     *
      * @param taskNumber The 1-based index of the task.
-     * @throws TaskNotFoundException If the index is out of bounds.
+     * @throws TaskNotFoundException              If the index is out of bounds.
      * @throws TaskAlreadyMarkedCompleteException If the task is already complete.
      */
     public void markTaskAsComplete(int taskNumber)
@@ -84,8 +90,9 @@ public class TaskService {
 
     /**
      * Marks a task as incomplete.
+     *
      * @param taskNumber The 1-based index of the task.
-     * @throws TaskNotFoundException If the index is out of bounds.
+     * @throws TaskNotFoundException                If the index is out of bounds.
      * @throws TaskAlreadyMarkedIncompleteException If the task is already incomplete.
      */
     public void markTaskAsIncomplete(int taskNumber)
@@ -104,6 +111,7 @@ public class TaskService {
 
     /**
      * Searches the task list for tasks whose descriptions contain the specified keyword.
+     *
      * @param keyword The string to match against task descriptions.
      * @return A list of tasks that contain the given keyword.
      */

@@ -3,19 +3,19 @@ package atom.ui.cli;
 import java.util.List;
 import java.util.Scanner;
 
-import atom.command.CommandResponse;
 import atom.command.ByeCommandResponse;
+import atom.command.CommandResponse;
 import atom.command.DeadlineCommandResponse;
 import atom.command.DeleteCommandResponse;
 import atom.command.EventCommandResponse;
 import atom.command.FindCommandResponse;
 import atom.command.ListCommandResponse;
 import atom.command.MarkCommandResponse;
+import atom.command.SystemErrorCommandResponse;
 import atom.command.ToDoCommandResponse;
 import atom.command.UnknownCommandResponse;
 import atom.command.UnmarkCommandResponse;
 import atom.command.UserErrorCommandResponse;
-import atom.command.SystemErrorCommandResponse;
 import atom.controller.Controller;
 import atom.task.Task;
 import atom.ui.CommandResponseHandler;
@@ -28,7 +28,7 @@ public class CommandLineInterface implements CommandResponseHandler {
     private Scanner scanner;
 
     /**
-     * Initializes the CLI with required dependencies.
+     * Constructs the CLI with required dependencies.
      *
      * @param controller main controller
      * @param scanner    Input scanner.
@@ -83,9 +83,9 @@ public class CommandLineInterface implements CommandResponseHandler {
     }
 
     /**
-     * Handles a goodbye command response
+     * Handles the cli interactions given a response to a bye command from the atom controller.
      *
-     * @param response The bye command response instance.
+     * @param response Response object from the atom controller.
      */
     public void handleResponse(ByeCommandResponse response) {
         System.out.println("Goodbye! Exiting...");
@@ -104,9 +104,9 @@ public class CommandLineInterface implements CommandResponseHandler {
     }
 
     /**
-     * Processes a todo command response to add a new todo task.
+     * Handles the cli interactions given a response to a todo command from the atom controller.
      *
-     * @param response The todo command response instance.
+     * @param response Response object from the atom controller.
      */
     public void handleResponse(ToDoCommandResponse response) {
         System.out.println("Noted. The following task has been added: ");
@@ -115,9 +115,9 @@ public class CommandLineInterface implements CommandResponseHandler {
     }
 
     /**
-     * Processes a deadline command response to add a new deadline task.
+     * Handles the cli interactions given a response to a deadline command from the atom controller.
      *
-     * @param response The deadline command response instance.
+     * @param response Response object from the atom controller.
      */
     public void handleResponse(DeadlineCommandResponse response) {
         System.out.println("Noted. The following task has been added: ");
@@ -126,9 +126,9 @@ public class CommandLineInterface implements CommandResponseHandler {
     }
 
     /**
-     * Processes a event command response to add a new event task.
+     * Handles the cli interactions given a response to a event command from the atom controller.
      *
-     * @param response The event command response instance.
+     * @param response Response object from the atom controller.
      */
     public void handleResponse(EventCommandResponse response) {
         System.out.println("Noted. The following task has been added: ");
@@ -137,9 +137,9 @@ public class CommandLineInterface implements CommandResponseHandler {
     }
 
     /**
-     * Processes a mark command response to complete a task
+     * Handles the cli interactions given a response to a mark command from the atom controller.
      *
-     * @param response The mark command response instance.
+     * @param response Response object from the atom controller.
      */
     public void handleResponse(MarkCommandResponse response) {
         System.out.println("Great Job! This task is marked as complete:");
@@ -147,9 +147,9 @@ public class CommandLineInterface implements CommandResponseHandler {
     }
 
     /**
-     * Processes a unmark command response to mark a task as incomplete
+     * Handles the cli interactions given a response to a unmark command from the atom controller.
      *
-     * @param response The unmark command response instance.
+     * @param response Response object from the atom controller.
      */
     public void handleResponse(UnmarkCommandResponse response) {
         System.out.println("Alright. This task is marked as incomplete:");
@@ -157,9 +157,9 @@ public class CommandLineInterface implements CommandResponseHandler {
     }
 
     /**
-     * Processes a delete command response to remove a task
+     * Handles the cli interactions given a response to a delete command from the atom controller.
      *
-     * @param response The delete command response instance.
+     * @param response Response object from the atom controller.
      */
     public void handleResponse(DeleteCommandResponse response) {
         System.out.println("Understood. This task will be deleted:");
@@ -167,9 +167,9 @@ public class CommandLineInterface implements CommandResponseHandler {
     }
 
     /**
-     * Processes a find command response to find a task
+     * Handles the cli interactions given a response to a find command from the atom controller.
      *
-     * @param response The find command response instance.
+     * @param response Response object from the atom controller.
      */
     public void handleResponse(FindCommandResponse response) {
         List<Task> matchingTasks = response.getTasks();
@@ -183,10 +183,20 @@ public class CommandLineInterface implements CommandResponseHandler {
         }
     }
 
+    /**
+     * Handles the cli interactions given a user error response from the atom controller.
+     *
+     * @param response Response object from the atom controller.
+     */
     public void handleResponse(UserErrorCommandResponse response) {
         System.out.println("ERROR: " + response.getException().getMessage());
     }
 
+    /**
+     * Handles the cli interactions given a system error response from the atom controller.
+     *
+     * @param response Response object from the atom controller.
+     */
     public void handleResponse(SystemErrorCommandResponse response) {
         Exception exception = response.getException();
         System.out.println("ERROR: " + exception.getMessage());
@@ -195,14 +205,15 @@ public class CommandLineInterface implements CommandResponseHandler {
     }
 
     /**
-     * Informs the user of an unknown command and suggests valid ones.
+     * Handles the cli interactions given a response to an unknown command from the atom controller.
      *
-     * @param response Response instance that contains the invalid input string.
+     * @param response Response object from the atom controller.
      */
     public void handleResponse(UnknownCommandResponse response) {
         String userInput = response.getUserInput();
         System.out.println("'" + userInput + "' command not found (unknown)");
-        String message = "The following are the only valid commands:\n\n" + "   todo <description>\n\n"
+        String message = "The following are the only valid commands:\n\n"
+            + "   todo <description>\n\n"
             + "   deadline <description> /by <datetime of deadline>\n\n"
             + "   event <description> /from <datetime that event starts> /to <datetime that event ends>\n\n"
             + "   list\n\n" + "   mark <task number shown after entering the list command>\n\n"

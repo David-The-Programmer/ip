@@ -1,7 +1,7 @@
 package atom.command;
 
-import atom.ui.CommandResponseHandler;
 import atom.task.Task;
+import atom.ui.CommandResponseHandler;
 
 /**
  * Represents the response of a delete command execution.
@@ -9,6 +9,11 @@ import atom.task.Task;
 public class DeleteCommandResponse implements CommandResponse {
     private Task task;
 
+    /**
+     * Constructs a DeleteCommandResponse instance.
+     *
+     * @param task Task that was deleted.
+     */
     public DeleteCommandResponse(Task task) {
         this.task = task;
     }
@@ -19,6 +24,7 @@ public class DeleteCommandResponse implements CommandResponse {
 
     /**
      * Accepts a command response handler to process the delete command response
+     *
      * @param handler The command response handler instance.
      */
     @Override

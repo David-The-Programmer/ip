@@ -9,7 +9,8 @@ public class DeleteCommand implements Command {
     private int taskNumber;
 
     /**
-     * Initializes a new DeleteCommand with the target task index.
+     * Constructs a new DeleteCommand with the target task index.
+     *
      * @param taskNumber The 1-based index of the task to be deleted.
      */
     public DeleteCommand(int taskNumber) {
@@ -18,6 +19,7 @@ public class DeleteCommand implements Command {
 
     /**
      * Retrieves the index of the task to be deleted.
+     *
      * @return The task number.
      */
     public int getTaskNumber() {
@@ -26,6 +28,7 @@ public class DeleteCommand implements Command {
 
     /**
      * Accepts a command handler to execute the deletion logic.
+     *
      * @param handler The command handler responsible for processing this command.
      */
     @Override

@@ -3,14 +3,15 @@ package atom.task;
 import atom.storage.Serialiser;
 
 /**
- * Abstract base class representing a generic task in the application.
+ * Represents a generic task in the application.
  */
 public abstract class Task {
     private String description;
     private Boolean isCompleted;
 
     /**
-     * Initializes a task with a description and sets completion status to false.
+     * Constructs a task with a description and sets completion status to false.
+     *
      * @param description Task description.
      */
     public Task(String description) {
@@ -34,6 +35,7 @@ public abstract class Task {
 
     /**
      * Checks if the task is completed.
+     *
      * @return True if completed, false otherwise.
      */
     public boolean isCompleted() {
@@ -42,6 +44,7 @@ public abstract class Task {
 
     /**
      * Gets the task description.
+     *
      * @return The description string.
      */
     public String getDescription() {
@@ -49,7 +52,8 @@ public abstract class Task {
     }
 
     /**
-     * Abstract method for accepting a serialiser for data persistence.
+     * Accepts a serialiser for data persistence.
+     *
      * @param serialiser The serialiser instance.
      */
     public abstract void acceptSerialiser(Serialiser serialiser);

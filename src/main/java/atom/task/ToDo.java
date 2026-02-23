@@ -8,7 +8,8 @@ import atom.storage.Serialiser;
 public class ToDo extends Task {
 
     /**
-     * Initializes a new todo task.
+     * Constructs a new todo task.
+     *
      * @param description Task description.
      */
     public ToDo(String description) {
@@ -17,6 +18,7 @@ public class ToDo extends Task {
 
     /**
      * Accepts a serialiser to process the todo task.
+     *
      * @param serialiser The serialiser instance.
      */
     public void acceptSerialiser(Serialiser serialiser) {

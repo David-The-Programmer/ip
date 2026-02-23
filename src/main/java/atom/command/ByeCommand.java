@@ -9,7 +9,8 @@ import atom.controller.CommandHandler;
 public class ByeCommand implements Command {
 
     /**
-     * Accepts a command handler to process the bye command
+     * Accepts a command handler to process the bye command.
+     *
      * @param handler The command handler instance.
      */
     @Override
