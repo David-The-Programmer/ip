@@ -75,7 +75,7 @@ public class TaskService {
      * @throws TaskAlreadyMarkedCompleteException If the task is already complete.
      */
     public void markTaskAsComplete(int taskNumber)
-        throws TaskNotFoundException, TaskAlreadyMarkedCompleteException {
+            throws TaskNotFoundException, TaskAlreadyMarkedCompleteException {
         int taskIndex = taskNumber - 1;
         if (taskIndex < 0 || taskIndex >= this.tasks.size()) {
             String message = "Task " + taskNumber + " cannot be found.";
@@ -96,7 +96,7 @@ public class TaskService {
      * @throws TaskAlreadyMarkedIncompleteException If the task is already incomplete.
      */
     public void markTaskAsIncomplete(int taskNumber)
-        throws TaskNotFoundException, TaskAlreadyMarkedIncompleteException {
+            throws TaskNotFoundException, TaskAlreadyMarkedIncompleteException {
         int taskIndex = taskNumber - 1;
         if (taskIndex < 0 || taskIndex >= this.tasks.size()) {
             String message = "Task " + taskNumber + " cannot be found.";

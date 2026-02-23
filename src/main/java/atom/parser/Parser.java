@@ -36,9 +36,9 @@ public class Parser {
      * @throws UnknownCommandException         If command string entered by user does not match any known commands.
      */
     public Command parse(String rawCommand)
-        throws InvalidToDoCommandException, InvalidDeleteCommandException, InvalidEventCommandException,
-        InvalidDeadlineCommandException, InvalidMarkCommandException, InvalidUnmarkCommandException,
-        InvalidFindCommandException, UnknownCommandException {
+            throws InvalidToDoCommandException, InvalidDeleteCommandException, InvalidEventCommandException,
+            InvalidDeadlineCommandException, InvalidMarkCommandException, InvalidUnmarkCommandException,
+            InvalidFindCommandException, UnknownCommandException {
         RawCommandStream stream = new RawCommandStream(rawCommand.trim());
         if (stream.isExhausted()) {
             throw new UnknownCommandException("rawCommand is empty");
@@ -253,7 +253,7 @@ public class Parser {
     private LocalDateTime parseEventCommandStartDateTime(RawCommandStream stream) throws InvalidEventCommandException {
         if (stream.isExhausted()) {
             throw new InvalidEventCommandException("'event' command is missing /from <date> <time> /to <date> <time>",
-                null);
+                    null);
         }
         String rawStartDate = stream.nextWord().trim();
         if (rawStartDate.isBlank()) {

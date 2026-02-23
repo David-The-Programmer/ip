@@ -60,10 +60,9 @@ public class ChatWindow extends AnchorPane implements CommandResponseHandler {
             scrollPane.setVvalue(1.0);
         });
         sendButton.disableProperty().bind(
-            Bindings.createBooleanBinding(
-                () -> userInput.getText().trim().isEmpty(),
-                userInput.textProperty()
-            )
+                Bindings.createBooleanBinding(() -> userInput.getText().trim().isEmpty(),
+                        userInput.textProperty()
+                )
         );
     }
 
@@ -242,12 +241,12 @@ public class ChatWindow extends AnchorPane implements CommandResponseHandler {
         String userInput = response.getUserInput();
         String responseStr = "'" + userInput + "' command not found (unknown)\n";
         responseStr += "The following are the only valid commands:\n\n" + "   todo <description>\n\n"
-            + "   deadline <description> /by <datetime of deadline>\n\n"
-            + "   event <description> /from <datetime that event starts> /to <datetime that event ends>\n\n"
-            + "   list\n\n" + "   mark <task number shown after entering the list command>\n\n"
-            + "   unmark <task number shown after entering the list command>\n\n"
-            + "   find <keyword in description>\n\n"
-            + "   bye";
+                + "   deadline <description> /by <datetime of deadline>\n\n"
+                + "   event <description> /from <datetime that event starts> /to <datetime that event ends>\n\n"
+                + "   list\n\n" + "   mark <task number shown after entering the list command>\n\n"
+                + "   unmark <task number shown after entering the list command>\n\n"
+                + "   find <keyword in description>\n\n"
+                + "   bye";
         dialogContainer.getChildren().add(DialogBox.getAtomDialog(responseStr));
     }
 }
