@@ -80,7 +80,7 @@ public class Storage {
             String message = "Unable to access save file";
             throw new StorageAccessDeniedException(message, e, saveFilePath.toString());
         } catch (IOException e) {
-            String message = "Unable to write tasks storage";
+            String message = "Unable to write to task storage";
             throw new StorageWriteException(message, e);
         }
     }

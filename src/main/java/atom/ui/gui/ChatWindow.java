@@ -238,12 +238,13 @@ public class ChatWindow extends AnchorPane implements CommandResponseHandler {
     @Override
     public void handleResponse(SystemErrorCommandResponse response) {
         Exception exception = response.getException();
-        String responseStr = "ERROR: " + exception.getMessage();
+        String responseStr = "ERROR: \n";
         responseStr += "Here's the full error stack trace: \n";
         StringWriter stringWriter = new StringWriter();
         PrintWriter printWriter = new PrintWriter(stringWriter);
         exception.printStackTrace(printWriter);
         responseStr += stringWriter.toString();
+        responseStr += "\nERROR: " + exception.getMessage();
         dialogContainer.getChildren().add(DialogBox.getAtomDialog(responseStr));
     }
 
@@ -292,13 +293,14 @@ public class ChatWindow extends AnchorPane implements CommandResponseHandler {
     @Override
     public void handleResponse(MassDeleteSystemErrorCommandResponse response) {
         Exception exception = response.getException();
-        String responseStr = "ERROR: " + exception.getMessage();
+        String responseStr = "ERROR: \n";
         responseStr += "Here's the full error stack trace: \n";
         StringWriter stringWriter = new StringWriter();
         PrintWriter printWriter = new PrintWriter(stringWriter);
         exception.printStackTrace(printWriter);
         responseStr += stringWriter.toString();
-        responseStr += "\nNo tasks were deleted";
+        responseStr += "\n" + exception.getMessage();
+        responseStr += "\nERROR: No tasks were deleted";
         dialogContainer.getChildren().add(DialogBox.getAtomDialog(responseStr));
     }
 

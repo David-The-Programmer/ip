@@ -37,6 +37,7 @@ public class GraphicalUserInterface extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<ChatWindow>getController().setAtomController(atomController);
+            stage.setTitle("A.T.O.M");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
