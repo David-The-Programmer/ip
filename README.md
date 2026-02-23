@@ -19,7 +19,7 @@ All you need to do is,
 
 A chat window should appear (similar to the one below):
 
-![Atom screenshort](./Ui.png)
+![Atom screenshort](./docs/Ui.png)
 
 ---
 
