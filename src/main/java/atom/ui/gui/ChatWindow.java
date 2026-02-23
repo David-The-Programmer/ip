@@ -3,6 +3,7 @@ package atom.ui.gui;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
+
 import atom.command.ByeCommandResponse;
 import atom.command.CommandResponse;
 import atom.command.DeadlineCommandResponse;

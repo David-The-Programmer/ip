@@ -1,7 +1,7 @@
 package atom.command;
 
-import atom.ui.CommandResponseHandler;
 import atom.task.Deadline;
+import atom.ui.CommandResponseHandler;
 
 /**
  * Represents the response of a deadline command execution.
@@ -25,6 +25,7 @@ public class DeadlineCommandResponse implements CommandResponse {
 
     /**
      * Accepts a command response handler to process the deadline command response
+     *
      * @param handler The command response handler instance.
      */
     @Override

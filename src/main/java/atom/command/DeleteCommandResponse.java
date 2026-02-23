@@ -1,7 +1,7 @@
 package atom.command;
 
-import atom.ui.CommandResponseHandler;
 import atom.task.Task;
+import atom.ui.CommandResponseHandler;
 
 /**
  * Represents the response of a delete command execution.
@@ -19,6 +19,7 @@ public class DeleteCommandResponse implements CommandResponse {
 
     /**
      * Accepts a command response handler to process the delete command response
+     *
      * @param handler The command response handler instance.
      */
     @Override
